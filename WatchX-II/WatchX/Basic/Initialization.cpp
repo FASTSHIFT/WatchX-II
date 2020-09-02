@@ -20,10 +20,10 @@ static bool Value_Init()
 void WatchX_Init()
 {
     Value_Init();
-    I2C_Scan(true);
+    //I2C_Scan(true);
     I2Cx_Init(I2C2, 100 * 1000);
     IMU_Init();
-    ParticleSensor_Init();
+    //ParticleSensor_Init();
     
     RTC_Init();
     RTC_Set(20, 8, 31, 17, 53, 0);

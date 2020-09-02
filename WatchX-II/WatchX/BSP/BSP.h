@@ -14,6 +14,7 @@ uint16_t Backlight_GetBKP(void);
 
 void IMU_Init();
 void IMU_Update();
+int16_t IMU_GetSteps();
 
 void ParticleSensor_Init();
 void ParticleSensor_Update();

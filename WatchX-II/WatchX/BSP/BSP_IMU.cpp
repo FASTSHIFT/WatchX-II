@@ -82,7 +82,7 @@ void IMU_Init(void)
 void IMU_Update()
 {
     /* Polling on int pin */
-    if (digitalRead(LIS_INT2_Pin))
+    if (1 || digitalRead(LIS_INT2_Pin))
     {
         /* Check for a step event */
         LIS2DS12_ACC_R_STEP_DETECT(0, (LIS2DS12_ACC_STEP_DETECT_t*) &stepDetect);
@@ -90,7 +90,7 @@ void IMU_Update()
         {
             /* Read the step number */
             LIS2DS12_ACC_Get_StepCounter(0, number_of_steps.u8bit);
-            Serial.printf("Step:%d\r\n", number_of_steps.i16bit);
+            //Serial.printf("Step:%d\r\n", number_of_steps.i16bit);
             if ( number_of_steps.i16bit == MAX_STEP_NUMBER )
             {
                 /* Reset the pedometer counter */
@@ -98,4 +98,9 @@ void IMU_Update()
             }
         }
     }
+}
+
+int16_t IMU_GetSteps()
+{
+    return number_of_steps.i16bit;
 }

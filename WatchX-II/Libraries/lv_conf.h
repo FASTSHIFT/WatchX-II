@@ -456,7 +456,7 @@ typedef void * lv_font_user_data_t;
 #define LV_THEME_DEFAULT_INIT               lv_theme_material_init
 #define LV_THEME_DEFAULT_COLOR_PRIMARY      lv_color_hex(0x01a2b1)
 #define LV_THEME_DEFAULT_COLOR_SECONDARY    lv_color_hex(0x44d1b6)
-#define LV_THEME_DEFAULT_FLAG               LV_THEME_MATERIAL_FLAG_LIGHT
+#define LV_THEME_DEFAULT_FLAG               LV_THEME_MATERIAL_FLAG_NO_FOCUS
 #define LV_THEME_DEFAULT_FONT_SMALL         &lv_font_montserrat_14
 #define LV_THEME_DEFAULT_FONT_NORMAL        &lv_font_montserrat_30
 #define LV_THEME_DEFAULT_FONT_SUBTITLE      &lv_font_montserrat_14

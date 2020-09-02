@@ -12,8 +12,6 @@ static void setup()
 static void loop()
 {
     Display_Update();
-//    ParticleSensor_Update();
-//    IMU_Update();
 }
 
 /**
