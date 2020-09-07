@@ -475,6 +475,11 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\lv_port_indev.cpp</FilePath>
             </File>
+            <File>
+              <FileName>lv_label_anim_effect.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\lv_label_anim_effect.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -537,6 +542,11 @@
               </FileOption>
             </File>
             <File>
+              <FileName>Page_DialPlate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_DialPlate.cpp</FilePath>
+            </File>
+            <File>
               <FileName>Page_MainMenu.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\Page\Page_MainMenu.cpp</FilePath>
@@ -551,20 +561,35 @@
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\IMG\IMG_DialPlate.c</FilePath>
             </File>
+            <File>
+              <FileName>IMG_CHNSecond.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_CHNSecond.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Heart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Heart.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Power.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>GUI/Font</GroupName>
           <Files>
             <File>
-              <FileName>FONT_ERASBD_64.c</FileName>
+              <FileName>Font_RexBold_28.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\WatchX\GUI\Font\FONT_ERASBD_64.c</FilePath>
+              <FilePath>..\WatchX\GUI\Font\Font_RexBold_28.c</FilePath>
             </File>
             <File>
-              <FileName>FONT_ERASDEMI_25.c</FileName>
+              <FileName>Font_RexBold_89.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\WatchX\GUI\Font\FONT_ERASDEMI_25.c</FilePath>
+              <FilePath>..\WatchX\GUI\Font\Font_RexBold_89.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1226,8 +1251,8 @@
               <RVCTZI>0</RVCTZI>
               <RVCTOtherData>0</RVCTOtherData>
               <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>2</IncludeInBuild>
-              <AlwaysBuild>2</AlwaysBuild>
+              <IncludeInBuild>0</IncludeInBuild>
+              <AlwaysBuild>0</AlwaysBuild>
               <GenerateAssemblyFile>2</GenerateAssemblyFile>
               <AssembleAssemblyFile>2</AssembleAssemblyFile>
               <PublicsOnly>2</PublicsOnly>

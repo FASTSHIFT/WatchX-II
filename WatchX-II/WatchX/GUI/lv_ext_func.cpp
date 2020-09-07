@@ -17,6 +17,16 @@ bool lv_obj_del_safe(lv_obj_t** obj)
     return ret;
 }
 
+void lv_obj_set_opa_scale(lv_obj_t* obj, lv_opa_t opa)
+{
+    lv_obj_set_style_local_opa_scale(obj, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, opa);
+}
+
+lv_opa_t lv_obj_get_opa_scale(lv_obj_t* obj)
+{
+    return lv_obj_get_style_opa_scale(obj, LV_OBJ_PART_MAIN);
+}
+
 /**
   * @brief  在label后追加字符串
   * @param  label:被追加的对象

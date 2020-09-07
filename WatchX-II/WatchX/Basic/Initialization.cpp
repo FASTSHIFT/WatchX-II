@@ -1,4 +1,4 @@
-#include "FileGroup.h"
+#include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
 
 /**
@@ -26,6 +26,6 @@ void WatchX_Init()
     //ParticleSensor_Init();
     
     RTC_Init();
-    RTC_Set(20, 8, 31, 17, 53, 0);
+    RTC_Set(2020, 9, 7, 23, 16, 0);
     //SD_Init();
 }

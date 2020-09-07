@@ -28,19 +28,24 @@ typedef enum
     PAGE_NONE,
     /*用户页面*/
     PAGE_MainMenu,
+    PAGE_DialPlate,
     /*保留*/
     PAGE_MAX
 } Page_Type;
 
 extern PageManager page;
 void PageDelay(uint32_t ms);
-#define PageWaitUntil(condition)\
-while(!(condition)){\
-    lv_task_handler();\
+
+#define PAGE_EXPORT(name)\
+void PageRegister_##name(uint8_t pageID)\
+{\
+    appWindow = AppWindow_GetCont(pageID);\
+    page.PageRegister(pageID, Setup, NULL, Exit, Event);\
 }
 
 /*LittleVGL*/
 #include "lvgl/lvgl.h"
+#include "lv_label_anim_effect.h"
 
 #define LV_ANIM_TIME_DEFAULT 200
 #define LV_SYMBOL_DEGREE_SIGN   "\xC2\xB0"
@@ -48,6 +53,8 @@ while(!(condition)){\
 void lv_port_disp_init();
 void lv_port_indev_init();
 bool lv_obj_del_safe(lv_obj_t** obj);
+void lv_obj_set_opa_scale(lv_obj_t* obj, lv_opa_t opa);
+lv_opa_t lv_obj_get_opa_scale(lv_obj_t* obj);
 void lv_label_set_text_add(lv_obj_t * label, const char * text);
 lv_coord_t lv_obj_get_x_center(lv_obj_t * obj);
 lv_coord_t lv_obj_get_y_center(lv_obj_t * obj);
@@ -62,9 +69,8 @@ void lv_obj_add_anim(
 );
 #define LV_OBJ_ADD_ANIM(obj,attr,target,time)\
 do{\
-    static lv_anim_t a;\
     lv_obj_add_anim(\
-        (obj), &a,\
+        (obj), NULL,\
         (lv_anim_exec_xcb_t)lv_obj_set_##attr,\
         lv_obj_get_##attr(obj),\
         (target),\

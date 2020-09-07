@@ -32,8 +32,9 @@ static void Display_FPSTest();
 static void Pages_Init()
 {
     PAGE_REG(MainMenu);          //主菜单
+    PAGE_REG(DialPlate);         //表盘
     
-    page.PagePush(PAGE_MainMenu);//打开表盘
+    page.PagePush(PAGE_DialPlate);//打开表盘
 }
 
 extern "C" {
@@ -77,7 +78,7 @@ void Display_Init()
     Pages_Init();
     
     /*背光渐亮*/
-    Backlight_SetGradual(Backlight_GetBKP(), 1000);
+    Backlight_SetGradual(Backlight_GetBKP(), 100);
     
     //lv_demo_benchmark();
     //lv_demo_stress();
