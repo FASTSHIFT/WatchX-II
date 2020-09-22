@@ -19,3 +19,17 @@
 * 3.添加新的字体RexBold
 * 4.添加label滑动效果库
 * 5.添加页面注册宏
+
+## [v0.4] - 2020-09-22
+ * 1.调整DISP刷新周期至20ms
+ * 2.修改PageManger的event类型为uint8_t，与lv_obj_event_cb兼容
+ * 3.更优雅的页面注册宏，使用PAGE_EXPORT和PAGE_IMPORT
+ * 4.使用lvgl提供的gestute功能，屏幕的gestute事件会传递给页面事件
+ * 5.独立DisplayPage.cpp
+ * 6.加入微软雅黑字体
+ * 7.添加计算器页面
+ * 8.添加主菜单，精致优雅的非线性动画
+ * 9.使用宏简化表盘页面繁琐的动画函数
+ * 10.添加lv_port_log日志输出接口
+ * 11.添加专属主题lv_theme_watchx
+ * 12.添加LVGL扩展功能文件组lv_ext

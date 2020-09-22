@@ -3,6 +3,9 @@
 #include "Basic/FileGroup.h"
 #include "BSP/BSP.h"
 
+#define TEXT_HEIGHT_1   8
+#define TEXT_WIDTH_1    6
+
 static void SoftDelay(uint32_t ms)
 {
     volatile uint32_t i = F_CPU / 1000 * ms / 5;
@@ -22,7 +25,7 @@ static void System_CrashReports(const char* report)
     screen.setFont();
 
     screen.setTextSize(1);
-    screen.setCursor(0, ScreenMid_H - TEXT_HEIGHT_1 - 5);
+    screen.setCursor(0, screen.height() / 2 - TEXT_HEIGHT_1 - 5);
     screen.println(report);
     screen.print("Press 'OK' to reboot..");
 
@@ -64,7 +67,7 @@ extern "C"
     void vApplicationHardFaultHook()
     {
         System_CrashReports("FXXK! hardfault!");
-        SoftDelay(1000);
+        SoftDelay(5000);
         NVIC_SystemReset();
     }
     __asm void HardFault_Handler()

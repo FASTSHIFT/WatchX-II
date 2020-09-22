@@ -116,7 +116,7 @@ bool PageManager::PageRegister(
   * @param  event: 事件编号
   * @retval 无
   */
-void PageManager::PageEventTransmit(void* obj, int event)
+void PageManager::PageEventTransmit(void* obj, uint8_t event)
 {
     /*将事件传递到当前页面*/
     if(PageList[NowPage].EventCallback != NULL)

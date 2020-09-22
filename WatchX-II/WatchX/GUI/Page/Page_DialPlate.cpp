@@ -1,8 +1,7 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
 
-/*此页面窗口*/
-static lv_obj_t* appWindow;
+PAGE_EXPORT(DialPlate);
 
 static lv_obj_t* contBatt;
 static lv_obj_t* ledBattGrp[10];
@@ -13,9 +12,8 @@ static lv_obj_t* labelWeek;
 
 static lv_obj_t* contTime;
 
-static lv_obj_t * labelTimeGrp[4];
-static lv_label_anim_effect_t labelTimeEffect[__Sizeof(labelTimeGrp)];
-static lv_obj_t* ledGrp[2];
+static lv_label_anim_effect_t labelTimeEffect[4];
+static lv_obj_t* ledSecGrp[2];
 static lv_task_t* task[2];
 
 static lv_obj_t* contHeartRate;
@@ -31,6 +29,8 @@ static void ContBatt_Creat(lv_obj_t* par)
     lv_obj_t* cont = lv_cont_create(par, NULL);
     lv_obj_set_size(cont, 222, 20);
     lv_obj_align(cont, NULL, LV_ALIGN_IN_TOP_MID, 0, 5);
+//    lv_obj_align(cont, NULL, LV_ALIGN_IN_TOP_RIGHT, -(APP_WIN_WIDTH - lv_obj_get_width(cont)) / 2, 5);
+//    lv_obj_set_auto_realign(cont, true);
     lv_obj_set_style_local_bg_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     lv_obj_set_style_local_border_width(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 0);
     contBatt = cont;
@@ -101,38 +101,33 @@ static void LabelDate_Update()
     lv_label_set_text(labelWeek, week_str[calendar.week]);
 }
 
-static void LabelTime_Update()
+static void LabelTime_Update(lv_anim_enable_t anim_enable = LV_ANIM_ON)
 {
     RTC_Get();
     
-//    lv_label_set_text_fmt(labelTimeHour, "%02d", calendar.min);
-//    lv_label_set_text_fmt(labelTimeMinute, "%02d", calendar.sec);
-    
     /*分-个位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[3], calendar.min % 10);
+    lv_label_anim_effect_check_value(&labelTimeEffect[3], calendar.min % 10, anim_enable);
     /*分-十位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[2], calendar.min / 10);
+    lv_label_anim_effect_check_value(&labelTimeEffect[2], calendar.min / 10, anim_enable);
     
     /*时-个位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[1], calendar.hour % 10);
+    lv_label_anim_effect_check_value(&labelTimeEffect[1], calendar.hour % 10, anim_enable);
     /*时-十位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[0], calendar.hour / 10);
+    lv_label_anim_effect_check_value(&labelTimeEffect[0], calendar.hour / 10, anim_enable);
     
-    lv_led_toggle(ledGrp[0]);
-    lv_led_toggle(ledGrp[1]);
-    
-    LabelDate_Update();
+    lv_led_toggle(ledSecGrp[0]);
+    lv_led_toggle(ledSecGrp[1]);
 }
 
 static void LabelTime_Creat(lv_obj_t* par)
 {
     const lv_coord_t x_mod[4] = {-70, -30, 30, 70};
-    for(int i = 0; i < __Sizeof(labelTimeGrp); i++)
+    for(int i = 0; i < __Sizeof(labelTimeEffect); i++)
     {
         lv_obj_t * label = lv_label_create(par, NULL);
         lv_label_set_text(label, "0");
         lv_obj_align(label, NULL, LV_ALIGN_CENTER, x_mod[i], 0);
-        labelTimeGrp[i] = label;
+        lv_obj_set_auto_realign(label, true);
         
         lv_label_anim_effect_init(&labelTimeEffect[i], par, label);
     }
@@ -143,11 +138,11 @@ static void LabelTime_Creat(lv_obj_t* par)
     lv_obj_set_style_local_border_width(led, LV_LED_PART_MAIN, LV_STATE_DEFAULT, 0);
     lv_obj_set_style_local_bg_color(led, LV_LED_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
     lv_obj_align(led, NULL, LV_ALIGN_CENTER, 0, -15);
-    ledGrp[0] = led;
+    ledSecGrp[0] = led;
     
     led = lv_led_create(par, led);
     lv_obj_align(led, NULL, LV_ALIGN_CENTER, 0, 15);
-    ledGrp[1] = led;
+    ledSecGrp[1] = led;
 }
 
 static void ContTime_Creat(lv_obj_t* par)
@@ -265,63 +260,36 @@ static void PagePlayAnim(bool open)
     
     int dir = open ? +1 : -1;
     
-    lv_coord_t now_width = 0;
     lv_opa_t opa_target = open ? LV_OPA_COVER : LV_OPA_TRANSP;
+    
+#define WIDTH_ANIM_DEF(obj, time)\
+do{\
+    lv_coord_t now_width = lv_obj_get_width(obj);\
+    if(open)lv_obj_set_width(obj, 0);\
+    lv_obj_set_hidden(obj, false);\
+    LV_OBJ_ADD_ANIM(\
+        obj, width,\
+        open ? now_width : 0,\
+        (time)\
+    );\
+}while(0)
 
     while(cnt--)
     {
         switch(step)
         {
             case 0:
-                now_width = lv_obj_get_width(contBatt);
-                lv_obj_set_width(contBatt, 0);
-                lv_obj_set_hidden(contBatt, false);
-                LV_OBJ_ADD_ANIM(
-                    contBatt, width,
-                    open ? now_width : 0,
-                    LV_ANIM_TIME_DEFAULT
-                );
-                step += dir;
+                WIDTH_ANIM_DEF(contBatt, LV_ANIM_TIME_DEFAULT);
                 PageDelay(LV_ANIM_TIME_DEFAULT);
+                step += dir;
                 break;
             case 1:
-                now_width = lv_obj_get_width(contDate);
-                lv_obj_set_width(contDate, 0);
-                lv_obj_set_hidden(contDate, false);
-                LV_OBJ_ADD_ANIM(
-                    contDate, width,
-                    open ? now_width : 0,
-                    LV_ANIM_TIME_DEFAULT
-                );
-            
-                now_width = lv_obj_get_width(contTime);
-                lv_obj_set_width(contTime, 0);
-                lv_obj_set_hidden(contTime, false);
-                LV_OBJ_ADD_ANIM(
-                    contTime, width,
-                    open ? now_width : 0,
-                    LV_ANIM_TIME_DEFAULT
-                );
-            
-                now_width = lv_obj_get_width(contHeartRate);
-                lv_obj_set_width(contHeartRate, 0);
-                lv_obj_set_hidden(contHeartRate, false);
-                LV_OBJ_ADD_ANIM(
-                    contHeartRate, width,
-                    open ? now_width : 0,
-                    LV_ANIM_TIME_DEFAULT
-                );
-            
-                now_width = lv_obj_get_width(contSteps);
-                lv_obj_set_width(contSteps, 0);
-                lv_obj_set_hidden(contSteps, false);
-                LV_OBJ_ADD_ANIM(
-                    contSteps, width,
-                    open ? now_width : 0,
-                    LV_ANIM_TIME_DEFAULT
-                );
-                step += dir;
+                WIDTH_ANIM_DEF(contDate, LV_ANIM_TIME_DEFAULT);
+                WIDTH_ANIM_DEF(contTime, LV_ANIM_TIME_DEFAULT);
+                WIDTH_ANIM_DEF(contHeartRate, LV_ANIM_TIME_DEFAULT);
+                WIDTH_ANIM_DEF(contSteps, LV_ANIM_TIME_DEFAULT);
                 PageDelay(LV_ANIM_TIME_DEFAULT);
+                step += dir;
                 break;
                 
             case 2:
@@ -335,12 +303,27 @@ static void PagePlayAnim(bool open)
                     lv_anim_path_bounce
                 );
             
-                for(int i = 0; i < __Sizeof(labelTimeGrp); i++)
+                for(int i = 0; i < __Sizeof(labelTimeEffect); i++)
                 {
+                    lv_obj_t* label;
+                    
+                    label = labelTimeEffect[i].label_1;
+                    
                     lv_obj_add_anim(
-                        labelTimeGrp[i], NULL, 
+                        label, NULL, 
                         (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                        lv_obj_get_opa_scale(labelTimeGrp[i]), opa_target,
+                        lv_obj_get_opa_scale(label), opa_target,
+                        bounce_time,
+                        NULL,
+                        lv_anim_path_bounce
+                    );
+                    
+                    label = labelTimeEffect[i].label_2;
+                    
+                    lv_obj_add_anim(
+                        label, NULL, 
+                        (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
+                        lv_obj_get_opa_scale(label), opa_target,
                         bounce_time,
                         NULL,
                         lv_anim_path_bounce
@@ -377,8 +360,6 @@ static void PagePlayAnim(bool open)
                 PageDelay(bounce_time);
                 break;
         }
-        
-        
     }
 }
 
@@ -422,11 +403,12 @@ static void Setup()
     
     ContTime_Creat(appWindow);
     lv_obj_set_hidden(contTime, true);
-    lv_obj_set_hidden(ledGrp[0], true);
-    lv_obj_set_hidden(ledGrp[1], true);
-    for(int i = 0; i < __Sizeof(labelTimeGrp); i++)
+    lv_obj_set_hidden(ledSecGrp[0], true);
+    lv_obj_set_hidden(ledSecGrp[1], true);
+    for(int i = 0; i < __Sizeof(labelTimeEffect); i++)
     {
-        lv_obj_set_opa_scale(labelTimeGrp[i], LV_OPA_0);
+        lv_obj_set_opa_scale(labelTimeEffect[i].label_1, LV_OPA_0);
+        lv_obj_set_opa_scale(labelTimeEffect[i].label_2, LV_OPA_0);
     }
     
     ContHeartRate_Creat(appWindow);
@@ -440,10 +422,14 @@ static void Setup()
     ImgCHN_Creat(appWindow);
     lv_obj_set_opa_scale(imgCHN, LV_OPA_0);
     
+    LabelTime_Update(LV_ANIM_OFF);
+    LabelDate_Update();
+    LabelSteps_Update();
+    
     PagePlayAnim(true);
     
-    lv_obj_set_hidden(ledGrp[0], false);
-    lv_obj_set_hidden(ledGrp[1], false);
+    lv_obj_set_hidden(ledSecGrp[0], false);
+    lv_obj_set_hidden(ledSecGrp[1], false);
     
     Tasks_Creat();
 }
@@ -455,6 +441,9 @@ static void Setup()
   */
 static void Exit()
 {
+    lv_obj_set_hidden(ledSecGrp[0], true);
+    lv_obj_set_hidden(ledSecGrp[1], true);
+    
     lv_task_del(task[0]);
     lv_task_del(task[1]);
     
@@ -465,12 +454,17 @@ static void Exit()
 
 /**
   * @brief  页面事件
-  * @param  btn:发出事件的按键
+  * @param  obj:发生事件的对象
   * @param  event:事件编号
   * @retval 无
   */
-static void Event(void* btn, int event)
+static void Event(void* obj, uint8_t event)
 {
+    if(obj == lv_scr_act())
+    {
+        if(event == LV_GESTURE_DIR_LEFT)
+        {
+            Page->PagePush(PAGE_MainMenu);
+        }
+    }
 }
-
-PAGE_EXPORT(DialPlate);

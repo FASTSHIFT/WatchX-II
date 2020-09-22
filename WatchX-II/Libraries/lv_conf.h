@@ -48,7 +48,7 @@
 
 /* Default display refresh period.
  * Can be changed in the display driver (`lv_disp_drv_t`).*/
-#define LV_DISP_DEF_REFR_PERIOD      10      /*[ms]*/
+#define LV_DISP_DEF_REFR_PERIOD      20      /*[ms]*/
 
 /* Dot Per Inch: used to initialize default sizes.
  * E.g. a button with width = LV_DPI / 2 -> half inch wide
@@ -260,7 +260,7 @@ typedef void * lv_img_decoder_user_data_t;
 
 /* Prefix performance critical functions to place them into a faster memory (e.g RAM)
  * Uses 15-20 kB extra memory */
-#define LV_ATTRIBUTE_FAST_MEM
+#define LV_ATTRIBUTE_FAST_MEM //__attribute__((section("RAMCODE")))
 
 /* Export integer constant to binding.
  * This macro is used with constants in the form of LV_<CONST> that
@@ -398,7 +398,8 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
  *                                LV_FONT_DECLARE(my_font_2)
  */
 #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(Font_RexBold_28) \
-                               LV_FONT_DECLARE(Font_RexBold_89)
+                               LV_FONT_DECLARE(Font_RexBold_89) \
+                               LV_FONT_DECLARE(Font_MicrosoftYaHei_28)
 
 /* Enable it if you have fonts with a lot of characters.
  * The limit depends on the font size, font face and bpp
@@ -451,10 +452,12 @@ typedef void * lv_font_user_data_t;
  * texts and borders will be black and the background will be
  * white. Else the colors are inverted.
  * No flags. Set LV_THEME_DEFAULT_FLAG 0 */
-#define LV_USE_THEME_MONO        1
+#define LV_USE_THEME_MONO        0
+
+#define LV_USE_THEME_WATCHX      1
 
 #define LV_THEME_DEFAULT_INCLUDE            <stdint.h>      /*Include a header for the init. function*/
-#define LV_THEME_DEFAULT_INIT               lv_theme_mono_init
+#define LV_THEME_DEFAULT_INIT               lv_theme_watchx_init
 #define LV_THEME_DEFAULT_COLOR_PRIMARY      LV_COLOR_WHITE
 #define LV_THEME_DEFAULT_COLOR_SECONDARY    LV_COLOR_RED
 #define LV_THEME_DEFAULT_FLAG               0

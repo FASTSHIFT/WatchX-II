@@ -43,7 +43,7 @@
 
 class PageManager {
     typedef void(*CallbackFunction_t)(void);
-    typedef void(*EventFunction_t)(void*,int);
+    typedef void(*EventFunction_t)(void*,uint8_t);
     typedef struct {
         CallbackFunction_t SetupCallback;
         CallbackFunction_t LoopCallback;
@@ -67,7 +67,7 @@ public:
     bool PagePush(uint8_t pageID);
     bool PagePop();
     void PageChangeTo(uint8_t pageID);
-    void PageEventTransmit(void* obj, int event);
+    void PageEventTransmit(void* obj, uint8_t event);
     void PageStackClear();
     void Running();
 private:

@@ -19,6 +19,8 @@ static bool Value_Init()
   */
 void WatchX_Init()
 {
+    Serial.begin(115200);
+    Serial.println("\r\n"WX_NAME" Hardware:"WX_HARDWARE_VERSION" Software:"WX_SOFTWARE_VERSION" "__DATE__" Build");
     Value_Init();
     //I2C_Scan(true);
     I2Cx_Init(I2C2, 100 * 1000);
@@ -26,6 +28,6 @@ void WatchX_Init()
     //ParticleSensor_Init();
     
     RTC_Init();
-    RTC_Set(2020, 9, 7, 23, 16, 0);
+    RTC_Set(2020, 9, 20, 0, 15, 55);
     //SD_Init();
 }

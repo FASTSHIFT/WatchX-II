@@ -3,7 +3,7 @@
 
 #define WX_NAME             "WatchX-II"  //手表名称
 #define WX_HARDWARE_VERSION "v1.0"       //硬件版本
-#define WX_SOFTWARE_VERSION "v0.3"       //软件版本
+#define WX_SOFTWARE_VERSION "v0.4"       //软件版本
 
 #define NULL_PIN            PD0
 

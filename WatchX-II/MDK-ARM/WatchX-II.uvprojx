@@ -133,11 +133,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -367,7 +367,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>.\Objects\WatchX-II.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -451,6 +451,11 @@
               <FilePath>..\WatchX\GUI\DisplayBasic.cpp</FilePath>
             </File>
             <File>
+              <FileName>DisplayPage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\DisplayPage.cpp</FilePath>
+            </File>
+            <File>
               <FileName>DisplayAppWin.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\DisplayAppWin.cpp</FilePath>
@@ -459,11 +464,6 @@
               <FileName>DisplayError.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\DisplayError.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>lv_ext_func.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\WatchX\GUI\lv_ext_func.cpp</FilePath>
             </File>
             <File>
               <FileName>lv_port_disp.cpp</FileName>
@@ -476,9 +476,9 @@
               <FilePath>..\WatchX\GUI\lv_port_indev.cpp</FilePath>
             </File>
             <File>
-              <FileName>lv_label_anim_effect.cpp</FileName>
+              <FileName>lv_port_log.cpp</FileName>
               <FileType>8</FileType>
-              <FilePath>..\WatchX\GUI\lv_label_anim_effect.cpp</FilePath>
+              <FilePath>..\WatchX\GUI\lv_port_log.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -551,6 +551,31 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\Page\Page_MainMenu.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Page_Calculator.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Calculator.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>GUI/lv_ext</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_label_anim_effect.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lv_theme_watchx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\lv_ext\lv_theme_watchx.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_obj_ext_func.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -576,6 +601,61 @@
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\IMG\IMG_Power.c</FilePath>
             </File>
+            <File>
+              <FileName>IMG_Bluetooth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Bluetooth.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Calculator.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Calculator.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_FileExplorer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_FileExplorer.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Game.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Game.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_HeartRate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_HeartRate.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Music.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Settings.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Settings.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Sleep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Sleep.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Sport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Sport.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Stopwatch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Stopwatch.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_AppShadow.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_AppShadow.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -590,6 +670,11 @@
               <FileName>Font_RexBold_89.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\Font\Font_RexBold_89.c</FilePath>
+            </File>
+            <File>
+              <FileName>Font_MicrosoftYaHei_28.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_28.c</FilePath>
             </File>
           </Files>
         </Group>

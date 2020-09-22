@@ -1,10 +1,8 @@
 #include "FileGroup.h"
 #include "GUI/DisplayPrivate.h"
-#include "Wire.h"
 
 static void setup()
 {
-    Serial.begin(115200);
     WatchX_Init();
     Display_Init();
 }

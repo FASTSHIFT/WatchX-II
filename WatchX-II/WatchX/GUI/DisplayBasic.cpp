@@ -10,32 +10,13 @@ SCREEN_CLASS screen(
     TFT_RS_Pin, TFT_WR_Pin, TFT_RD_Pin
 );
 
-/*实例化页面调度器*/
-PageManager page(PAGE_MAX);
 
-/*页面注册器*/
-#define PAGE_REG(name)\
-do{\
-    extern void PageRegister_##name(uint8_t pageID);\
-    PageRegister_##name(PAGE_##name);\
-}while(0)
 
 #if (USE_FPS_TEST == 1) 
 static void Display_FPSTest();
 #endif
 
-/**
-  * @brief  页面初始化
-  * @param  无
-  * @retval 无
-  */
-static void Pages_Init()
-{
-    PAGE_REG(MainMenu);          //主菜单
-    PAGE_REG(DialPlate);         //表盘
-    
-    page.PagePush(PAGE_DialPlate);//打开表盘
-}
+
 
 extern "C" {
     void lv_demo_benchmark(void);
@@ -70,12 +51,13 @@ void Display_Init()
     lv_init();
     lv_port_disp_init();
     lv_port_indev_init();
+    lv_port_log_init();
     
     /*APP窗口初始化*/
     AppWindow_Creat();
     
     /*页面初始化*/
-    Pages_Init();
+    DisplayPage_Init();
     
     /*背光渐亮*/
     Backlight_SetGradual(Backlight_GetBKP(), 100);
@@ -85,30 +67,7 @@ void Display_Init()
     //lv_demo_widgets();
 }
 
-/**
-  * @brief  显示更新
-  * @param  无
-  * @retval 无
-  */
-void Display_Update()
-{
-    lv_task_handler();
-    page.Running();
-}
 
-/**
-  * @brief  页面阻塞延时，保持lvgl更新
-  * @param  无
-  * @retval 无
-  */
-void PageDelay(uint32_t ms)
-{
-    uint32_t lastTime = millis();
-    while(millis() - lastTime <= ms)
-    {
-        lv_task_handler();
-    }
-}
 
 #if (USE_FPS_TEST == 1) 
 static void Display_FPSTest()

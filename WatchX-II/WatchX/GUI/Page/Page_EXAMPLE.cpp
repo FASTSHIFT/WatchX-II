@@ -1,8 +1,7 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
 
-/*此页面窗口*/
-static lv_obj_t* appWindow;
+PAGE_EXPORT(EXAMPLE);
 
 /**
   * @brief  页面初始化事件
@@ -27,12 +26,11 @@ static void Exit()
 
 /**
   * @brief  页面事件
-  * @param  btn:发出事件的按键
+  * @param  obj:发生事件的对象
   * @param  event:事件编号
   * @retval 无
   */
-static void Event(void* btn, int event)
+static void Event(void* obj, uint8_t event)
 {
+    (void)Page;
 }
-
-PAGE_EXPORT(EXAMPLE);
