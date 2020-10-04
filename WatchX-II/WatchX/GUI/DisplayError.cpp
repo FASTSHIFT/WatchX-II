@@ -1,6 +1,7 @@
 #include "GUI/DisplayPrivate.h"
 #include "cm_backtrace/cm_backtrace.h"
 #include "Basic/FileGroup.h"
+#include "Basic/TasksManage.h"
 #include "BSP/BSP.h"
 
 #define TEXT_HEIGHT_1   8
@@ -10,6 +11,15 @@ static void SoftDelay(uint32_t ms)
 {
     volatile uint32_t i = F_CPU / 1000 * ms / 5;
     while(i--);
+}
+
+static void WaitUserReboot()
+{
+    while(digitalRead(KEY_Pin) == LOW)
+    {
+        SoftDelay(1000);
+    }
+    NVIC_SystemReset();
 }
 
 #include "Adafruit_GFX_Library/Fonts\FreeMono12pt7b.h"
@@ -27,7 +37,7 @@ static void System_CrashReports(const char* report)
     screen.setTextSize(1);
     screen.setCursor(0, screen.height() / 2 - TEXT_HEIGHT_1 - 5);
     screen.println(report);
-    screen.print("Press 'OK' to reboot..");
+    screen.print("Press KEY to reboot..");
 
     screen.setCursor(0, screen.height() - TEXT_HEIGHT_1 * 6);
     screen.println("Error code:");
@@ -64,12 +74,26 @@ void cmb_printf_hook(const char *__restrict __format, ...)
 /***************************** HardFault_Handler *******************************/
 extern "C"
 {
+    void vApplicationStackOverflowHook(TaskHandle_t xTask, char * pcTaskName)
+    {
+        char strBuf[configMAX_TASK_NAME_LEN + 1];
+        snprintf(strBuf, sizeof(strBuf), "stack overflow\n < %s >", pcTaskName);
+        System_CrashReports(strBuf);
+        WaitUserReboot();
+    }
+    
+    void vApplicationMallocFailedHook()
+    {
+        System_CrashReports("malloc failed");
+        WaitUserReboot();
+    }
+    
     void vApplicationHardFaultHook()
     {
-        System_CrashReports("FXXK! hardfault!");
-        SoftDelay(5000);
-        NVIC_SystemReset();
+        System_CrashReports("FXXK HardFault!");
+        WaitUserReboot();
     }
+    
     __asm void HardFault_Handler()
     {
         extern vApplicationHardFaultHook

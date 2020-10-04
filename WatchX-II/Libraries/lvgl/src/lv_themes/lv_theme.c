@@ -25,7 +25,7 @@ static void clear_styles(lv_obj_t * obj, lv_theme_style_t name);
 /**********************
  *  STATIC VARIABLES
  **********************/
-static lv_theme_t * act_theme;
+static lv_theme_t * act_theme = NULL;
 
 /**********************
  *      MACROS

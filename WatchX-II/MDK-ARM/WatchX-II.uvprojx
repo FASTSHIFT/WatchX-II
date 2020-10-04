@@ -186,7 +186,7 @@
             <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -336,7 +336,7 @@
               <MiscControls>--gnu</MiscControls>
               <Define>LIBRARY_VERSION,ARDUINO=111</Define>
               <Undefine></Undefine>
-              <IncludePath>..\ArduinoAPI;..\Core;..\Libraries;..\WatchX;..\Libraries\SdFat\src</IncludePath>
+              <IncludePath>..\ArduinoAPI;..\Core;..\Libraries;..\WatchX;..\Libraries\SdFat\src;..\Libraries\FreeRTOS;..\Libraries\FreeRTOS\Source\include;..\Libraries\FreeRTOS\Source\portable\RVDS\ARM_CM4F</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -391,6 +391,16 @@
               <FilePath>..\WatchX\Basic\Initialization.cpp</FilePath>
             </File>
             <File>
+              <FileName>rt_sys.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\Basic\rt_sys.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>system.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\Basic\system.c</FilePath>
+            </File>
+            <File>
               <FileName>FileGroup.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\WatchX\Basic\FileGroup.h</FilePath>
@@ -399,6 +409,16 @@
               <FileName>SysConfig.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\WatchX\Basic\SysConfig.h</FilePath>
+            </File>
+            <File>
+              <FileName>TasksManage.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\WatchX\Basic\TasksManage.h</FilePath>
+            </File>
+            <File>
+              <FileName>TasksManage.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\Basic\TasksManage.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -434,6 +454,26 @@
               <FileName>BSP_SD_NAND.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\BSP\BSP_SD_NAND.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_Button.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_Button.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_Power.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_Power.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_MotorLRA.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_MotorLRA.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_TouchPad.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_TouchPad.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -556,6 +596,11 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\Page\Page_Calculator.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Page_Stopwatch.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Stopwatch.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -656,6 +701,26 @@
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\IMG\IMG_AppShadow.c</FilePath>
             </File>
+            <File>
+              <FileName>IMG_StopwatchAdd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_StopwatchAdd.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_StopwatchPause.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_StopwatchPause.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_StopwatchReset.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_StopwatchReset.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_StopwatchStart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_StopwatchStart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -675,6 +740,11 @@
               <FileName>Font_MicrosoftYaHei_28.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_28.c</FilePath>
+            </File>
+            <File>
+              <FileName>Font_MicrosoftYaHei_50.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_50.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -725,6 +795,11 @@
               <FileName>spo2_algorithm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\MAX3010x\src\spo2_algorithm.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ButtonEvent.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\ButtonEvent\ButtonEvent.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1462,6 +1537,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>FreeRTOS</GroupName>
+          <Files>
+            <File>
+              <FileName>FreeRTOSConfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Libraries\FreeRTOS\FreeRTOSConfig.h</FilePath>
+            </File>
+            <File>
+              <FileName>croutine.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\croutine.c</FilePath>
+            </File>
+            <File>
+              <FileName>list.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\list.c</FilePath>
+            </File>
+            <File>
+              <FileName>queue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\queue.c</FilePath>
+            </File>
+            <File>
+              <FileName>tasks.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\tasks.c</FilePath>
+            </File>
+            <File>
+              <FileName>timers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\timers.c</FilePath>
+            </File>
+            <File>
+              <FileName>heap_2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\portable\MemMang\heap_2.c</FilePath>
+            </File>
+            <File>
+              <FileName>port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c</FilePath>
+            </File>
+            <File>
+              <FileName>cpu_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\FreeRTOS\cpu_utils.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>SdFat</GroupName>
           <Files>
             <File>
@@ -1685,6 +1810,12 @@
     <apis/>
     <components>
       <component Cclass="CMSIS" Cgroup="CORE" Cvendor="ARM" Cversion="5.3.0" condition="ARMv6_7_8-M Device">
+        <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.6.0"/>
+        <targetInfos>
+          <targetInfo name="WatchX-II"/>
+        </targetInfos>
+      </component>
+      <component Cclass="CMSIS" Cgroup="DSP" Cvariant="Library" Cvendor="ARM" Cversion="1.7.0" condition="CMSIS DSP">
         <package name="CMSIS" schemaVersion="1.3" url="http://www.keil.com/pack/" vendor="ARM" version="5.6.0"/>
         <targetInfos>
           <targetInfo name="WatchX-II"/>

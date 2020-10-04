@@ -87,6 +87,10 @@ do{\
   */
 #define __LoopExecute(func,n) for(unsigned long i=0;i<(n);i++)func
 
+#ifndef constrain
+#   define constrain(amt,low,high) ((amt)<(low)?(low):((amt)>(high)?(high):(amt)))
+#endif
+
 /**
   * @brief  将一个值限制在一个范围内
   * @param  x:被限制的值(任意类型)
@@ -100,9 +104,9 @@ do{\
   * @brief  将一个值的变化区间线性映射到另一个区间
   * @param  x:被映射的值(任意类型)
   * @param  in_min:被映射的值的最小值
-  * @param  in_min:被映射的值的最大值
+  * @param  in_max:被映射的值的最大值
   * @param  out_min:被映射的值的最小值
-  * @param  out_min:被映射的值的最大值
+  * @param  out_max:被映射的值的最大值
   * @retval 映射值输出
   */
 #define __Map(x,in_min,in_max,out_min,out_max) \

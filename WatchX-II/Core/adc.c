@@ -110,7 +110,7 @@ void ADC_DMA_Init(void)
 
     // 复位DMA控制器
     DMA_Reset(DMA1_Channel1);
-
+    
     // 配置 DMA 初始化结构体
     // 外设基址为：ADC 数据寄存器地址
     DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t) (&(ADC1->RDOR));
@@ -162,7 +162,7 @@ void ADC_DMA_Init(void)
     ADC_InitStructure.ADC_ContinuousMode = ENABLE;
 
     // 不用外部触发转换，软件开启即可
-    ADC_InitStructure.ADC_ExternalTrig = ADC_ExternalTrigInjec_None;
+    ADC_InitStructure.ADC_ExternalTrig = ADC_ExternalTrig_None;
 
     // 转换结果右对齐
     ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
@@ -263,10 +263,11 @@ void ADCx_Init(ADC_Type* ADCx)
     RCC_ADCCLKConfig(RCC_APB2CLK_Div8);
 
     ADC_Reset(ADCx);
+    ADC_StructInit(&ADC_InitStructure);
     ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
     ADC_InitStructure.ADC_ScanMode = DISABLE;
     ADC_InitStructure.ADC_ContinuousMode = DISABLE;
-    ADC_InitStructure.ADC_ExternalTrig = ADC_ExternalTrigInjec_None;
+    ADC_InitStructure.ADC_ExternalTrig = ADC_ExternalTrig_None;
     ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
     ADC_InitStructure.ADC_NumOfChannel = 1;
     ADC_Init(ADCx, &ADC_InitStructure);
@@ -288,7 +289,7 @@ uint16_t ADCx_GetValue(ADC_Type* ADCx, uint16_t ADC_Channel)
 {
     ADC_RegularChannelConfig(ADCx, ADC_Channel, 1, ADC_SampleTime_41_5);
 
-    ADC_SoftwareStartConvCtrl(ADC1, ENABLE);
+    ADC_SoftwareStartConvCtrl(ADCx, ENABLE);
     while(!ADC_GetFlagStatus(ADCx, ADC_FLAG_EC));
     return ADC_GetConversionValue(ADCx);
 }

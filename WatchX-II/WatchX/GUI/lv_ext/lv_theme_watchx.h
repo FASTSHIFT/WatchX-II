@@ -1,10 +1,10 @@
 /**
- * @file lv_theme_mono.h
+ * @file lv_theme_watchx.h
  *
  */
 
-#ifndef LV_THEME_MONO_H
-#define LV_THEME_MONO_H
+#ifndef LV_THEME_WATCHX_H
+#define LV_THEME_WATCHX_H
 
 #ifdef __cplusplus
 extern "C" {

@@ -6,7 +6,7 @@
 #define  DEBOUNCE_STEPS     2 // 1 LSb = 1 step (3rd steps will be notify) 
 #define  RST_DEBOUNCE_TIME 13 // 1 LSb = 80 ms
 #define  MIN_THRESHOLD      8 // 1 LSb = FS / 64 (FS: 2g or 4g)
-#define  MAX_STEP_NUMBER  100 // 1 step
+#define  MAX_STEP_NUMBER  30000// 1 step
 
 
 /* Private variables ---------------------------------------------------------*/

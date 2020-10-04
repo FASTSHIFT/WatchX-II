@@ -1,9 +1,6 @@
 #include "DisplayPrivate.h"
-#include "at32f4xx_i2c.h"
-#include "FT6336U/FT6336U.h"
 #include "Basic/SysConfig.h"
-
-static FT6336U ft6336u;
+#include "BSP/BSP.h"
 
 static void touchpad_init(void);
 static bool touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data);
@@ -55,7 +52,7 @@ void lv_port_indev_init(void)
 /*Initialize your touchpad*/
 static void touchpad_init(void)
 {
-    pinMode(TP_EINT_Pin, INPUT);
+    TouchPad_Init();
 //    ft6336u.begin();
 //    while(1)
 //    {
@@ -74,6 +71,7 @@ static bool touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
     /*Save the pressed coordinates and the state*/
     if(touchpad_is_pressed())
     {
+        Power_HandleTimeUpdate();
         touchpad_get_xy(&last_x, &last_y);
         data->state = LV_INDEV_STATE_PR;
     }
@@ -94,14 +92,13 @@ static bool touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 static bool touchpad_is_pressed(void)
 {
     /*Your code comes here*/
-    return ft6336u.read_touch1_event() == 0x02;
+    TouchPad_Update();
+    return TouchPad_GetPressed();
 }
 
 /*Get the x and y coordinates if the touchpad is pressed*/
 static void touchpad_get_xy(lv_coord_t * x, lv_coord_t * y)
 {
     /*Your code comes here*/
-
-    (*x) = (239 - ft6336u.read_touch1_x());
-    (*y) = (239 - ft6336u.read_touch1_y());
+    TouchPad_GetPoints(x, y);
 }

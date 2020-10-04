@@ -43,7 +43,7 @@ void Delay_Init(void)
   * @param  无
   * @retval 无
   */
-void SysTick_Handler(void)
+void SystemMsInc(void)
 {
     System_ms++;
 }

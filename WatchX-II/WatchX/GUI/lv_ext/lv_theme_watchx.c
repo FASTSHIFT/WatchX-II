@@ -1,5 +1,5 @@
 /**
- * @file lv_theme_mono.c
+ * @file lv_theme_watchx.c
  *
  */
 
@@ -7,7 +7,6 @@
  *      INCLUDES
  *********************/
 #include "lvgl/lvgl.h" /*To see all the widgets*/
-#include "lv_theme_watchx.h"
 
 #if LV_USE_THEME_WATCHX
 

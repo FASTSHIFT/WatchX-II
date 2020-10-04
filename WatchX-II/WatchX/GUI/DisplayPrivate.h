@@ -1,6 +1,8 @@
 #ifndef __DISPLAYPRIVATE_H
 #define __DISPLAYPRIVATE_H
 
+#ifdef ARDUINO
+
 /*Basic*/
 #include "Adafruit_ST7789/Adafruit_ST7789.h"
 
@@ -9,6 +11,13 @@ typedef Adafruit_ST7789 SCREEN_CLASS;
 extern SCREEN_CLASS screen;
 
 void DisplayError_Init();
+
+void lv_port_disp_init();
+void lv_port_indev_init();
+void lv_port_log_init();
+
+#endif
+
 void Display_Init();
 void Display_Update();
 
@@ -57,12 +66,9 @@ void PageRegister_##name(PageManager* page_p, uint8_t pageID)\
 #include "lv_ext/lv_label_anim_effect.h"
 #include "lv_ext/lv_obj_ext_func.h"
 
-void lv_port_disp_init();
-void lv_port_indev_init();
-void lv_port_log_init();
 
 /*AppWindow*/
-void AppWindow_Creat();
+void AppWindow_Create();
 lv_obj_t * AppWindow_GetCont(uint8_t pageID);
 lv_coord_t AppWindow_GetHeight();
 lv_coord_t AppWindow_GetWidth();

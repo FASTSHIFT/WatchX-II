@@ -5,31 +5,35 @@ PAGE_EXPORT(MainMenu);
 
 static lv_obj_t* contApps;
 
-LV_IMG_DECLARE(IMG_Bluetooth);
-LV_IMG_DECLARE(IMG_Calculator);
-LV_IMG_DECLARE(IMG_FileExplorer);
-LV_IMG_DECLARE(IMG_Game);
-LV_IMG_DECLARE(IMG_HeartRate);
-LV_IMG_DECLARE(IMG_Music);
-LV_IMG_DECLARE(IMG_Settings);
-LV_IMG_DECLARE(IMG_Sleep);
-LV_IMG_DECLARE(IMG_Sport);
-LV_IMG_DECLARE(IMG_Stopwatch);
-LV_IMG_DECLARE(IMG_AppShadow);
+extern "C" {
+    LV_IMG_DECLARE(IMG_Bluetooth);
+    LV_IMG_DECLARE(IMG_Calculator);
+    LV_IMG_DECLARE(IMG_FileExplorer);
+    LV_IMG_DECLARE(IMG_Game);
+    LV_IMG_DECLARE(IMG_HeartRate);
+    LV_IMG_DECLARE(IMG_Music);
+    LV_IMG_DECLARE(IMG_Settings);
+    LV_IMG_DECLARE(IMG_Sleep);
+    LV_IMG_DECLARE(IMG_Sport);
+    LV_IMG_DECLARE(IMG_Stopwatch);
+    LV_IMG_DECLARE(IMG_AppShadow);
+}
 
-typedef struct{
+typedef struct
+{
     const void* src_img;
     const char* name;
     const uint8_t pageID;
     const lv_color_t bg_color;
     lv_obj_t* img;
     lv_obj_t* cont;
-}AppICON_TypeDef;
+} AppICON_TypeDef;
 
 #define APP_DEF(name, color) {&IMG_##name, #name, PAGE_##name, color, NULL}
 #define APP_ICON_SIZE 80
 
-static AppICON_TypeDef AppICON_Grp[] = {
+static AppICON_TypeDef AppICON_Grp[] =
+{
     APP_DEF(Bluetooth,    LV_COLOR_MAKE(0, 40, 255)),
     APP_DEF(Calculator,   LV_COLOR_MAKE(248, 119, 0)),
     APP_DEF(FileExplorer, LV_COLOR_MAKE(255, 184, 78)),
@@ -46,7 +50,7 @@ static void AppClickAnim(lv_obj_t* cont, lv_obj_t* img, bool ispress)
 {
     LV_OBJ_ADD_ANIM(cont, width, ispress ? 70 : 80, 100);
     LV_OBJ_ADD_ANIM(cont, height, ispress ? 70 : 80, 100);
-    
+
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, img);
@@ -58,8 +62,22 @@ static void AppClickAnim(lv_obj_t* cont, lv_obj_t* img, bool ispress)
     lv_anim_path_init(&path);
     lv_anim_path_set_cb(&path, lv_anim_path_ease_in_out);
     lv_anim_set_path(&a, &path);
-    
+
     lv_anim_start(&a);
+}
+
+static uint8_t AppICON_GetPageID(lv_obj_t* obj)
+{
+    uint8_t pageID = PAGE_NONE;
+    for (int i = 0; i < __Sizeof(AppICON_Grp); i++)
+    {
+        if (obj == AppICON_Grp[i].cont)
+        {
+            pageID = AppICON_Grp[i].pageID;
+            break;
+        }
+    }
+    return pageID;
 }
 
 static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
@@ -72,34 +90,33 @@ static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
     {
         AppClickAnim(obj, lv_obj_get_child(obj, NULL), false);
     }
-    
+
     if(event == LV_EVENT_CLICKED)
     {
-        for(int i = 0; i < __Sizeof(AppICON_Grp); i++)
+        uint8_t pageID = AppICON_GetPageID(obj);
+
+        if (pageID == PAGE_NONE)
+            return;
+
+        if (pageID == PAGE_Calculator)
         {
-            if(obj == AppICON_Grp[i].cont)
-            {
-                int pageID = AppICON_Grp[i].pageID;
-                if(pageID != PAGE_NONE)
-                {
-                    if(pageID == PAGE_Calculator)
-                    {
-                        Page->PagePush(PAGE_Calculator);
-                    }
-                }
-            }
+            Page->PagePush(PAGE_Calculator);
+        }
+        else if (pageID == PAGE_Stopwatch)
+        {
+            Page->PagePush(PAGE_Stopwatch);
         }
     }
 }
 
-static void AppICON_Creat(lv_obj_t* par)
+static void AppICON_Create(lv_obj_t* par)
 {
     static lv_style_t style;
     lv_style_init(&style);
     lv_style_set_radius(&style, LV_STATE_DEFAULT, 10);
     lv_style_set_border_width(&style, LV_STATE_DEFAULT, 0);
     lv_style_set_bg_color(&style, LV_STATE_PRESSED, LV_COLOR_GRAY);
-    
+
     for(int i = 0; i < __Sizeof(AppICON_Grp); i++)
     {
         lv_obj_t* cont = lv_cont_create(par, NULL);
@@ -109,36 +126,36 @@ static void AppICON_Creat(lv_obj_t* par)
 
         lv_obj_set_event_cb(cont, AppICON_EventHandler);
         lv_obj_set_drag_parent(cont, true);
-        
+
         lv_coord_t interval_pixel_0 = (lv_obj_get_width(par) - lv_obj_get_width(cont) * 2) / 3;
         lv_coord_t interval_pixel_1 = interval_pixel_0 + lv_obj_get_width(cont);
         lv_coord_t interval_pixel_2 = lv_obj_get_width(cont) / 2 + interval_pixel_0 / 2;
-        
+
         lv_obj_set_auto_realign(cont, true);
         lv_obj_align(
-            cont, 
-            NULL, 
-            LV_ALIGN_IN_TOP_MID, 
-            ((i % 2) == 0) ? -interval_pixel_2 : interval_pixel_2, 
+            cont,
+            NULL,
+            LV_ALIGN_IN_TOP_MID,
+            ((i % 2) == 0) ? -interval_pixel_2 : interval_pixel_2,
             interval_pixel_0 + (i / 2) * interval_pixel_1
         );
-        
+
         lv_obj_t* img = lv_img_create(cont, NULL);
         lv_img_set_src(img, AppICON_Grp[i].src_img);
         lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
         lv_obj_set_auto_realign(img, true);
-        
+
         AppICON_Grp[i].cont = cont;
         AppICON_Grp[i].img = img;
     }
 }
 
-static void ImgAppShadow(lv_obj_t* par)
+static void ImgAppShadow_Create(lv_obj_t* par)
 {
     lv_obj_t* img1 = lv_img_create(par, NULL);
     lv_img_set_src(img1, &IMG_AppShadow);
     lv_obj_align(img1, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
-    
+
     lv_obj_t* img2 = lv_img_create(par, img1);
     lv_img_set_angle(img2, 1800);
     lv_obj_align(img2, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
@@ -149,7 +166,7 @@ static void ContApps_ReleaseAnim(lv_coord_t manual_target = 0)
     lv_coord_t y_pos = lv_obj_get_y(contApps);
     lv_coord_t y_min = -(lv_obj_get_height(contApps) - APP_WIN_HEIGHT);
     lv_coord_t y_target = 0;
-    
+
     if(!manual_target)
     {
         if(y_pos > 0)
@@ -169,30 +186,42 @@ static void ContApps_ReleaseAnim(lv_coord_t manual_target = 0)
     {
         y_target = manual_target;
     }
-    
+
     LV_OBJ_ADD_ANIM(contApps, y, y_target, LV_ANIM_TIME_DEFAULT);
 }
 
 static void ContApps_EventHandler(lv_obj_t* obj, lv_event_t event)
 {
-    if( event == LV_EVENT_RELEASED 
-     || event == LV_EVENT_PRESS_LOST 
-     || event == LV_EVENT_DRAG_END
-    )
+    static bool is_draging = false;
+
+    if (event == LV_EVENT_DRAG_BEGIN)
+    {
+        is_draging = true;
+    }
+    else if (event == LV_EVENT_DRAG_END)
+    {
+        is_draging = false;
+    }
+
+    if((!is_draging && event == LV_EVENT_RELEASED)
+            || event == LV_EVENT_PRESS_LOST
+            || event == LV_EVENT_DRAG_END
+      )
     {
         if(lv_anim_get(contApps, (lv_anim_exec_xcb_t)lv_obj_set_y) == NULL)
         {
             ContApps_ReleaseAnim();
         }
     }
+
 }
 
-static void ContApps_Creat(lv_obj_t* par)
+static void ContApps_Create(lv_obj_t* par)
 {
     lv_obj_t* cont = lv_cont_create(par, NULL);
-    
+
     lv_obj_set_width(cont, APP_WIN_WIDTH);
-    
+
     lv_coord_t interval_pixel_h = (lv_obj_get_width(par) - APP_ICON_SIZE * 2) / 3;
     lv_obj_set_height(
         cont,
@@ -232,10 +261,10 @@ static void Setup()
 {
     /*将此页面移到前台*/
     lv_obj_move_foreground(appWindow);
-    
-    ContApps_Creat(appWindow);
-    ImgAppShadow(appWindow);
-    AppICON_Creat(contApps);
+
+    ContApps_Create(appWindow);
+    ImgAppShadow_Create(appWindow);
+    AppICON_Create(contApps);
     PagePlayAnim(true);
 }
 

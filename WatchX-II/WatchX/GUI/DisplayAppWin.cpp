@@ -17,7 +17,7 @@ lv_coord_t AppWindow_GetWidth()
     return (lv_obj_get_width(lv_scr_act()));
 }
 
-void AppWindow_Creat()
+void AppWindow_Create()
 {
     static lv_style_t style;
     lv_style_init(&style);

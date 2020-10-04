@@ -3,7 +3,7 @@
 
 #define WX_NAME             "WatchX-II"  //手表名称
 #define WX_HARDWARE_VERSION "v1.0"       //硬件版本
-#define WX_SOFTWARE_VERSION "v0.4"       //软件版本
+#define WX_SOFTWARE_VERSION "v0.5"       //软件版本
 
 #define NULL_PIN            PD0
 
@@ -29,15 +29,15 @@
 #define BAT_CHG_DET_Pin     PC13
 
 /*振动电机*/
-#define MOTOR_IN1_Pin       PA7
-#define MOTOR_IN2_Pin       PA6
+#define MotorLRA_IN1_Pin    PA7
+#define MotorLRA_IN2_Pin    PA6
 
 /*传感器I2C*/
 #define SENSOR_SCL_Pin      PB10
 #define SENSOR_SDA_Pin      PB11
 #define SENSOR_I2C          I2C2
 
-/*触摸中断脚*/
+/*触摸数据就绪脚*/
 #define TP_EINT_Pin         PB12
 
 /*SD卡 SPI接口*/

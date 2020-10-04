@@ -77,7 +77,11 @@ typedef int16_t lv_coord_t;
  * The graphical objects and other related data are stored here. */
 
 /* 1: use custom malloc/free, 0: use the built-in `lv_mem_alloc` and `lv_mem_free` */
-#define LV_MEM_CUSTOM      0
+#ifdef ARDUINO
+#   define LV_MEM_CUSTOM      1
+#else
+#   define LV_MEM_CUSTOM      0
+#endif
 #if LV_MEM_CUSTOM == 0
 /* Size of the memory used by `lv_mem_alloc` in bytes (>= 2kB)*/
 #  define LV_MEM_SIZE    (32U * 1024U)
@@ -92,14 +96,14 @@ typedef int16_t lv_coord_t;
 /* Automatically defrag. on free. Defrag. means joining the adjacent free cells. */
 #  define LV_MEM_AUTO_DEFRAG  1
 #else       /*LV_MEM_CUSTOM*/
-#  define LV_MEM_CUSTOM_INCLUDE <stdlib.h>   /*Header for the dynamic memory function*/
-#  define LV_MEM_CUSTOM_ALLOC   malloc       /*Wrapper to malloc*/
-#  define LV_MEM_CUSTOM_FREE    free         /*Wrapper to free*/
+#  define LV_MEM_CUSTOM_INCLUDE "FreeRTOS.h"   /*Header for the dynamic memory function*/
+#  define LV_MEM_CUSTOM_ALLOC   pvPortMalloc   /*Wrapper to malloc*/
+#  define LV_MEM_CUSTOM_FREE    vPortFree      /*Wrapper to free*/
 #endif     /*LV_MEM_CUSTOM*/
 
 /* Use the standard memcpy and memset instead of LVGL's own functions.
  * The standard functions might or might not be faster depending on their implementation. */
-#define LV_MEMCPY_MEMSET_STD    0
+#define LV_MEMCPY_MEMSET_STD    1
 
 /* Garbage Collector settings
  * Used if lvgl is binded to higher level language and the memory is managed by that language */
@@ -121,7 +125,7 @@ typedef int16_t lv_coord_t;
 #define LV_INDEV_DEF_READ_PERIOD          30
 
 /* Drag threshold in pixels */
-#define LV_INDEV_DEF_DRAG_LIMIT           10
+#define LV_INDEV_DEF_DRAG_LIMIT           5
 
 /* Drag throw slow-down in [%]. Greater value -> faster slow-down */
 #define LV_INDEV_DEF_DRAG_THROW           10
@@ -280,7 +284,13 @@ typedef void * lv_img_decoder_user_data_t;
 
 /* 1: use a custom tick source.
  * It removes the need to manually update the tick with `lv_tick_inc`) */
+
+#ifdef ARDUINO
 #define LV_TICK_CUSTOM     1
+#else
+#define LV_TICK_CUSTOM     0
+#endif
+
 #if LV_TICK_CUSTOM == 1
 #define LV_TICK_CUSTOM_INCLUDE  "delay.h"         /*Header for the system time function*/
 #define LV_TICK_CUSTOM_SYS_TIME_EXPR (millis())     /*Expression evaluating to current system time in ms*/
@@ -399,7 +409,8 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
  */
 #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(Font_RexBold_28) \
                                LV_FONT_DECLARE(Font_RexBold_89) \
-                               LV_FONT_DECLARE(Font_MicrosoftYaHei_28)
+                               LV_FONT_DECLARE(Font_MicrosoftYaHei_28) \
+                               LV_FONT_DECLARE(Font_MicrosoftYaHei_50)
 
 /* Enable it if you have fonts with a lot of characters.
  * The limit depends on the font size, font face and bpp
@@ -456,7 +467,7 @@ typedef void * lv_font_user_data_t;
 
 #define LV_USE_THEME_WATCHX      1
 
-#define LV_THEME_DEFAULT_INCLUDE            <stdint.h>      /*Include a header for the init. function*/
+#define LV_THEME_DEFAULT_INCLUDE            "GUI/lv_ext/lv_theme_watchx.h"      /*Include a header for the init. function*/
 #define LV_THEME_DEFAULT_INIT               lv_theme_watchx_init
 #define LV_THEME_DEFAULT_COLOR_PRIMARY      LV_COLOR_WHITE
 #define LV_THEME_DEFAULT_COLOR_SECONDARY    LV_COLOR_RED

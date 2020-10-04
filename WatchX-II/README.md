@@ -33,3 +33,18 @@
  * 10.添加lv_port_log日志输出接口
  * 11.添加专属主题lv_theme_watchx
  * 12.添加LVGL扩展功能文件组lv_ext
+ 
+## [v0.5] - 2020-10-04
+ * 1.修复ADC问题
+ * 2.移植FreeRTOS(V10.4.1)
+ * 3.LVGL使用FreeRTOS提供的内存管理
+ * 4.LVGL使用标准的memset和memcpy
+ * 5.添加lv_sim_visual_studio_sdl模拟器，可直接在PC上调试UI
+ * 6.添加按键支持
+ * 7.添加Power管理
+ * 8.移植X-CTRL的线性马达驱动
+ * 9.分离FT6336U驱动至BSP TouchPad
+ * 10.修改计步数上限
+ * 11.UI层使用lv_tick_get()，减少millis()依赖
+ * 12.添加秒表程序(由Trigger-CN设计)
+ * 13.修复主菜单滑动动画BUG

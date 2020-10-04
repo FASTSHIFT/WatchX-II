@@ -38,7 +38,7 @@
 /**********************
  *  STATIC VARIABLES
  **********************/
-static lv_disp_t * disp_def;
+static lv_disp_t * disp_def = 0;
 
 /**********************
  *      MACROS

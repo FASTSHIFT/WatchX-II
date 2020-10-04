@@ -1,6 +1,7 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
-#include "BSP/BSP.h"
+
+#ifdef ARDUINO
 
 #define USE_FPS_TEST 0
 
@@ -9,8 +10,6 @@ SCREEN_CLASS screen(
     TFT_PORT_Pin, TFT_RES_Pin, TFT_CS_Pin,
     TFT_RS_Pin, TFT_WR_Pin, TFT_RD_Pin
 );
-
-
 
 #if (USE_FPS_TEST == 1) 
 static void Display_FPSTest();
@@ -54,7 +53,7 @@ void Display_Init()
     lv_port_log_init();
     
     /*APP窗口初始化*/
-    AppWindow_Creat();
+    AppWindow_Create();
     
     /*页面初始化*/
     DisplayPage_Init();
@@ -96,4 +95,17 @@ static void Display_FPSTest()
     screen.print(FPS);
     while(1);
 }
+#endif
+
+#else
+
+void Display_Init()
+{
+    /*APP窗口初始化*/
+    AppWindow_Create();
+
+    /*页面初始化*/
+    DisplayPage_Init();
+}
+
 #endif

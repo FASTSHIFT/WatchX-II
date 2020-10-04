@@ -67,7 +67,7 @@ static void BtnGrp_EventHandler(lv_obj_t* obj, lv_event_t event)
     }
 }
 
-static void BtnGrp_Creat(lv_obj_t* par)
+static void BtnGrp_Create(lv_obj_t* par)
 {
     static lv_style_t style;
     lv_style_init(&style);
@@ -96,7 +96,7 @@ static void BtnGrp_Creat(lv_obj_t* par)
     }
 }
 
-static void ContBtnGrp_Creat(lv_obj_t* par)
+static void ContBtnGrp_Create(lv_obj_t* par)
 {
     lv_obj_t* cont = lv_cont_create(par, NULL);
     lv_obj_set_width(cont, APP_WIN_WIDTH);
@@ -108,7 +108,7 @@ static void ContBtnGrp_Creat(lv_obj_t* par)
     contBtnGrp = cont;
 }
 
-static void TextareaCalc_Creat(lv_obj_t* par)
+static void TextareaCalc_Create(lv_obj_t* par)
 {
     lv_obj_t* textarea = lv_textarea_create(par, NULL);
     lv_obj_set_width(textarea, APP_WIN_WIDTH);
@@ -151,9 +151,9 @@ static void Setup()
     /*将此页面移到前台*/
     lv_obj_move_foreground(appWindow);
 
-    ContBtnGrp_Creat(appWindow);
-    BtnGrp_Creat(contBtnGrp);
-    TextareaCalc_Creat(appWindow);
+    ContBtnGrp_Create(appWindow);
+    BtnGrp_Create(contBtnGrp);
+    TextareaCalc_Create(appWindow);
     PagePlayAnim(true);
 }
 

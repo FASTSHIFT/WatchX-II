@@ -28,7 +28,8 @@ void DisplayPage_Init()
 {
     PAGE_IMPORT(MainMenu);        //主菜单
     PAGE_IMPORT(DialPlate);       //表盘
-    PAGE_IMPORT(Calculator);        //计算器
+    PAGE_IMPORT(Calculator);      //计算器
+    PAGE_IMPORT(Stopwatch);       //秒表
     
     page.PagePush(PAGE_DialPlate);   //进入第一个页面
     
@@ -53,8 +54,8 @@ void Display_Update()
   */
 void PageDelay(uint32_t ms)
 {
-    uint32_t lastTime = millis();
-    while(millis() - lastTime <= ms)
+    uint32_t lastTime = lv_tick_get();
+    while(lv_tick_get() - lastTime <= ms)
     {
         lv_task_handler();
     }
