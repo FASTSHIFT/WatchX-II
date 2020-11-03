@@ -27,9 +27,7 @@ int16_t IMU_GetSteps();
 /*ParticleSensor*/
 void ParticleSensor_Init();
 void ParticleSensor_Update();
-
-/*I2C*/
-void I2C_Scan(bool startScan);
+float ParticleSensor_GetBeats();
 
 /*SD*/
 void SD_Init();
@@ -66,5 +64,35 @@ void TouchPad_Init();
 void TouchPad_Update();
 bool TouchPad_GetPressed();
 void TouchPad_GetPoints(int16_t* x, int16_t* y);
+
+/*ComMaster*/
+typedef struct ComMaster_UserCallback
+{
+    uint8_t ID;
+    bool (*Func)(void*, uint8_t);
+    const char* Name;
+    struct ComMaster_UserCallback* Next;
+} ComMaster_UserCallback_TypeDef;
+void ComMaster_Init();
+void ComMaster_Update();
+void ComMaster_AddUserCallbackNode(ComMaster_UserCallback_TypeDef* node);
+
+#define ComMaster_MakeNode(name,dataPack)\
+static ComMaster_UserCallback_TypeDef name##_Node;\
+static bool name##_NodeCallback(void* buf, uint8_t size)\
+{\
+    if(size != sizeof(dataPack))\
+        return false;\
+    memcpy(&(dataPack), buf, size);\
+    return true;\
+}
+#define ComMaster_InitNode(name,id)\
+do{\
+    name##_Node.ID = (id) & 0x0F;\
+    name##_Node.Func = name##_NodeCallback;\
+    name##_Node.Name = #name;\
+    name##_Node.Next = NULL;\
+    ComMaster_AddUserCallbackNode(&name##_Node);\
+}while(0)
 
 #endif

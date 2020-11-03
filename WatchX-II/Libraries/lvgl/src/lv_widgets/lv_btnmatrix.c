@@ -178,7 +178,7 @@ void lv_btnmatrix_set_map(lv_obj_t * btnm, const char * map[])
     }
 
     lv_coord_t btn_h = max_h - ((line_cnt - 1) * inner);
-    btn_h            = btn_h / line_cnt;
+    btn_h            = (btn_h + line_cnt / 2) / line_cnt;
     btn_h--; /*-1 because e.g. height = 100 means 101 pixels (0..100)*/
 
     /* Count the units and the buttons in a line
@@ -208,7 +208,7 @@ void lv_btnmatrix_set_map(lv_obj_t * btnm, const char * map[])
         /*Only deal with the non empty lines*/
         if(btn_cnt != 0) {
             /*Calculate the width of all units*/
-            lv_coord_t all_unit_w = max_w - ((btn_cnt - 1) * inner);
+            lv_coord_t all_unit_w = max_w - ((unit_cnt - 1) * inner);
 
             /*Set the button size and positions and set the texts*/
             uint16_t i;
@@ -216,19 +216,20 @@ void lv_btnmatrix_set_map(lv_obj_t * btnm, const char * map[])
 
             unit_act_cnt = 0;
             for(i = 0; i < btn_cnt; i++) {
+                uint8_t btn_unit_w = get_button_width(ext->ctrl_bits[btn_i]);
                 /* one_unit_w = all_unit_w / unit_cnt
                  * act_unit_w = one_unit_w * button_width
                  * do this two operations but the multiply first to divide a greater number */
-                lv_coord_t act_unit_w = (all_unit_w * get_button_width(ext->ctrl_bits[btn_i])) / unit_cnt;
+                lv_coord_t act_unit_w = (all_unit_w * btn_unit_w) / unit_cnt + inner * (btn_unit_w - 1);
                 act_unit_w--; /*-1 because e.g. width = 100 means 101 pixels (0..100)*/
 
                 /*Always recalculate act_x because of rounding errors */
                 if(base_dir == LV_BIDI_DIR_RTL)  {
-                    act_x = (unit_act_cnt * all_unit_w) / unit_cnt + i * inner;
+                    act_x = (unit_act_cnt * all_unit_w) / unit_cnt + unit_act_cnt * inner;
                     act_x = lv_obj_get_width(btnm) - right - act_x - act_unit_w - 1;
                 }
                 else {
-                    act_x = (unit_act_cnt * all_unit_w) / unit_cnt + i * inner +
+                    act_x = (unit_act_cnt * all_unit_w) / unit_cnt + unit_act_cnt * inner +
                             left;
                 }
                 /* Set the button's area.
@@ -243,7 +244,7 @@ void lv_btnmatrix_set_map(lv_obj_t * btnm, const char * map[])
                     lv_area_set(&ext->button_areas[btn_i], act_x, act_y, act_x + act_unit_w, act_y + btn_h);
                 }
 
-                unit_act_cnt += get_button_width(ext->ctrl_bits[btn_i]);
+                unit_act_cnt += btn_unit_w;
 
                 i_tot++;
                 btn_i++;
@@ -321,13 +322,19 @@ void lv_btnmatrix_set_recolor(const lv_obj_t * btnm, bool en)
  * @param btnm pointer to button matrix object
  * @param btn_id 0 based index of the button to modify. (Not counting new lines)
  */
-void lv_btnmatrix_set_btn_ctrl(const lv_obj_t * btnm, uint16_t btn_id, lv_btnmatrix_ctrl_t ctrl)
+void lv_btnmatrix_set_btn_ctrl(lv_obj_t * btnm, uint16_t btn_id, lv_btnmatrix_ctrl_t ctrl)
 {
     LV_ASSERT_OBJ(btnm, LV_OBJX_NAME);
 
     lv_btnmatrix_ext_t * ext = lv_obj_get_ext_attr(btnm);
 
     if(btn_id >= ext->btn_cnt) return;
+
+    /*Uncheck all buttons if required*/
+    if(ext->one_check && (ctrl & LV_BTNMATRIX_CTRL_CHECK_STATE)) {
+        lv_btnmatrix_clear_btn_ctrl_all(btnm, LV_BTNMATRIX_CTRL_CHECK_STATE);
+        ext->btn_id_act = btn_id;
+    }
 
     ext->ctrl_bits[btn_id] |= ctrl;
     invalidate_button_area(btnm, btn_id);

@@ -52,7 +52,6 @@ void lv_port_indev_init(void)
 /*Initialize your touchpad*/
 static void touchpad_init(void)
 {
-    TouchPad_Init();
 //    ft6336u.begin();
 //    while(1)
 //    {
@@ -92,7 +91,6 @@ static bool touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
 static bool touchpad_is_pressed(void)
 {
     /*Your code comes here*/
-    TouchPad_Update();
     return TouchPad_GetPressed();
 }
 

@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>AT32F403ACGU7</Device>
           <Vendor>ArteryTek</Vendor>
-          <PackID>Keil.AT32F4xx_DFP.1.3.1</PackID>
+          <PackID>Keil.AT32F4xx_DFP.1.3.4</PackID>
           <Cpu>IRAM(0x20000000,0x38000) IROM(0x08000000,0x100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -436,21 +436,6 @@
               <FilePath>..\WatchX\BSP\BSP_Backlight.cpp</FilePath>
             </File>
             <File>
-              <FileName>BSP_ParticleSensor.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\WatchX\BSP\BSP_ParticleSensor.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BSP_IMU.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\WatchX\BSP\BSP_IMU.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>BSP_I2C_Scan.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\WatchX\BSP\BSP_I2C_Scan.cpp</FilePath>
-            </File>
-            <File>
               <FileName>BSP_SD_NAND.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\BSP\BSP_SD_NAND.cpp</FilePath>
@@ -471,9 +456,49 @@
               <FilePath>..\WatchX\BSP\BSP_MotorLRA.cpp</FilePath>
             </File>
             <File>
+              <FileName>BSP_IMU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_IMU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_ParticleSensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_ParticleSensor.cpp</FilePath>
+            </File>
+            <File>
               <FileName>BSP_TouchPad.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\BSP\BSP_TouchPad.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_ComMaster.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_ComMaster.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP/Built-in</GroupName>
+          <Files>
+            <File>
+              <FileName>BSP_I2C_Scan.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\Built-in\BSP_I2C_Scan.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_IMU.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\Built-in\BSP_IMU.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_ParticleSensor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\Built-in\BSP_ParticleSensor.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>BSP_TouchPad.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\Built-in\BSP_TouchPad.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -494,6 +519,11 @@
               <FileName>DisplayPage.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\DisplayPage.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>DisplayStatusBar.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\DisplayStatusBar.cpp</FilePath>
             </File>
             <File>
               <FileName>DisplayAppWin.cpp</FileName>
@@ -601,6 +631,26 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\Page\Page_Stopwatch.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Page_HeartRate.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_HeartRate.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Page_Settings.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Settings.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Page_TimeSet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_TimeSet.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Page_BacklightSet.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_BacklightSet.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -620,6 +670,11 @@
               <FileName>lv_obj_ext_func.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>lv_anim_timeline.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\lv_ext\lv_anim_timeline.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -721,6 +776,16 @@
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\IMG\IMG_StopwatchStart.c</FilePath>
             </File>
+            <File>
+              <FileName>IMG_CalcBG.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_CalcBG.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_HeartrateTinyheart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_HeartrateTinyheart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -746,6 +811,11 @@
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_50.c</FilePath>
             </File>
+            <File>
+              <FileName>Font_MicrosoftYaHei_16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_16.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -767,14 +837,19 @@
               <FilePath>..\Libraries\PageManager\PageManager.cpp</FilePath>
             </File>
             <File>
-              <FileName>FT6336U.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\FT6336U\FT6336U.cpp</FilePath>
-            </File>
-            <File>
               <FileName>Adafruit_ST7789.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\Adafruit_ST7789\Adafruit_ST7789.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ButtonEvent.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\ButtonEvent\ButtonEvent.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>FT6336U.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\FT6336U\FT6336U.cpp</FilePath>
             </File>
             <File>
               <FileName>LIS2DS12_ACC.cpp</FileName>
@@ -782,29 +857,24 @@
               <FilePath>..\Libraries\LIS2DS12\LIS2DS12_ACC.cpp</FilePath>
             </File>
             <File>
-              <FileName>MAX30105.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\MAX3010x\src\MAX30105.cpp</FilePath>
-            </File>
-            <File>
               <FileName>heartRate.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\MAX3010x\src\heartRate.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>MAX30105.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Libraries\MAX3010x\src\MAX30105.cpp</FilePath>
             </File>
             <File>
               <FileName>spo2_algorithm.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\Libraries\MAX3010x\src\spo2_algorithm.cpp</FilePath>
             </File>
-            <File>
-              <FileName>ButtonEvent.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>..\Libraries\ButtonEvent\ButtonEvent.cpp</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>LVGL</GroupName>
+          <GroupName>lvgl</GroupName>
           <GroupOption>
             <CommonProperty>
               <UseCPPCompiler>0</UseCPPCompiler>
@@ -984,6 +1054,16 @@
               <FileName>lv_font_loader.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Libraries\lvgl\src\lv_font\lv_font_loader.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserrat_8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\lvgl\src\lv_font\lv_font_montserrat_8.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_font_montserrat_10.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\lvgl\src\lv_font\lv_font_montserrat_10.c</FilePath>
             </File>
             <File>
               <FileName>lv_font_montserrat_12.c</FileName>
@@ -1922,7 +2002,7 @@
       <file attr="config" category="source" name="Device\StdPeriph_Driver\templates\at32f4xx_conf.h" version="1.0.1">
         <instance index="0">RTE\Device\AT32F403ACGU7\at32f4xx_conf.h</instance>
         <component Cclass="Device" Cgroup="StdPeriph Drivers" Csub="Framework" Cvendor="Keil" Cversion="1.0.1" condition="AT32F4xx STDPERIPH"/>
-        <package name="AT32F4xx_DFP" schemaVersion="1.2" supportContact="support@keil.com" vendor="Keil" version="1.3.1"/>
+        <package name="AT32F4xx_DFP" schemaVersion="1.2" supportContact="support@keil.com" vendor="Keil" version="1.3.4"/>
         <targetInfos>
           <targetInfo name="WatchX-II"/>
         </targetInfos>
@@ -1930,7 +2010,7 @@
       <file attr="config" category="source" condition="AT32F403ACGU7" name="Device\Source\ARM\startup_at32f403acgu7.s" version="1.0.1">
         <instance index="0">RTE\Device\AT32F403ACGU7\startup_at32f403acgu7.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.1" condition="AT32F4xx CMSIS"/>
-        <package name="AT32F4xx_DFP" schemaVersion="1.2" supportContact="support@keil.com" vendor="Keil" version="1.3.1"/>
+        <package name="AT32F4xx_DFP" schemaVersion="1.2" supportContact="support@keil.com" vendor="Keil" version="1.3.4"/>
         <targetInfos>
           <targetInfo name="WatchX-II"/>
         </targetInfos>
@@ -1938,7 +2018,7 @@
       <file attr="config" category="source" name="Device\Source\system_at32f4xx.c" version="1.0.1">
         <instance index="0">RTE\Device\AT32F403ACGU7\system_at32f4xx.c</instance>
         <component Cclass="Device" Cgroup="System_AT32Fxx" Cvendor="Keil" Cversion="1.0.1" condition="AT32F4xx CMSIS"/>
-        <package name="AT32F4xx_DFP" schemaVersion="1.2" supportContact="support@keil.com" vendor="Keil" version="1.3.1"/>
+        <package name="AT32F4xx_DFP" schemaVersion="1.2" supportContact="support@keil.com" vendor="Keil" version="1.3.4"/>
         <targetInfos>
           <targetInfo name="WatchX-II"/>
         </targetInfos>

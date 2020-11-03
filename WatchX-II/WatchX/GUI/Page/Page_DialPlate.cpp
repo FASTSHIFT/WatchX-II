@@ -1,6 +1,7 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
 
+/*导出页面接口*/
 PAGE_EXPORT(DialPlate);
 
 extern "C"{
@@ -33,17 +34,19 @@ static lv_obj_t* imgCHN;
 
 static void ContBatt_UpdateBattUsage(uint8_t usage)
 {
-    static int8_t maxIndexLast = 0;
-    int8_t maxIndexTarget = __Map(usage, 0, 100, 0, __Sizeof(ledBattGrp));
-    
-    __ValueCloseTo(maxIndexLast, maxIndexTarget, 1);
+    int8_t maxIndexTarget = __Map(usage, 0, 100, 0, __Sizeof(ledBattGrp));  
     
     for(int i = 0; i < __Sizeof(ledBattGrp); i++)
     {
         lv_obj_t* led = ledBattGrp[i];
         
-        (i < maxIndexLast) ? lv_led_on(led) : lv_led_off(led);
+        (i < maxIndexTarget) ? lv_led_on(led) : lv_led_off(led);
     }
+}
+
+static void ContBatt_AnimCallback(void* obj, int16_t usage)
+{
+    ContBatt_UpdateBattUsage(usage);
 }
 
 static void ContBatt_Create(lv_obj_t* par)
@@ -51,8 +54,6 @@ static void ContBatt_Create(lv_obj_t* par)
     lv_obj_t* cont = lv_cont_create(par, NULL);
     lv_obj_set_size(cont, 222, 20);
     lv_obj_align(cont, NULL, LV_ALIGN_IN_TOP_MID, 0, 5);
-//    lv_obj_align(cont, NULL, LV_ALIGN_IN_TOP_RIGHT, -(APP_WIN_WIDTH - lv_obj_get_width(cont)) / 2, 5);
-//    lv_obj_set_auto_realign(cont, true);
     lv_obj_set_style_local_bg_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     lv_obj_set_style_local_border_width(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 0);
     contBatt = cont;
@@ -93,6 +94,7 @@ static void ContWeek_Create(lv_obj_t* par)
     lv_obj_set_style_local_text_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     
     lv_obj_t* label = lv_label_create(cont, NULL);
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_RexBold_28);
     lv_label_set_text(label, "SUN");
     lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
     labelWeek = label;
@@ -108,6 +110,7 @@ static void ContDate_Create(lv_obj_t* par)
     contDate = cont;
     
     lv_obj_t* label = lv_label_create(cont, NULL);
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_RexBold_28);
     lv_label_set_text(label, "00.00.00");
     lv_obj_align(label, NULL, LV_ALIGN_IN_LEFT_MID, 10, 0);
     labelDate = label;
@@ -156,6 +159,7 @@ static void LabelTime_Create(lv_obj_t* par)
     
     lv_obj_t* led = lv_led_create(par, NULL);
     lv_obj_set_size(led, 8, 8);
+    lv_obj_set_hidden(led, true);
     lv_obj_set_style_local_radius(led, LV_LED_PART_MAIN, LV_STATE_DEFAULT, 0);
     lv_obj_set_style_local_border_width(led, LV_LED_PART_MAIN, LV_STATE_DEFAULT, 0);
     lv_obj_set_style_local_bg_color(led, LV_LED_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
@@ -185,6 +189,11 @@ static void ContTime_Create(lv_obj_t* par)
     LabelTime_Create(contTime);
 }
 
+static void LabelHeartRate_Update()
+{
+    lv_label_set_text_fmt(labelHeartRate, "%04.01f", ParticleSensor_GetBeats());
+}
+
 static void ContHeartRate_Create(lv_obj_t* par)
 {
     lv_obj_t* cont = lv_cont_create(par, NULL);
@@ -199,11 +208,13 @@ static void ContHeartRate_Create(lv_obj_t* par)
     lv_obj_set_style_local_text_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     
     lv_obj_t* label = lv_label_create(cont, NULL);
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_RexBold_28);
     lv_label_set_text(label, "HRT");
     lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
     
     label = lv_label_create(contHeartRate, NULL);
-    lv_label_set_text(label, "60.0");
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_RexBold_28);
+    lv_label_set_text(label, "00.0");
     lv_obj_align(label, cont, LV_ALIGN_OUT_RIGHT_MID, 10, 0);
     labelHeartRate = label;
     
@@ -211,7 +222,6 @@ static void ContHeartRate_Create(lv_obj_t* par)
     lv_obj_set_size(cont, lv_obj_get_width(contHeartRate) / 4, lv_obj_get_height(contHeartRate));
     lv_obj_align(cont, NULL, LV_ALIGN_IN_RIGHT_MID, 0, 0);
     lv_obj_set_style_local_bg_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
-    
 
     lv_obj_t* img = lv_img_create(cont, NULL);
     lv_img_set_src(img, &IMG_Heart);
@@ -229,7 +239,7 @@ static void ContHeartRate_Create(lv_obj_t* par)
 
     lv_anim_path_t path;
     lv_anim_path_init(&path);
-    lv_anim_path_set_cb(&path, lv_anim_path_ease_in_out);
+    lv_anim_path_set_cb(&path, lv_anim_path_ease_out);
     lv_anim_set_path(&a, &path);
     
     lv_anim_start(&a);
@@ -237,7 +247,6 @@ static void ContHeartRate_Create(lv_obj_t* par)
 
 static void LabelSteps_Update()
 {
-    IMU_Update(); 
     lv_label_set_text_fmt(labelSteps, "%05d", IMU_GetSteps());
 }
 
@@ -255,10 +264,12 @@ static void ContSteps_Create(lv_obj_t* par)
     lv_obj_set_style_local_text_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     
     lv_obj_t* label = lv_label_create(cont, NULL);
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_RexBold_28);
     lv_label_set_text(label, "STP");
     lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
     
     label = lv_label_create(contSteps, NULL);
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_RexBold_28);
     lv_label_set_text(label, "00000");
     lv_obj_align(label, cont, LV_ALIGN_OUT_RIGHT_MID, 10, 0);
     labelSteps = label;
@@ -272,121 +283,43 @@ static void ImgCHN_Create(lv_obj_t* par)
     imgCHN = img;
 }
 
-static void PagePlayAnim(bool open)
+static void PagePlayAnim(bool playback = false)
 {
-    int cnt = 3;
-    
-    int step = open ? 0 : (cnt - 1);
-    
-    int dir = open ? +1 : -1;
-    
-    lv_opa_t opa_target = open ? LV_OPA_COVER : LV_OPA_TRANSP;
-    
-#define WIDTH_ANIM_DEF(obj, time)\
-do{\
-    lv_coord_t now_width = lv_obj_get_width(obj);\
-    if(open)lv_obj_set_width(obj, 0);\
-    lv_obj_set_hidden(obj, false);\
-    LV_OBJ_ADD_ANIM(\
-        obj, width,\
-        open ? now_width : 0,\
-        (time)\
-    );\
-}while(0)
+#define ANIM_WIDTH_DEF(start_time, obj) {start_time, obj, LV_ANIM_EXEC(width), 0,  lv_obj_get_width(obj), LV_ANIM_TIME_DEFAULT, lv_anim_path_ease_out}
+#define ANIM_OPA_DEF(start_time, obj)   {start_time, obj, LV_ANIM_EXEC(opa_scale), LV_OPA_TRANSP, LV_OPA_COVER, 500, lv_anim_path_bounce}
 
-    while(cnt--)
-    {
-        switch(step)
-        {
-            case 0:
-                WIDTH_ANIM_DEF(contBatt, LV_ANIM_TIME_DEFAULT);
-                PageDelay(LV_ANIM_TIME_DEFAULT);
-                step += dir;
-                break;
-            case 1:
-                WIDTH_ANIM_DEF(contDate, LV_ANIM_TIME_DEFAULT);
-                WIDTH_ANIM_DEF(contTime, LV_ANIM_TIME_DEFAULT);
-                WIDTH_ANIM_DEF(contHeartRate, LV_ANIM_TIME_DEFAULT);
-                WIDTH_ANIM_DEF(contSteps, LV_ANIM_TIME_DEFAULT);
-                PageDelay(LV_ANIM_TIME_DEFAULT);
-                step += dir;
-                break;
-                
-            case 2:
-                const int bounce_time = 500;
-                lv_obj_add_anim(
-                    labelDate, NULL, 
-                    (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                    lv_obj_get_opa_scale(labelDate), opa_target,
-                    bounce_time,
-                    NULL,
-                    lv_anim_path_bounce
-                );
-            
-                for(int i = 0; i < __Sizeof(labelTimeEffect); i++)
-                {
-                    lv_obj_t* label;
-                    
-                    label = labelTimeEffect[i].label_1;
-                    
-                    lv_obj_add_anim(
-                        label, NULL, 
-                        (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                        lv_obj_get_opa_scale(label), opa_target,
-                        bounce_time,
-                        NULL,
-                        lv_anim_path_bounce
-                    );
-                    
-                    label = labelTimeEffect[i].label_2;
-                    
-                    lv_obj_add_anim(
-                        label, NULL, 
-                        (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                        lv_obj_get_opa_scale(label), opa_target,
-                        bounce_time,
-                        NULL,
-                        lv_anim_path_bounce
-                    );
-                }
+    lv_anim_timeline_t anim_timeline[] = {
+        ANIM_WIDTH_DEF(0,   contBatt),
+        ANIM_WIDTH_DEF(100, contDate),
+        ANIM_WIDTH_DEF(200, contTime),
+        ANIM_WIDTH_DEF(300, contHeartRate),
+        ANIM_WIDTH_DEF(400, contSteps),
 
-                lv_obj_add_anim(
-                    labelHeartRate, NULL, 
-                    (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                    lv_obj_get_opa_scale(labelHeartRate), opa_target,
-                    bounce_time,
-                    NULL,
-                    lv_anim_path_bounce
-                );
-            
-                lv_obj_add_anim(
-                    labelSteps, NULL, 
-                    (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                    lv_obj_get_opa_scale(labelSteps), opa_target,
-                    bounce_time,
-                    NULL,
-                    lv_anim_path_bounce
-                );
+        {400, NULL, (lv_anim_exec_xcb_t)ContBatt_AnimCallback, 0, Power_GetBattUsage(), 400, lv_anim_path_linear},
 
-                lv_obj_add_anim(
-                    imgCHN, NULL, 
-                    (lv_anim_exec_xcb_t)lv_obj_set_opa_scale,
-                    lv_obj_get_opa_scale(imgCHN), opa_target,
-                    bounce_time,
-                    NULL,
-                    lv_anim_path_bounce
-                );
-                step += dir;
-                PageDelay(bounce_time);
-                break;
-        }
-    }
+        ANIM_OPA_DEF(800, labelTimeEffect[0].label_1),
+        ANIM_OPA_DEF(800, labelTimeEffect[1].label_1),
+        ANIM_OPA_DEF(800, labelTimeEffect[2].label_1),
+        ANIM_OPA_DEF(800, labelTimeEffect[3].label_1),
+        ANIM_OPA_DEF(800, labelTimeEffect[0].label_2),
+        ANIM_OPA_DEF(800, labelTimeEffect[1].label_2),
+        ANIM_OPA_DEF(800, labelTimeEffect[2].label_2),
+        ANIM_OPA_DEF(800, labelTimeEffect[3].label_2),
+        ANIM_OPA_DEF(800, labelDate),
+        ANIM_OPA_DEF(800, labelHeartRate),
+        ANIM_OPA_DEF(800, labelSteps),
+        ANIM_OPA_DEF(800, imgCHN),
+    };
+
+    uint32_t playtime = lv_anim_timeline_start(anim_timeline, __Sizeof(anim_timeline), playback);
+    PageDelay(playtime);
 }
 
 static void Task_1000msUpdate(lv_task_t* task)
 {
     LabelDate_Update();
     LabelSteps_Update();
+    LabelHeartRate_Update();
     
     if(Power_GetBattIsCharging())
     {
@@ -425,38 +358,20 @@ static void Setup()
     lv_obj_move_foreground(appWindow);
     
     ContBatt_Create(appWindow);
-    lv_obj_set_hidden(contBatt, true);
-    
     ContDate_Create(appWindow);
-    lv_obj_set_hidden(contDate, true);
-    lv_obj_set_opa_scale(labelDate, LV_OPA_0);
-    
     ContTime_Create(appWindow);
-    lv_obj_set_hidden(contTime, true);
-    lv_obj_set_hidden(ledSecGrp[0], true);
-    lv_obj_set_hidden(ledSecGrp[1], true);
-    for(int i = 0; i < __Sizeof(labelTimeEffect); i++)
-    {
-        lv_obj_set_opa_scale(labelTimeEffect[i].label_1, LV_OPA_0);
-        lv_obj_set_opa_scale(labelTimeEffect[i].label_2, LV_OPA_0);
-    }
     
     ContHeartRate_Create(appWindow);
-    lv_obj_set_hidden(contHeartRate, true);
-    lv_obj_set_opa_scale(labelHeartRate, LV_OPA_0);
     
     ContSteps_Create(appWindow);
-    lv_obj_set_hidden(contSteps, true);
-    lv_obj_set_opa_scale(labelSteps, LV_OPA_0);
     
     ImgCHN_Create(appWindow);
-    lv_obj_set_opa_scale(imgCHN, LV_OPA_0);
     
     LabelTime_Update(LV_ANIM_OFF);
     LabelDate_Update();
     LabelSteps_Update();
     
-    PagePlayAnim(true);
+    PagePlayAnim();
     
     lv_obj_set_hidden(ledSecGrp[0], false);
     lv_obj_set_hidden(ledSecGrp[1], false);
@@ -477,7 +392,7 @@ static void Exit()
     lv_task_del(task[0]);
     lv_task_del(task[1]);
     
-    PagePlayAnim(false);
+    PagePlayAnim(true);
     
     lv_obj_clean(appWindow);
 }
@@ -494,7 +409,7 @@ static void Event(void* obj, uint8_t event)
     {
         if(event == LV_GESTURE_DIR_LEFT)
         {
-            Page->PagePush(PAGE_MainMenu);
+            Page->Push(PAGE_MainMenu);
         }
     }
 }

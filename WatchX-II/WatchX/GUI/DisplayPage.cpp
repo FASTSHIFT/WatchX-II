@@ -15,7 +15,7 @@ static void page_gestute_event_cb(lv_obj_t * obj, lv_event_t event)
     if(event == LV_EVENT_GESTURE)
     {
         lv_gesture_dir_t dir = lv_indev_get_gesture_dir(lv_indev_get_act());
-        page.PageEventTransmit(obj, dir);
+        page.EventTransmit(obj, dir);
     }
 }
 
@@ -30,8 +30,12 @@ void DisplayPage_Init()
     PAGE_IMPORT(DialPlate);       //表盘
     PAGE_IMPORT(Calculator);      //计算器
     PAGE_IMPORT(Stopwatch);       //秒表
-    
-    page.PagePush(PAGE_DialPlate);   //进入第一个页面
+    PAGE_IMPORT(HeartRate);       //心率
+    PAGE_IMPORT(Settings);        //设置
+    PAGE_IMPORT(TimeSet);         //时间设置
+    PAGE_IMPORT(BacklightSet);    //背光设置
+
+    page.Push(PAGE_DialPlate);    //进入第一个页面
     
     lv_obj_set_event_cb(lv_scr_act(), page_gestute_event_cb);
 }
@@ -43,8 +47,8 @@ void DisplayPage_Init()
   */
 void Display_Update()
 {
-    lv_task_handler();
     page.Running();
+    lv_task_handler();
 }
 
 /**
@@ -55,7 +59,8 @@ void Display_Update()
 void PageDelay(uint32_t ms)
 {
     uint32_t lastTime = lv_tick_get();
-    while(lv_tick_get() - lastTime <= ms)
+    
+    while(lv_tick_elaps(lastTime) <= ms)
     {
         lv_task_handler();
     }

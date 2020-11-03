@@ -3,8 +3,12 @@
 
 #define WX_NAME             "WatchX-II"  //手表名称
 #define WX_HARDWARE_VERSION "v1.0"       //硬件版本
-#define WX_SOFTWARE_VERSION "v0.5"       //软件版本
+#define WX_SOFTWARE_VERSION "v0.6"       //软件版本
 
+/*使用内置I2C读取传感器*/
+#define WX_USE_BUILT_IN_I2C 0
+
+/*空引脚*/
 #define NULL_PIN            PD0
 
 /*屏幕*/

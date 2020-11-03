@@ -77,11 +77,8 @@ typedef int16_t lv_coord_t;
  * The graphical objects and other related data are stored here. */
 
 /* 1: use custom malloc/free, 0: use the built-in `lv_mem_alloc` and `lv_mem_free` */
-#ifdef ARDUINO
-#   define LV_MEM_CUSTOM      1
-#else
-#   define LV_MEM_CUSTOM      0
-#endif
+#define LV_MEM_CUSTOM      0
+
 #if LV_MEM_CUSTOM == 0
 /* Size of the memory used by `lv_mem_alloc` in bytes (>= 2kB)*/
 #  define LV_MEM_SIZE    (32U * 1024U)
@@ -122,13 +119,13 @@ typedef int16_t lv_coord_t;
  * Can be changed in the Input device driver (`lv_indev_drv_t`)*/
 
 /* Input device read period in milliseconds */
-#define LV_INDEV_DEF_READ_PERIOD          30
+#define LV_INDEV_DEF_READ_PERIOD          20
 
 /* Drag threshold in pixels */
 #define LV_INDEV_DEF_DRAG_LIMIT           5
 
 /* Drag throw slow-down in [%]. Greater value -> faster slow-down */
-#define LV_INDEV_DEF_DRAG_THROW           10
+#define LV_INDEV_DEF_DRAG_THROW           15
 
 /* Long press time in milliseconds.
  * Time to send `LV_EVENT_LONG_PRESSSED`) */
@@ -199,6 +196,19 @@ typedef void * lv_group_user_data_t;
 e.g. "stm32f769xx.h" or "stm32f429xx.h" */
 #define LV_GPU_DMA2D_CMSIS_INCLUDE
 
+/*1: Use PXP for CPU off-load on NXP RTxxx platforms */
+#define LV_USE_GPU_NXP_PXP      0
+
+/*1: Add default bare metal and FreeRTOS interrupt handling routines for PXP (lv_gpu_nxp_pxp_osa.c)
+ *   and call lv_gpu_nxp_pxp_init() automatically during lv_init(). Note that symbol FSL_RTOS_FREE_RTOS
+ *   has to be defined in order to use FreeRTOS OSA, otherwise bare-metal implementation is selected.
+ *0: lv_gpu_nxp_pxp_init() has to be called manually before lv_init()
+ * */
+#define LV_USE_GPU_NXP_PXP_AUTO_INIT 0
+
+/*1: Use VG-Lite for CPU offload on NXP RTxxx platforms */
+#define LV_USE_GPU_NXP_VG_LITE   0
+
 /* 1: Enable file system (might be required for images */
 #define LV_USE_FILESYSTEM       1
 #if LV_USE_FILESYSTEM
@@ -253,9 +263,14 @@ typedef void * lv_img_decoder_user_data_t;
 /* Define a custom attribute to `lv_disp_flush_ready` function */
 #define LV_ATTRIBUTE_FLUSH_READY
 
+/* Required alignment size for buffers */
+#define LV_ATTRIBUTE_MEM_ALIGN_SIZE
+
 /* With size optimization (-Os) the compiler might not align data to
- * 4 or 8 byte boundary. This alignment will be explicitly applied where needed.
- * E.g. __attribute__((aligned(4))) */
+ * 4 or 8 byte boundary. Some HW may need even 32 or 64 bytes.
+ * This alignment will be explicitly applied where needed.
+ * LV_ATTRIBUTE_MEM_ALIGN_SIZE should be used to specify required align size.
+ * E.g. __attribute__((aligned(LV_ATTRIBUTE_MEM_ALIGN_SIZE))) */
 #define LV_ATTRIBUTE_MEM_ALIGN
 
 /* Attribute to mark large constant arrays for example
@@ -371,6 +386,8 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
 
 /* Montserrat fonts with bpp = 4
  * https://fonts.google.com/specimen/Montserrat  */
+#define LV_FONT_MONTSERRAT_8     0
+#define LV_FONT_MONTSERRAT_10    0
 #define LV_FONT_MONTSERRAT_12    0
 #define LV_FONT_MONTSERRAT_14    0
 #define LV_FONT_MONTSERRAT_16    0
@@ -409,6 +426,7 @@ typedef void * lv_indev_drv_user_data_t;            /*Type of user data in the i
  */
 #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(Font_RexBold_28) \
                                LV_FONT_DECLARE(Font_RexBold_89) \
+                               LV_FONT_DECLARE(Font_MicrosoftYaHei_16)\
                                LV_FONT_DECLARE(Font_MicrosoftYaHei_28) \
                                LV_FONT_DECLARE(Font_MicrosoftYaHei_50)
 
@@ -472,10 +490,10 @@ typedef void * lv_font_user_data_t;
 #define LV_THEME_DEFAULT_COLOR_PRIMARY      LV_COLOR_WHITE
 #define LV_THEME_DEFAULT_COLOR_SECONDARY    LV_COLOR_RED
 #define LV_THEME_DEFAULT_FLAG               0
-#define LV_THEME_DEFAULT_FONT_SMALL         &Font_RexBold_28
-#define LV_THEME_DEFAULT_FONT_NORMAL        &Font_RexBold_28
-#define LV_THEME_DEFAULT_FONT_SUBTITLE      &Font_RexBold_28
-#define LV_THEME_DEFAULT_FONT_TITLE         &Font_RexBold_28
+#define LV_THEME_DEFAULT_FONT_SMALL         &Font_MicrosoftYaHei_28
+#define LV_THEME_DEFAULT_FONT_NORMAL        &Font_MicrosoftYaHei_28
+#define LV_THEME_DEFAULT_FONT_SUBTITLE      &Font_MicrosoftYaHei_28
+#define LV_THEME_DEFAULT_FONT_TITLE         &Font_MicrosoftYaHei_28
 
 /*=================
  *  Text settings
@@ -531,7 +549,7 @@ typedef void * lv_font_user_data_t;
 #  define lv_snprintf     snprintf
 #  define lv_vsnprintf    vsnprintf
 #else   /*!LV_SPRINTF_CUSTOM*/
-#  define LV_SPRINTF_DISABLE_FLOAT 1
+#  define LV_SPRINTF_DISABLE_FLOAT 0
 #endif  /*LV_SPRINTF_CUSTOM*/
 
 /*===================
@@ -668,7 +686,7 @@ typedef void * lv_obj_user_data_t;
  * 1: Some extra precision
  * 2: Best precision
  */
-#  define LV_LINEMETER_PRECISE    0
+#  define LV_LINEMETER_PRECISE    1
 #endif
 
 /*Mask (dependencies: -)*/
@@ -702,9 +720,6 @@ typedef void * lv_obj_user_data_t;
 #  define LV_ROLLER_INF_PAGES         7
 #endif
 
-/*Rotary (dependencies: lv_arc, lv_btn)*/
-#define LV_USE_ROTARY     1
-
 /*Slider (dependencies: lv_bar)*/
 #define LV_USE_SLIDER    1
 
@@ -725,6 +740,7 @@ typedef void * lv_obj_user_data_t;
 #define LV_USE_TABLE    1
 #if LV_USE_TABLE
 #  define LV_TABLE_COL_MAX    12
+#  define LV_TABLE_CELL_STYLE_CNT 4
 #endif
 
 /*Tab (dependencies: lv_page, lv_btnm)*/

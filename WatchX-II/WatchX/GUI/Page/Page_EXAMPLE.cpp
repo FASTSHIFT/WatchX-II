@@ -1,6 +1,7 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
 
+/*µ¼³öÒ³Ãæ*/
 PAGE_EXPORT(EXAMPLE);
 
 /**

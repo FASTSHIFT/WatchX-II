@@ -161,6 +161,7 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_dejavu_16_persian_hebrew.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_fmt_txt.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_loader.c" />
+    <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_10.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_12.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_12_subpx.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_14.c" />
@@ -182,6 +183,7 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_44.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_46.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_48.c" />
+    <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_8.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_simsun_16_cjk.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_unscii_8.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_hal\lv_hal_disp.c" />
@@ -248,6 +250,8 @@
     <ClCompile Include="..\..\WatchX\GUI\DisplayAppWin.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayBasic.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayPage.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\DisplayStatusBar.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_16.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_28.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_50.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_28.c" />
@@ -263,6 +267,7 @@
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Game.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Heart.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartRate.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartrateTinyheart.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Music.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Power.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Settings.c" />
@@ -273,14 +278,19 @@
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchPause.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchReset.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchStart.c" />
+    <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.c" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_BacklightSet.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Calculator.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_DialPlate.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_EXAMPLE.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_HeartRate.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_MainMenu.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Settings.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Stopwatch.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_TimeSet.cpp" />
     <ClCompile Include="BSP\BSP_Backlight.cpp" />
     <ClCompile Include="BSP\BSP_IMU.cpp" />
     <ClCompile Include="BSP\BSP_ParticleSensor.cpp" />
@@ -306,9 +316,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Libraries\lvgl\lvgl.h" />
+    <ClInclude Include="..\..\Libraries\lvgl\lv_conf_template.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lvgl.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_api_map.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_conf_internal.h" />
+    <ClInclude Include="..\..\Libraries\lvgl\src\lv_conf_kconfig.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_group.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_indev.h" />
@@ -401,6 +413,7 @@
     <ClInclude Include="..\..\WatchX\Basic\SysConfig.h" />
     <ClInclude Include="..\..\WatchX\BSP\BSP.h" />
     <ClInclude Include="..\..\WatchX\GUI\DisplayPrivate.h" />
+    <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.h" />
@@ -508,10 +521,23 @@
     <ClInclude Include="SDL2\include\SDL_vulkan.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Libraries\lvgl\CHANGELOG.md" />
+    <None Include="..\..\Libraries\lvgl\lvgl.mk" />
+    <None Include="..\..\Libraries\lvgl\README.md" />
+    <None Include="..\..\Libraries\lvgl\src\lv_core\lv_core.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_draw\lv_draw.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_font\lv_font.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_hal\lv_hal.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_misc\lv_misc.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_themes\lv_themes.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_widgets\lv_widgets.mk" />
     <None Include="SDL2.dll" />
     <None Include="SDL2\include\SDL_config.h.cmake" />
     <None Include="SDL2\include\SDL_config.h.in" />
     <None Include="SDL2\include\SDL_config_macosx.h.orig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Libraries\lvgl\LICENCE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

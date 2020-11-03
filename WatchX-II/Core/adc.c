@@ -153,6 +153,9 @@ void ADC_DMA_Init(void)
 
     // ADC 模式配置
     // 只使用一个ADC，属于单模式
+    ADC_Reset(ADC1);
+    ADC_StructInit(&ADC_InitStructure);
+    
     ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
 
     // 扫描模式

@@ -40,6 +40,8 @@ typedef enum
     PAGE_Sleep,
     PAGE_Sport,
     PAGE_Stopwatch,
+    PAGE_TimeSet,
+    PAGE_BacklightSet,
     /*±£Áô*/
     PAGE_MAX
 } Page_Type;
@@ -53,26 +55,48 @@ static lv_obj_t* appWindow;\
 static void Setup();\
 static void Exit();\
 static void Event(void* obj, uint8_t event);\
-void PageRegister_##name(PageManager* page_p, uint8_t pageID)\
+static void PageEvent_##name(void* obj, uint8_t event)\
 {\
-    appWindow = AppWindow_GetCont(pageID);\
+    if(obj == Page)\
+    {\
+        switch (event)\
+        {\
+        case PageManager::MSG_Setup: Setup(); break; \
+        case PageManager::MSG_Exit:  Exit();  break; \
+        case PageManager::MSG_Loop:/*Loop();*/break; \
+        default: break; \
+        }\
+    }\
+    else\
+    {\
+        Event(obj, event);\
+    }\
+}\
+void PageRegister_##name(PageManager* page, uint8_t pageID)\
+{\
+    appWindow = AppWindow_GetObj(pageID);\
     lv_obj_set_event_cb(appWindow, (lv_event_cb_t)Event);\
-    Page = page_p;\
-    page_p->PageRegister(pageID, Setup, NULL, Exit, Event);\
+    page->Register(pageID, PageEvent_##name, #name);\
+    Page = page; \
 }
 
-/*LittleVGL*/
+/*LVGL*/
 #include "lvgl/lvgl.h"
 #include "lv_ext/lv_label_anim_effect.h"
 #include "lv_ext/lv_obj_ext_func.h"
-
+#include "lv_ext/lv_anim_timeline.h"
 
 /*AppWindow*/
-void AppWindow_Create();
-lv_obj_t * AppWindow_GetCont(uint8_t pageID);
-lv_coord_t AppWindow_GetHeight();
-lv_coord_t AppWindow_GetWidth();
-#define APP_WIN_HEIGHT AppWindow_GetHeight()
-#define APP_WIN_WIDTH  AppWindow_GetWidth()
+void AppWindow_Create(lv_obj_t* par);
+lv_obj_t* AppWindow_GetObj(uint8_t pageID);
+#define APP_WIN_HEIGHT lv_obj_get_height(appWindow)
+#define APP_WIN_WIDTH  lv_obj_get_width(appWindow)
+
+/*StatusBar*/
+void StatusBar_Create(lv_obj_t* par);
+void StatusBar_SetName(const char* name);
+void StatusBar_SetEnable(bool en, lv_anim_enable_t anim_en = LV_ANIM_ON);
+const char* StatusBar_GetName();
+bool StatusBar_GetEnable();
 
 #endif

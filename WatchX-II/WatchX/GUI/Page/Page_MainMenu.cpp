@@ -25,7 +25,6 @@ typedef struct
     const char* name;
     const uint8_t pageID;
     const lv_color_t bg_color;
-    lv_obj_t* img;
     lv_obj_t* cont;
 } AppICON_TypeDef;
 
@@ -82,29 +81,39 @@ static uint8_t AppICON_GetPageID(lv_obj_t* obj)
 
 static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
 {
+    lv_obj_t* cont = lv_obj_get_child(obj, NULL);
+    lv_obj_t* img = lv_obj_get_child(cont, NULL);
     if(event == LV_EVENT_PRESSED)
     {
-        AppClickAnim(obj, lv_obj_get_child(obj, NULL), true);
+        AppClickAnim(cont, img, true);
     }
     else if(event == LV_EVENT_RELEASED || event == LV_EVENT_PRESS_LOST)
     {
-        AppClickAnim(obj, lv_obj_get_child(obj, NULL), false);
+        AppClickAnim(cont, img, false);
     }
 
     if(event == LV_EVENT_CLICKED)
     {
-        uint8_t pageID = AppICON_GetPageID(obj);
+        uint8_t pageID = AppICON_GetPageID(cont);
 
         if (pageID == PAGE_NONE)
             return;
 
         if (pageID == PAGE_Calculator)
         {
-            Page->PagePush(PAGE_Calculator);
+            Page->Push(PAGE_Calculator);
         }
         else if (pageID == PAGE_Stopwatch)
         {
-            Page->PagePush(PAGE_Stopwatch);
+            Page->Push(PAGE_Stopwatch);
+        }
+        else if (pageID == PAGE_HeartRate)
+        {
+            Page->Push(PAGE_HeartRate);
+        }
+        else if (pageID == PAGE_Settings)
+        {
+            Page->Push(PAGE_Settings);
         }
     }
 }
@@ -117,28 +126,40 @@ static void AppICON_Create(lv_obj_t* par)
     lv_style_set_border_width(&style, LV_STATE_DEFAULT, 0);
     lv_style_set_bg_color(&style, LV_STATE_PRESSED, LV_COLOR_GRAY);
 
+    static lv_anim_path_t path;
+    lv_anim_path_init(&path);
+    lv_anim_path_set_cb(&path, lv_anim_path_ease_in_out);
+    lv_style_set_transition_path(&style, LV_STATE_PRESSED, &path);
+    lv_style_set_transition_time(&style, LV_STATE_PRESSED, 100);
+    lv_style_set_transition_prop_1(&style, LV_STATE_PRESSED, LV_STYLE_BG_COLOR);
+
     for(int i = 0; i < __Sizeof(AppICON_Grp); i++)
     {
-        lv_obj_t* cont = lv_cont_create(par, NULL);
-        lv_obj_add_style(cont, LV_CONT_PART_MAIN, &style);
-        lv_obj_set_size(cont, APP_ICON_SIZE, APP_ICON_SIZE);
-        lv_obj_set_style_local_bg_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, AppICON_Grp[i].bg_color);
+        lv_obj_t* cont_vir = lv_cont_create(par, NULL);
+        lv_obj_set_style_local_border_width(cont_vir, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 0);
+        lv_obj_set_size(cont_vir, APP_ICON_SIZE, APP_ICON_SIZE);
+        lv_obj_set_drag_parent(cont_vir, true);
+        lv_obj_set_event_cb(cont_vir, AppICON_EventHandler);
 
-        lv_obj_set_event_cb(cont, AppICON_EventHandler);
-        lv_obj_set_drag_parent(cont, true);
-
-        lv_coord_t interval_pixel_0 = (lv_obj_get_width(par) - lv_obj_get_width(cont) * 2) / 3;
-        lv_coord_t interval_pixel_1 = interval_pixel_0 + lv_obj_get_width(cont);
-        lv_coord_t interval_pixel_2 = lv_obj_get_width(cont) / 2 + interval_pixel_0 / 2;
-
-        lv_obj_set_auto_realign(cont, true);
+        lv_coord_t interval_pixel_0 = (lv_obj_get_width(par) - lv_obj_get_width(cont_vir) * 2) / 3;
+        lv_coord_t interval_pixel_1 = interval_pixel_0 + lv_obj_get_width(cont_vir);
+        lv_coord_t interval_pixel_2 = lv_obj_get_width(cont_vir) / 2 + interval_pixel_0 / 2;
         lv_obj_align(
-            cont,
+            cont_vir,
             NULL,
             LV_ALIGN_IN_TOP_MID,
             ((i % 2) == 0) ? -interval_pixel_2 : interval_pixel_2,
             interval_pixel_0 + (i / 2) * interval_pixel_1
         );
+
+        lv_obj_t* cont = lv_cont_create(cont_vir, NULL);
+        lv_obj_set_parent_event(cont, true);
+        lv_obj_align(cont, NULL, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_set_auto_realign(cont, true);
+        lv_obj_set_drag_parent(cont, true);
+        lv_obj_add_style(cont, LV_CONT_PART_MAIN, &style);
+        lv_obj_set_size(cont, APP_ICON_SIZE, APP_ICON_SIZE);
+        lv_obj_set_style_local_bg_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, AppICON_Grp[i].bg_color);
 
         lv_obj_t* img = lv_img_create(cont, NULL);
         lv_img_set_src(img, AppICON_Grp[i].src_img);
@@ -146,7 +167,6 @@ static void AppICON_Create(lv_obj_t* par)
         lv_obj_set_auto_realign(img, true);
 
         AppICON_Grp[i].cont = cont;
-        AppICON_Grp[i].img = img;
     }
 }
 
@@ -241,13 +261,20 @@ static void ContApps_Create(lv_obj_t* par)
 
 static void PagePlayAnim(bool open)
 {
+    static lv_coord_t contAppsPosY = 0;
     if(open)
     {
         lv_obj_set_y(contApps, APP_WIN_HEIGHT);
-        ContApps_ReleaseAnim();
+        __LimitValue(
+            contAppsPosY, 
+            (-lv_obj_get_height(contApps) + APP_WIN_HEIGHT),
+            0
+        );
+        ContApps_ReleaseAnim(contAppsPosY);
     }
     else
     {
+        contAppsPosY = lv_obj_get_y(contApps);
         ContApps_ReleaseAnim(APP_WIN_HEIGHT);
     }
 }
@@ -292,7 +319,7 @@ static void Event(void* obj, uint8_t event)
     {
         if(event == LV_GESTURE_DIR_LEFT || event == LV_GESTURE_DIR_RIGHT)
         {
-            Page->PagePop();
+            Page->Pop();
         }
     }
 }

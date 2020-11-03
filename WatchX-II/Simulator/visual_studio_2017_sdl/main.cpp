@@ -14,6 +14,7 @@
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/keyboard.h"
 #include "GUI/DisplayPrivate.h"
+#include "Basic/FileGroup.h"
 
 /*********************
 *      DEFINES
@@ -55,7 +56,8 @@ int main(int argc, char** argv)
     while (1)
     {
         Display_Update();
-        Sleep(10);       /*Just to let the system breathe */
+        Power_Update();
+        Sleep(5);       /*Just to let the system breathe */
     }
 
     return 0;

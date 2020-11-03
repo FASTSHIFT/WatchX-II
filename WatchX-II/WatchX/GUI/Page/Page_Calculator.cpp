@@ -15,7 +15,7 @@ static const lv_color_t Btn_ColorWhite  = LV_COLOR_WHITE;
 typedef struct
 {
     const char* text;
-    lv_color_t color;
+    const lv_color_t color;
 } BtnGrp_TypeDef;
 
 static const BtnGrp_TypeDef BtnGrp[] =
@@ -123,22 +123,20 @@ static void TextareaCalc_Create(lv_obj_t* par)
     textareaClac = textarea;
 }
 
-static void PagePlayAnim(bool open)
+static void PagePlayAnim(bool playback = false)
 {
-    lv_coord_t y_target = open ? lv_obj_get_y(contBtnGrp) : APP_WIN_HEIGHT;
-    lv_opa_t opa_target = open ? LV_OPA_COVER : LV_OPA_TRANSP;
-    if(open)
-    {
-        lv_obj_set_y(contBtnGrp, APP_WIN_HEIGHT);
-        lv_obj_set_opa_scale(textareaClac, LV_OPA_TRANSP);
-    }
-    else
+    lv_anim_timeline_t anim_timeline[] = {
+        {0, contBtnGrp,   LV_ANIM_EXEC(y),         APP_WIN_HEIGHT, lv_obj_get_y(contBtnGrp), LV_ANIM_TIME_DEFAULT, lv_anim_path_ease_out},
+        {0, textareaClac, LV_ANIM_EXEC(opa_scale), LV_OPA_TRANSP,  LV_OPA_COVER,             LV_ANIM_TIME_DEFAULT, lv_anim_path_ease_in_out},
+    };
+
+    if(playback)
     {
         lv_textarea_set_cursor_hidden(textareaClac, true);
     }
     
-    LV_OBJ_ADD_ANIM(contBtnGrp, y, y_target, LV_ANIM_TIME_DEFAULT);
-    LV_OBJ_ADD_ANIM(textareaClac, opa_scale, opa_target, LV_ANIM_TIME_DEFAULT);
+    uint32_t playtime = lv_anim_timeline_start(anim_timeline, __Sizeof(anim_timeline), playback);
+    PageDelay(playtime);
 }
 
 /**
@@ -154,7 +152,7 @@ static void Setup()
     ContBtnGrp_Create(appWindow);
     BtnGrp_Create(contBtnGrp);
     TextareaCalc_Create(appWindow);
-    PagePlayAnim(true);
+    PagePlayAnim();
 }
 
 /**
@@ -164,8 +162,7 @@ static void Setup()
   */
 static void Exit()
 {
-    PagePlayAnim(false);
-    PageDelay(LV_ANIM_TIME_DEFAULT);
+    PagePlayAnim(true);
     lv_obj_clean(appWindow);
 }
 
@@ -181,7 +178,7 @@ static void Event(void* obj, uint8_t event)
     {
         if(event == LV_GESTURE_DIR_BOTTOM)
         {
-            Page->PagePop();
+            Page->Pop();
         }
     }
 }

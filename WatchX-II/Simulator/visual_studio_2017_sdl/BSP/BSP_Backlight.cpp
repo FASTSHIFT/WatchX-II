@@ -1,7 +1,7 @@
 #include "GUI/DisplayPrivate.h"
 #include "BSP/BSP.h"
 
-static uint16_t Backlight_Val = 0;
+static uint16_t Backlight_Val = 500;
 
 /**
   * @brief  背光亮度渐变，受lv_anim控制

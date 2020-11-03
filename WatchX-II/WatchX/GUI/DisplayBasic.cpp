@@ -15,8 +15,6 @@ SCREEN_CLASS screen(
 static void Display_FPSTest();
 #endif
 
-
-
 extern "C" {
     void lv_demo_benchmark(void);
     void lv_demo_widgets(void);
@@ -53,7 +51,10 @@ void Display_Init()
     lv_port_log_init();
     
     /*APP窗口初始化*/
-    AppWindow_Create();
+    AppWindow_Create(lv_scr_act());
+
+    /*状态栏初始化*/
+    StatusBar_Create(lv_layer_sys());
     
     /*页面初始化*/
     DisplayPage_Init();
@@ -102,7 +103,10 @@ static void Display_FPSTest()
 void Display_Init()
 {
     /*APP窗口初始化*/
-    AppWindow_Create();
+    AppWindow_Create(lv_scr_act());
+
+    /*状态栏初始化*/
+    StatusBar_Create(lv_layer_sys());
 
     /*页面初始化*/
     DisplayPage_Init();

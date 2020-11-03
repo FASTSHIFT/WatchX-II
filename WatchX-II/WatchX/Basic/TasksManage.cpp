@@ -17,18 +17,18 @@ static void Task_Display(void *pvParameters)
 
 static void Task_Sensor(void *pvParameters)
 {
-    //IMU_Init();
-    //ParticleSensor_Init();
     for(;;)
     {
-        //TouchPad_Update();
-        //ParticleSensor_Update();
-        //IMU_Update();
-        
+#if (WX_USE_BUILT_IN_I2C != 0)
+        TouchPad_Update();
+        IMU_Update();
+#else
+        ComMaster_Update();
+#endif
         Button_Update();
         Power_Update();
         
-        vTaskDelay(20);
+        vTaskDelay(10);
     }
 }
 
@@ -39,7 +39,7 @@ static void TimerTask_20msUpdate(TimerHandle_t xTimer)
 
 void Tasks_Init()
 {
-    xTaskReg(Display, KByteToWord(16), 1);
+    xTaskReg(Display, KByteToWord(16), WX_USE_BUILT_IN_I2C);
     xTaskReg(Sensor,  KByteToWord(2),  0);
     
     xTimerReg(TimerTask_20msUpdate, 20);

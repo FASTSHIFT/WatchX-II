@@ -8,7 +8,7 @@ static uint32_t Power_LastHandleTime = 0;
 static uint16_t Power_AutoLowPowerTimeout = 60;
 
 /*自动关机功能使能*/
-static bool Power_AutoLowPowerEnable = true;
+static bool Power_AutoLowPowerEnable = false;
 
 static uint16_t Power_ADCValue = 0;
 
@@ -24,7 +24,7 @@ void Power_Init()
     digitalWrite(POWER_EN_Pin, HIGH);
     
     /*电池检测*/
-    pinMode(BAT_DET_Pin, INPUT_ANALOG);
+    pinMode(BAT_DET_Pin, INPUT_ANALOG_DMA);
     pinMode(BAT_DET_EN_Pin, OUTPUT);
     pinMode(BAT_CHG_DET_Pin, INPUT_PULLUP);
     digitalWrite(BAT_DET_EN_Pin, LOW);
@@ -93,7 +93,7 @@ void Power_Shutdown()
   */
 void Power_Update()
 {
-    Power_ADCValue = analogRead(BAT_DET_Pin);
+    Power_ADCValue = analogRead_DMA(BAT_DET_Pin);
     
     if(!Power_AutoLowPowerEnable)
         return;
