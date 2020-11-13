@@ -17,7 +17,7 @@ static int beatAvg;
 
 void ParticleSensor_Init()
 {
-    Serial.println("Initializing...");
+    Serial.println("MAX30105 Initializing...");
 
     // Initialize sensor
     if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed

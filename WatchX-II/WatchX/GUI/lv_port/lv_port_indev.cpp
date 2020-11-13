@@ -1,4 +1,4 @@
-#include "DisplayPrivate.h"
+#include "GUI/DisplayPrivate.h"
 #include "Basic/SysConfig.h"
 #include "BSP/BSP.h"
 

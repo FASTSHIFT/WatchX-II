@@ -55,7 +55,7 @@ static lv_obj_t* appWindow;\
 static void Setup();\
 static void Exit();\
 static void Event(void* obj, uint8_t event);\
-static void PageEvent_##name(void* obj, uint8_t event)\
+static void Page_EventHandler(void* obj, uint8_t event)\
 {\
     if(obj == Page)\
     {\
@@ -76,7 +76,7 @@ void PageRegister_##name(PageManager* page, uint8_t pageID)\
 {\
     appWindow = AppWindow_GetObj(pageID);\
     lv_obj_set_event_cb(appWindow, (lv_event_cb_t)Event);\
-    page->Register(pageID, PageEvent_##name, #name);\
+    page->Register(pageID, Page_EventHandler, #name);\
     Page = page; \
 }
 
@@ -85,6 +85,15 @@ void PageRegister_##name(PageManager* page, uint8_t pageID)\
 #include "lv_ext/lv_label_anim_effect.h"
 #include "lv_ext/lv_obj_ext_func.h"
 #include "lv_ext/lv_anim_timeline.h"
+#include "lv_ext/lv_theme_watchx.h"
+
+extern "C" {
+    LV_FONT_DECLARE(Font_RexBold_28);
+    LV_FONT_DECLARE(Font_RexBold_89);
+    LV_FONT_DECLARE(Font_MicrosoftYaHei_16);
+    LV_FONT_DECLARE(Font_MicrosoftYaHei_28);
+    LV_FONT_DECLARE(Font_MicrosoftYaHei_50);
+}
 
 /*AppWindow*/
 void AppWindow_Create(lv_obj_t* par);

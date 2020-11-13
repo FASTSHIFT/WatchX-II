@@ -22,6 +22,7 @@ static void Task_Sensor(void *pvParameters)
 #if (WX_USE_BUILT_IN_I2C != 0)
         TouchPad_Update();
         IMU_Update();
+        //ParticleSensor_Update();
 #else
         ComMaster_Update();
 #endif

@@ -1,13 +1,11 @@
 #include "GUI/DisplayPrivate.h"
 #include "Basic/SysConfig.h"
 
-/*ÆÁÄ»»º³åÇøÐÅÏ¢*/
-static lv_disp_buf_t disp_buf;
-
 /*Æ¹ÅÒ»º³åÇø£¬»º³å20ÐÐÏñËØ*/
+#define DISP_BUF_SIZE (LV_HOR_RES_MAX * 20)
 static lv_color_t lv_disp_buf0[1];
-static lv_color_t lv_disp_buf1[LV_HOR_RES_MAX * 20];
-static lv_color_t lv_disp_buf2[LV_HOR_RES_MAX * 20];
+static lv_color_t lv_disp_buf1[DISP_BUF_SIZE];
+static lv_color_t lv_disp_buf2[DISP_BUF_SIZE];
 
 static lv_disp_drv_t* lv_disp_drv_p = NULL;
 static TMR_Type* ParallelOccupiedTMR = NULL;
@@ -162,6 +160,7 @@ static void disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *c
   */
 void lv_port_disp_init()
 {
+    static lv_disp_buf_t disp_buf;
     lv_disp_buf_init(&disp_buf, lv_disp_buf1, lv_disp_buf2, sizeof(lv_disp_buf1) / sizeof(lv_color_t));
     
     Parallel_Init();

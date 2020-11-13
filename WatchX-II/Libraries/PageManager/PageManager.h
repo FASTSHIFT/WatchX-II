@@ -36,6 +36,7 @@
   * @upgrade:  2020.11.3  - v1.5 将事件回调改成消息机制，统一使用一个回调函数处理；
   *                              修改函数命名，去除Page前缀；
   *                              为每个页面添加Name，可使用GetCurrentName()访问当前页面的名字
+  * @upgrade:  2020.11.6  - v1.6 优化Running函数，去除其中的IS_PAGE判断
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/

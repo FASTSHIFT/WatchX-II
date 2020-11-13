@@ -115,6 +115,10 @@ static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
         {
             Page->Push(PAGE_Settings);
         }
+        else if (pageID == PAGE_Game)
+        {
+            Page->Push(PAGE_Game);
+        }
     }
 }
 

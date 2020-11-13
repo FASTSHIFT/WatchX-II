@@ -7,20 +7,8 @@
     <Filter Include="Libraries">
       <UniqueIdentifier>{404b0756-bec7-4049-86be-d36b2d96daa4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI/lv_ext">
-      <UniqueIdentifier>{2c4ecabd-5a6c-47b4-88cb-fd1943170c63}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{58545214-979f-4c4a-860e-1f6dcab1495e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI/Page">
-      <UniqueIdentifier>{a53ea8f2-cde6-4673-ace4-8e9be7ae129d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI/IMG">
-      <UniqueIdentifier>{31b043ba-41e9-4e96-9709-c9f83d8923ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI/Font">
-      <UniqueIdentifier>{6dfc2a09-7cda-4bb1-8325-972f873493ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="lv_drivers">
       <UniqueIdentifier>{d512fd63-00b2-43dc-ba1e-47f7d6908d03}</UniqueIdentifier>
@@ -60,6 +48,57 @@
     </Filter>
     <Filter Include="lvgl\src\lv_widgets">
       <UniqueIdentifier>{637172ac-4739-46b1-af29-996bab0325b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{5bc18bc3-6904-478e-88da-71081556a6f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Arduboy">
+      <UniqueIdentifier>{2bd10904-cb31-4d31-9adb-5852629fb651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Font">
+      <UniqueIdentifier>{6dfc2a09-7cda-4bb1-8325-972f873493ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\IMG">
+      <UniqueIdentifier>{31b043ba-41e9-4e96-9709-c9f83d8923ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\lv_ext">
+      <UniqueIdentifier>{2c4ecabd-5a6c-47b4-88cb-fd1943170c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Page">
+      <UniqueIdentifier>{a53ea8f2-cde6-4673-ace4-8e9be7ae129d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Arduboy\audio">
+      <UniqueIdentifier>{d115024e-017c-4569-98f1-458a5747c3d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Arduboy\core">
+      <UniqueIdentifier>{291097d5-915a-4bf5-8e2b-1090e979b7bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Arduboy2">
+      <UniqueIdentifier>{89567c52-5734-4064-8c2a-bdae647bc933}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\ArduinoLib">
+      <UniqueIdentifier>{1267baa8-2f39-4e7a-a6f1-874348a35a1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\PageManager">
+      <UniqueIdentifier>{682529aa-616a-4926-a015-62191a8c893f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\EEPROM_File">
+      <UniqueIdentifier>{e7064b0c-f7c1-4ef2-8e2e-87df8ef3aada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Games">
+      <UniqueIdentifier>{b6b3b70a-10a5-4e07-88e3-0b56d072e0a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Games\chribocchi">
+      <UniqueIdentifier>{b5ad8038-ea56-44a8-9c04-546d0462a5a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Games\Arduboy3D">
+      <UniqueIdentifier>{cc142709-8c82-417d-9c95-76145632bc47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Games\Arduboy3D\Generated">
+      <UniqueIdentifier>{b2f1755b-b929-4e95-8d66-f8b7024cc76a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\ArduboyTones">
+      <UniqueIdentifier>{9cf6b828-d690-44bf-afd6-cabf27b2715c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -101,79 +140,76 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Calculator.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_DialPlate.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_EXAMPLE.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_MainMenu.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Bluetooth.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CalcBG.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Calculator.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CHNSecond.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_DialPlate.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_FileExplorer.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Game.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Heart.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartRate.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Music.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Power.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Settings.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Sleep.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Sport.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Stopwatch.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_28.c">
-      <Filter>GUI/Font</Filter>
+      <Filter>GUI\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_28.c">
-      <Filter>GUI/Font</Filter>
+      <Filter>GUI\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_68.c">
-      <Filter>GUI/Font</Filter>
+      <Filter>GUI\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_89.c">
-      <Filter>GUI/Font</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Libraries\PageManager\PageManager.cpp">
-      <Filter>Libraries</Filter>
+      <Filter>GUI\Font</Filter>
     </ClCompile>
     <ClCompile Include="BSP\BSP_Backlight.cpp">
       <Filter>BSP</Filter>
@@ -188,13 +224,13 @@
       <Filter>BSP</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.c">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClCompile>
     <ClCompile Include="lv_drivers\display\fbdev.c">
       <Filter>lv_drivers</Filter>
@@ -221,46 +257,46 @@
       <Filter>BSP</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Stopwatch.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_50.c">
-      <Filter>GUI/Font</Filter>
+      <Filter>GUI\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchAdd.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchPause.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchReset.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchStart.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.cpp">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_HeartRate.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Settings.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartrateTinyheart.c">
-      <Filter>GUI/IMG</Filter>
+      <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_16.c">
-      <Filter>GUI/Font</Filter>
+      <Filter>GUI\Font</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\DisplayStatusBar.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_BacklightSet.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_TimeSet.cpp">
-      <Filter>GUI/Page</Filter>
+      <Filter>GUI\Page</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.c">
       <Filter>lvgl\src\lv_core</Filter>
@@ -580,6 +616,135 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_win.c">
       <Filter>lvgl\src\lv_widgets</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\GameDisp.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\GameManager.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Page_Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Page_GameSelect.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\audio\audio.cpp">
+      <Filter>Game\Arduboy\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\core\core.cpp">
+      <Filter>Game\Arduboy\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\Arduboy.cpp">
+      <Filter>Game\Arduboy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\ab_logo.c">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2.cpp">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Audio.cpp">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Beep.cpp">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Core.cpp">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\glcdfont.c">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Sprites.cpp">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\SpritesB.cpp">
+      <Filter>Game\Arduboy2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\dtostrf.c">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Print.cpp">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Stream.cpp">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\WMath.cpp">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\WString.cpp">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Arduino.cpp">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\PageManager\PageManager.cpp">
+      <Filter>Libraries\PageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\EEPROM_File\EEPROM_File.cpp">
+      <Filter>Libraries\EEPROM_File</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\chribocchi.cpp">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\game.cpp">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\logo.cpp">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\MyArduboy.cpp">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\title.cpp">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Arduboy3D.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Draw.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Enemy.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Entity.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\FixedMath.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Font.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Game.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Map.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\MapGenerator.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Menu.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Particle.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Player.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Projectile.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Sounds.cpp">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.cpp">
+      <Filter>Game\ArduboyTones</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lv_drv_conf.h" />
@@ -875,20 +1040,17 @@
     <ClInclude Include="..\..\WatchX\GUI\DisplayPrivate.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Libraries\PageManager\PageManager.h">
-      <Filter>Libraries</Filter>
-    </ClInclude>
     <ClInclude Include="BSP\rtc.h">
       <Filter>BSP</Filter>
     </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.h">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.h">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.h">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClInclude>
     <ClInclude Include="lv_drivers\display\fbdev.h">
       <Filter>lv_drivers</Filter>
@@ -915,7 +1077,7 @@
       <Filter>BSP</Filter>
     </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.h">
-      <Filter>GUI/lv_ext</Filter>
+      <Filter>GUI\lv_ext</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.h">
       <Filter>lvgl\src\lv_core</Filter>
@@ -1189,6 +1351,153 @@
     </ClInclude>
     <ClInclude Include="..\..\Libraries\lvgl\src\lvgl.h">
       <Filter>lvgl\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\GameDisp.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\GamePrivate.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\audio\audio.h">
+      <Filter>Game\Arduboy\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\core\core.h">
+      <Filter>Game\Arduboy\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\Arduboy.h">
+      <Filter>Game\Arduboy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Audio.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Beep.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Core.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Sprites.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\SpritesB.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\SpritesCommon.h">
+      <Filter>Game\Arduboy2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Arduino.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\binary.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\dtostrf.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Print.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Printable.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Stream.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WCharacter.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\wirish_math.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WMath.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WProgram.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WString.h">
+      <Filter>Game\ArduinoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\PageManager\PageManager.h">
+      <Filter>Libraries\PageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\EEPROM_File\EEPROM_File.h">
+      <Filter>Libraries\EEPROM_File</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\chribocchi\common.h">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\chribocchi\MyArduboy.h">
+      <Filter>Game\Games\chribocchi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Defines.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Draw.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Enemy.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Entity.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\FixedMath.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Font.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Game.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Images.inc.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\LUT.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Map.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\MapGenerator.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Menu.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Particle.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Platform.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Player.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Projectile.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Sounds.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Textures.h">
+      <Filter>Game\Games\Arduboy3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Generated\SpriteData.inc.h">
+      <Filter>Game\Games\Arduboy3D\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Generated\SpriteTypes.h">
+      <Filter>Game\Games\Arduboy3D\Generated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.h">
+      <Filter>Game\ArduboyTones</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTonesPitches.h">
+      <Filter>Game\ArduboyTones</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

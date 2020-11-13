@@ -42,17 +42,18 @@
 
 #include "WireBase.h"
 //#include "wirish.h"
+#include "Basic/SysConfig.h"
 
 /*
  * On the Maple, let the default pins be in the same location as the Arduino
  * pins
  */
 #ifndef SDA_Pin
-#define SDA_Pin PB11
+#define SDA_Pin SENSOR_SDA_Pin
 #endif
 
 #ifndef SCL_Pin
-#define SCL_Pin PB10
+#define SCL_Pin SENSOR_SCL_Pin
 #endif
 
 #define SOFT_STANDARD 27

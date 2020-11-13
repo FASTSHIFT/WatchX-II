@@ -30,7 +30,7 @@ static void SliderBacklight_Create(lv_obj_t* par)
     lv_obj_align(slider, NULL, LV_ALIGN_CENTER, 0, 0);
     lv_obj_set_event_cb(slider, SliderBacklight_EventHandler);
     lv_slider_set_range(slider, 0, 100);
-    lv_slider_set_value(slider, Backlight_GetValue() / 10, LV_ANIM_ON);
+    lv_slider_set_value(slider, Backlight_GetValue() / 10, LV_ANIM_OFF);
 
     lv_obj_t* label = lv_label_create(par, NULL);
     //lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_MicrosoftYaHei_28);

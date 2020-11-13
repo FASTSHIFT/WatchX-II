@@ -56,7 +56,6 @@ int main(int argc, char** argv)
     while (1)
     {
         Display_Update();
-        Power_Update();
         Sleep(5);       /*Just to let the system breathe */
     }
 

@@ -77,7 +77,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;$(ProjectDir)..\..\WatchX\Game\ArduinoLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -92,7 +92,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;$(ProjectDir)..\..\WatchX\Game\ArduinoLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Libraries\EEPROM_File\EEPROM_File.cpp" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_group.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_indev.c" />
@@ -247,6 +248,62 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_tileview.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_win.c" />
     <ClCompile Include="..\..\Libraries\PageManager\PageManager.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\ab_logo.c" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Audio.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Beep.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Core.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\glcdfont.c" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Sprites.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\SpritesB.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\Arduboy.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\audio\audio.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\core\core.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Arduino.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\dtostrf.c" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Print.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Stream.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\WMath.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\WString.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\GameDisp.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\GameManager.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Arduboy3D.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Draw.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Enemy.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Entity.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\FixedMath.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Font.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Game.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Map.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\MapGenerator.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Menu.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Particle.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Player.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Projectile.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Sounds.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\chribocchi.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\game.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\logo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\MyArduboy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\title.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Page_Game.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Page_GameSelect.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayAppWin.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayBasic.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayPage.cpp" />
@@ -315,6 +372,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Libraries\EEPROM_File\EEPROM_File.h" />
     <ClInclude Include="..\..\Libraries\lvgl\lvgl.h" />
     <ClInclude Include="..\..\Libraries\lvgl\lv_conf_template.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lvgl.h" />
@@ -412,6 +470,60 @@
     <ClInclude Include="..\..\WatchX\Basic\FileGroup.h" />
     <ClInclude Include="..\..\WatchX\Basic\SysConfig.h" />
     <ClInclude Include="..\..\WatchX\BSP\BSP.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Audio.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Beep.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Core.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Sprites.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\SpritesB.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\SpritesCommon.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTonesPitches.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\Arduboy.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\audio\audio.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\core\core.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Arduino.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\binary.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\dtostrf.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Print.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Printable.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Stream.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WCharacter.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\wirish_math.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WMath.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WProgram.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WString.h" />
+    <ClInclude Include="..\..\WatchX\Game\GameDisp.h" />
+    <ClInclude Include="..\..\WatchX\Game\GamePrivate.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Defines.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Draw.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Enemy.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Entity.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\FixedMath.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Font.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Game.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Generated\SpriteData.inc.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Generated\SpriteTypes.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Images.inc.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\LUT.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Map.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\MapGenerator.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Menu.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Particle.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Platform.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Player.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Projectile.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Sounds.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Textures.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\chribocchi\common.h">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\chribocchi\MyArduboy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\DisplayPrivate.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.h" />

@@ -19,8 +19,14 @@ void TouchPad_Init()
 void TouchPad_Update()
 {
     IsPressed = (ft6336u.read_touch1_event() == 0x02);
-    TouchPoint_X = (239 - ft6336u.read_touch1_x());
-    TouchPoint_Y = (239 - ft6336u.read_touch1_y());
+    if(IsPressed)
+    {
+        TouchPoint_X = (239 - ft6336u.read_touch1_x());
+        TouchPoint_Y = (239 - ft6336u.read_touch1_y());
+//        Serial.print(TouchPoint_X);
+//        Serial.print(',');
+//        Serial.println(TouchPoint_Y);
+    }
 }
 
 bool TouchPad_GetPressed()

@@ -19,12 +19,11 @@ void AppWindow_Create(lv_obj_t* par)
     
     for(int i = 0; i < PAGE_MAX; i++)
     {
-        lv_obj_t * cont = lv_cont_create(par, NULL);
-        lv_obj_add_style(cont, LV_CONT_PART_MAIN, &style);
-        lv_obj_set_size(cont, lv_obj_get_width(par), lv_obj_get_height(par));
-        lv_obj_align(cont, NULL, LV_ALIGN_CENTER, 0, 0);
-        lv_cont_set_fit(cont, LV_FIT_NONE);
+        lv_obj_t* obj = lv_obj_create(par, NULL);
+        lv_obj_add_style(obj, LV_OBJ_PART_MAIN, &style);
+        lv_obj_set_size(obj, lv_obj_get_width(par), lv_obj_get_height(par));
+        lv_obj_align(obj, NULL, LV_ALIGN_CENTER, 0, 0);
         
-        appWindow_Grp[i] = cont;
+        appWindow_Grp[i] = obj;
     }
 }

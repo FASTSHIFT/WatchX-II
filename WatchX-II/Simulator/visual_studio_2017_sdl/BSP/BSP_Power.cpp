@@ -96,7 +96,7 @@ void Power_Update()
 
 uint8_t Power_GetBattUsage()
 {
-    int voltage = __Map(
+    /*int voltage = __Map(
         Power_ADCValue,
         0, 4095,
         0, 3300
@@ -110,9 +110,9 @@ uint8_t Power_GetBattUsage()
         voltage,
         3000, 4100,
         0, 100
-    );
+    );*/
     
-    return usage;
+    return 100;
 }
 
 bool Power_GetBattIsCharging()

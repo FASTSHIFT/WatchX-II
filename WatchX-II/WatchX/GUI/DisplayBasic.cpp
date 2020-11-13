@@ -1,6 +1,35 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
 
+/**
+  * @brief  通用显示初始化
+  * @param  无
+  * @retval 无
+  */
+static void Display_CommonInit()
+{
+    /*自定义主题初始化*/
+    lv_theme_t * th = lv_theme_watchx_init(
+        LV_COLOR_WHITE, 
+        LV_COLOR_RED,
+        0,
+        &Font_MicrosoftYaHei_28,
+        &Font_MicrosoftYaHei_28,
+        &Font_MicrosoftYaHei_28,
+        &Font_MicrosoftYaHei_28
+    );
+    lv_theme_set_act(th);
+
+    /*APP窗口初始化*/
+    AppWindow_Create(lv_scr_act());
+
+    /*状态栏初始化*/
+    StatusBar_Create(lv_layer_top());
+
+    /*页面初始化*/
+    DisplayPage_Init();
+}
+
 #ifdef ARDUINO
 
 #define USE_FPS_TEST 0
@@ -50,14 +79,7 @@ void Display_Init()
     lv_port_indev_init();
     lv_port_log_init();
     
-    /*APP窗口初始化*/
-    AppWindow_Create(lv_scr_act());
-
-    /*状态栏初始化*/
-    StatusBar_Create(lv_layer_sys());
-    
-    /*页面初始化*/
-    DisplayPage_Init();
+    Display_CommonInit();
     
     /*背光渐亮*/
     Backlight_SetGradual(Backlight_GetBKP(), 100);
@@ -66,8 +88,6 @@ void Display_Init()
     //lv_demo_stress();
     //lv_demo_widgets();
 }
-
-
 
 #if (USE_FPS_TEST == 1) 
 static void Display_FPSTest()
@@ -102,14 +122,7 @@ static void Display_FPSTest()
 
 void Display_Init()
 {
-    /*APP窗口初始化*/
-    AppWindow_Create(lv_scr_act());
-
-    /*状态栏初始化*/
-    StatusBar_Create(lv_layer_sys());
-
-    /*页面初始化*/
-    DisplayPage_Init();
+    Display_CommonInit();
 }
 
 #endif

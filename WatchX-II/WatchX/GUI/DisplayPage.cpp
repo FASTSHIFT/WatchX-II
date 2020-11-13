@@ -34,6 +34,7 @@ void DisplayPage_Init()
     PAGE_IMPORT(Settings);        //设置
     PAGE_IMPORT(TimeSet);         //时间设置
     PAGE_IMPORT(BacklightSet);    //背光设置
+    PAGE_IMPORT(Game);            //游戏
 
     page.Push(PAGE_DialPlate);    //进入第一个页面
     

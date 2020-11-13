@@ -37,8 +37,8 @@
 PageManager::PageManager(uint8_t pageMax, uint8_t pageStackSize)
 {
     MaxPage = pageMax;
-    NewPage = NULL;
-    OldPage = NULL;
+    NewPage = 0;
+    OldPage = 0;
     IsPageBusy = false;
 
     /* 申请内存，清空列表 */
@@ -237,7 +237,7 @@ void PageManager::Running()
         IsPageBusy = true;
 
         /*触发旧页面退出事件*/
-        if (PageList[OldPage].Callback != NULL && IS_PAGE(OldPage))
+        if (PageList[OldPage].Callback != NULL)
         {
             PageList[OldPage].Callback(this, MSG_Exit);
         }
@@ -249,23 +249,21 @@ void PageManager::Running()
         NowPage = NewPage;
 
         /*触发新页面初始化事件*/
-        if (PageList[NewPage].Callback != NULL && IS_PAGE(NewPage))
+        if (PageList[NewPage].Callback != NULL)
         {
             PageList[NewPage].Callback(this, MSG_Setup);
         }
 
         /*新页面初始化完成，标记为旧页面*/
         OldPage = NewPage;
-    }
-    else
-    {
+
         /*标记页面不忙碌，处于循环状态*/
         IsPageBusy = false;
-        
-        /*页面循环事件*/
-        if (PageList[NowPage].Callback != NULL && IS_PAGE(NowPage))
-        {
-            PageList[NowPage].Callback(this, MSG_Loop);
-        }   
     }
+   
+    /*页面循环事件*/
+    if (PageList[NowPage].Callback != NULL)
+    {
+        PageList[NowPage].Callback(this, MSG_Loop);
+    }   
 }

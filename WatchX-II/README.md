@@ -75,3 +75,20 @@
 * 23.为lv_obj_add_anim添加动画启动延时
 * 24.改进DialPlate表盘页面的动画
 * 25.改进Stopwatch秒表页面的动画
+* 26.更新PageManager v1.5
+
+## [v0.7] - 2020-11-13
+* 1.添加I2C Slave (STM32F1)
+* 2.添加Arduboy/Arduboy2 Game System
+* 3.添加ArduboyTones
+* 4.添加游戏《Arduboy3D》、《chribocchi》
+* 5.重新设计的Game子系统，使用canvas呈现游戏图像
+* 6.更新PageManager v1.6
+* 7.支持使用SysConfig.h配置软件I2C引脚
+* 8.改进theme初始化依赖，watchx_theme与lv_conf.h解耦
+* 9.添加EEPROM_File库，支持使用文件模拟EEPROM
+* 10.AppWimdow使用lv_obj而不使用lv_cont
+* 11.添加MCU和Sim共用的显示初始化函数Display_CommonInit()
+* 12.使用DisplayPrivate.h导入字体
+* 13.将port层统一添加至lv_port文件组
+* 14.关闭背光调整页面的slider动画
