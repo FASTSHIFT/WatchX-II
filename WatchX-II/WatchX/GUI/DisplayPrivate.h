@@ -25,9 +25,9 @@ void Display_Update();
 #include "PageManager/PageManager.h"
 typedef enum
 {
-    /*保留*/
+    /*淇濈暀*/
     PAGE_NONE,
-    /*用户页面*/
+    /*鐢ㄦ埛椤甸潰*/
     PAGE_MainMenu,
     PAGE_DialPlate,
     PAGE_Bluetooth,
@@ -42,7 +42,7 @@ typedef enum
     PAGE_Stopwatch,
     PAGE_TimeSet,
     PAGE_BacklightSet,
-    /*保留*/
+    /*淇濈暀*/
     PAGE_MAX
 } Page_Type;
 
@@ -86,6 +86,7 @@ void PageRegister_##name(PageManager* page, uint8_t pageID)\
 #include "lv_ext/lv_obj_ext_func.h"
 #include "lv_ext/lv_anim_timeline.h"
 #include "lv_ext/lv_theme_watchx.h"
+#include "lv_port/lv_fs_if.h"
 
 extern "C" {
     LV_FONT_DECLARE(Font_RexBold_28);

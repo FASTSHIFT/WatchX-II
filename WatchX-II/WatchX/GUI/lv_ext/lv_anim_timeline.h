@@ -26,6 +26,7 @@ typedef struct {
 }
 
 uint32_t lv_anim_timeline_start(const lv_anim_timeline_t* anim_timeline, uint32_t len, bool playback = false);
+void     lv_anim_timeline_del(const lv_anim_timeline_t* anim_timeline, uint32_t len);
 uint32_t lv_anim_timeline_get_playtime(const lv_anim_timeline_t* anim_timeline, uint32_t len);
 
 #endif // ! __LV_ANIM_TIMELINE_H

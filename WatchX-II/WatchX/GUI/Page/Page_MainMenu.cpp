@@ -17,6 +17,7 @@ extern "C" {
     LV_IMG_DECLARE(IMG_Sport);
     LV_IMG_DECLARE(IMG_Stopwatch);
     LV_IMG_DECLARE(IMG_AppShadow);
+    LV_IMG_DECLARE(IMG_AppShadow2);
 }
 
 typedef struct
@@ -25,11 +26,12 @@ typedef struct
     const char* name;
     const uint8_t pageID;
     const lv_color_t bg_color;
-    lv_obj_t* cont;
+    lv_obj_t* obj;
 } AppICON_TypeDef;
 
 #define APP_DEF(name, color) {&IMG_##name, #name, PAGE_##name, color, NULL}
 #define APP_ICON_SIZE 80
+#define APP_ICON_ANIM_TIME 100
 
 static AppICON_TypeDef AppICON_Grp[] =
 {
@@ -45,17 +47,14 @@ static AppICON_TypeDef AppICON_Grp[] =
     APP_DEF(Stopwatch,    LV_COLOR_MAKE(60, 255, 167)),
 };
 
-static void AppClickAnim(lv_obj_t* cont, lv_obj_t* img, bool ispress)
+static void AppClickAnim(lv_obj_t* img, bool ispress)
 {
-    LV_OBJ_ADD_ANIM(cont, width, ispress ? 70 : 80, 100);
-    LV_OBJ_ADD_ANIM(cont, height, ispress ? 70 : 80, 100);
-
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, img);
     lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)lv_img_set_zoom);
     lv_anim_set_values(&a, lv_img_get_zoom(img), ispress ? 190 : LV_IMG_ZOOM_NONE);
-    lv_anim_set_time(&a, 100);
+    lv_anim_set_time(&a, APP_ICON_ANIM_TIME);
 
     lv_anim_path_t path;
     lv_anim_path_init(&path);
@@ -65,36 +64,24 @@ static void AppClickAnim(lv_obj_t* cont, lv_obj_t* img, bool ispress)
     lv_anim_start(&a);
 }
 
-static uint8_t AppICON_GetPageID(lv_obj_t* obj)
-{
-    uint8_t pageID = PAGE_NONE;
-    for (int i = 0; i < __Sizeof(AppICON_Grp); i++)
-    {
-        if (obj == AppICON_Grp[i].cont)
-        {
-            pageID = AppICON_Grp[i].pageID;
-            break;
-        }
-    }
-    return pageID;
-}
-
 static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
 {
     lv_obj_t* cont = lv_obj_get_child(obj, NULL);
     lv_obj_t* img = lv_obj_get_child(cont, NULL);
+    AppICON_TypeDef* appIcon = (AppICON_TypeDef*)lv_obj_get_user_data(obj);
+
     if(event == LV_EVENT_PRESSED)
     {
-        AppClickAnim(cont, img, true);
+        AppClickAnim(img, true);
     }
     else if(event == LV_EVENT_RELEASED || event == LV_EVENT_PRESS_LOST)
     {
-        AppClickAnim(cont, img, false);
+        AppClickAnim(img, false);
     }
 
     if(event == LV_EVENT_CLICKED)
     {
-        uint8_t pageID = AppICON_GetPageID(cont);
+        uint8_t pageID = appIcon->pageID;
 
         if (pageID == PAGE_NONE)
             return;
@@ -129,48 +116,54 @@ static void AppICON_Create(lv_obj_t* par)
     lv_style_set_radius(&style, LV_STATE_DEFAULT, 10);
     lv_style_set_border_width(&style, LV_STATE_DEFAULT, 0);
     lv_style_set_bg_color(&style, LV_STATE_PRESSED, LV_COLOR_GRAY);
+    lv_style_set_transform_width(&style, LV_STATE_PRESSED, -10);
+    lv_style_set_transform_height(&style, LV_STATE_PRESSED, -10);
 
     static lv_anim_path_t path;
     lv_anim_path_init(&path);
     lv_anim_path_set_cb(&path, lv_anim_path_ease_in_out);
     lv_style_set_transition_path(&style, LV_STATE_PRESSED, &path);
-    lv_style_set_transition_time(&style, LV_STATE_PRESSED, 100);
-    lv_style_set_transition_prop_1(&style, LV_STATE_PRESSED, LV_STYLE_BG_COLOR);
+    lv_style_set_transition_path(&style, LV_STATE_DEFAULT, &path);
+    lv_style_set_transition_time(&style, LV_STATE_DEFAULT, APP_ICON_ANIM_TIME);
+    lv_style_set_transition_prop_1(&style, LV_STATE_DEFAULT, LV_STYLE_BG_COLOR);
+    lv_style_set_transition_prop_2(&style, LV_STATE_DEFAULT, LV_STYLE_TRANSFORM_WIDTH);
+    lv_style_set_transition_prop_3(&style, LV_STATE_DEFAULT, LV_STYLE_TRANSFORM_HEIGHT);
 
     for(int i = 0; i < __Sizeof(AppICON_Grp); i++)
     {
-        lv_obj_t* cont_vir = lv_cont_create(par, NULL);
-        lv_obj_set_style_local_border_width(cont_vir, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 0);
-        lv_obj_set_size(cont_vir, APP_ICON_SIZE, APP_ICON_SIZE);
-        lv_obj_set_drag_parent(cont_vir, true);
-        lv_obj_set_event_cb(cont_vir, AppICON_EventHandler);
+        lv_obj_t* obj_vir = lv_obj_create(par, NULL);
+        lv_obj_set_style_local_border_width(obj_vir, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 0);
+        lv_obj_set_size(obj_vir, APP_ICON_SIZE, APP_ICON_SIZE);
+        lv_obj_set_drag_parent(obj_vir, true);
+        lv_obj_set_event_cb(obj_vir, AppICON_EventHandler);
+        lv_obj_set_user_data(obj_vir, &(AppICON_Grp[i]));
 
-        lv_coord_t interval_pixel_0 = (lv_obj_get_width(par) - lv_obj_get_width(cont_vir) * 2) / 3;
-        lv_coord_t interval_pixel_1 = interval_pixel_0 + lv_obj_get_width(cont_vir);
-        lv_coord_t interval_pixel_2 = lv_obj_get_width(cont_vir) / 2 + interval_pixel_0 / 2;
+        lv_coord_t interval_pixel_0 = (lv_obj_get_width(par) - lv_obj_get_width(obj_vir) * 2) / 3;
+        lv_coord_t interval_pixel_1 = interval_pixel_0 + lv_obj_get_width(obj_vir);
+        lv_coord_t interval_pixel_2 = lv_obj_get_width(obj_vir) / 2 + interval_pixel_0 / 2;
         lv_obj_align(
-            cont_vir,
+            obj_vir,
             NULL,
             LV_ALIGN_IN_TOP_MID,
             ((i % 2) == 0) ? -interval_pixel_2 : interval_pixel_2,
             interval_pixel_0 + (i / 2) * interval_pixel_1
         );
 
-        lv_obj_t* cont = lv_cont_create(cont_vir, NULL);
-        lv_obj_set_parent_event(cont, true);
-        lv_obj_align(cont, NULL, LV_ALIGN_CENTER, 0, 0);
-        lv_obj_set_auto_realign(cont, true);
-        lv_obj_set_drag_parent(cont, true);
-        lv_obj_add_style(cont, LV_CONT_PART_MAIN, &style);
-        lv_obj_set_size(cont, APP_ICON_SIZE, APP_ICON_SIZE);
-        lv_obj_set_style_local_bg_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, AppICON_Grp[i].bg_color);
+        lv_obj_t* obj = lv_obj_create(obj_vir, NULL);
+        lv_obj_set_parent_event(obj, true);
+        lv_obj_align(obj, NULL, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_set_auto_realign(obj, true);
+        lv_obj_set_drag_parent(obj, true);
+        lv_obj_add_style(obj, LV_CONT_PART_MAIN, &style);
+        lv_obj_set_size(obj, APP_ICON_SIZE, APP_ICON_SIZE);
+        lv_obj_set_style_local_bg_color(obj, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, AppICON_Grp[i].bg_color);
 
-        lv_obj_t* img = lv_img_create(cont, NULL);
+        lv_obj_t* img = lv_img_create(obj, NULL);
         lv_img_set_src(img, AppICON_Grp[i].src_img);
         lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
         lv_obj_set_auto_realign(img, true);
 
-        AppICON_Grp[i].cont = cont;
+        AppICON_Grp[i].obj = obj;
     }
 }
 
@@ -180,8 +173,8 @@ static void ImgAppShadow_Create(lv_obj_t* par)
     lv_img_set_src(img1, &IMG_AppShadow);
     lv_obj_align(img1, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
 
-    lv_obj_t* img2 = lv_img_create(par, img1);
-    lv_img_set_angle(img2, 1800);
+    lv_obj_t* img2 = lv_img_create(par, NULL);
+    lv_img_set_src(img2, &IMG_AppShadow2);
     lv_obj_align(img2, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
 }
 
@@ -242,25 +235,25 @@ static void ContApps_EventHandler(lv_obj_t* obj, lv_event_t event)
 
 static void ContApps_Create(lv_obj_t* par)
 {
-    lv_obj_t* cont = lv_cont_create(par, NULL);
+    lv_obj_t* obj = lv_obj_create(par, NULL);
 
-    lv_obj_set_width(cont, APP_WIN_WIDTH);
+    lv_obj_set_width(obj, APP_WIN_WIDTH);
 
     lv_coord_t interval_pixel_h = (lv_obj_get_width(par) - APP_ICON_SIZE * 2) / 3;
     lv_obj_set_height(
-        cont,
+        obj,
         (interval_pixel_h + APP_ICON_SIZE)
         * (__Sizeof(AppICON_Grp) / 2)
         + interval_pixel_h
     );
-    lv_obj_align(cont, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
-    lv_obj_set_style_local_border_width(cont, LV_PAGE_PART_BG, LV_STATE_DEFAULT, 0);
-    lv_obj_set_event_cb(cont, ContApps_EventHandler);
-    lv_obj_set_drag(cont, true);
-    lv_obj_set_drag_throw(cont, true);
-    lv_obj_set_drag_dir(cont, LV_DRAG_DIR_VER);
+    lv_obj_align(obj, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
+    lv_obj_set_style_local_border_width(obj, LV_PAGE_PART_BG, LV_STATE_DEFAULT, 0);
+    lv_obj_set_event_cb(obj, ContApps_EventHandler);
+    lv_obj_set_drag(obj, true);
+    lv_obj_set_drag_throw(obj, true);
+    lv_obj_set_drag_dir(obj, LV_DRAG_DIR_VER);
 
-    contApps = cont;
+    contApps = obj;
 }
 
 static void PagePlayAnim(bool open)

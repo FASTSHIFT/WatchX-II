@@ -55,14 +55,16 @@ static void BtnGrp_EventHandler(lv_obj_t* obj, lv_event_t event)
     {
         if (obj == confirmBtn)
         {
-            RTC_Set(
-                lv_roller_get_selected(rollerDateGrp[0].roller)+2001,
-                lv_roller_get_selected(rollerDateGrp[1].roller)+1,
-                lv_roller_get_selected(rollerDateGrp[2].roller)+1,
-                lv_roller_get_selected(rollerTimeGrp[0].roller),
-                lv_roller_get_selected(rollerTimeGrp[1].roller),
-                lv_roller_get_selected(rollerTimeGrp[2].roller)
-            );
+            Clock_Value_t clock;
+            
+            clock.year = lv_roller_get_selected(rollerDateGrp[0].roller) + 2001;
+            clock.month = lv_roller_get_selected(rollerDateGrp[1].roller) + 1;
+            clock.date = lv_roller_get_selected(rollerDateGrp[2].roller) + 1;
+            clock.hour = lv_roller_get_selected(rollerTimeGrp[0].roller);
+            clock.min = lv_roller_get_selected(rollerTimeGrp[1].roller);
+            clock.sec = lv_roller_get_selected(rollerTimeGrp[2].roller);
+            
+            Clock_SetValue(&clock);
         }
         else if (obj == switchBtn)
         {
@@ -205,13 +207,14 @@ static void SwitchButton_Create(lv_obj_t* par)
 
 static void RollerGrp_Update()
 {
-    RTC_Get();
-    lv_roller_set_selected(rollerDateGrp[0].roller, calendar.w_year - 2001, LV_ANIM_OFF);
-    lv_roller_set_selected(rollerDateGrp[1].roller, calendar.w_month-1, LV_ANIM_OFF);
-    lv_roller_set_selected(rollerDateGrp[2].roller, calendar.w_date-1, LV_ANIM_OFF);
-    lv_roller_set_selected(rollerTimeGrp[0].roller, calendar.hour, LV_ANIM_OFF);
-    lv_roller_set_selected(rollerTimeGrp[1].roller, calendar.min, LV_ANIM_OFF);
-    lv_roller_set_selected(rollerTimeGrp[2].roller, calendar.sec, LV_ANIM_OFF);
+    Clock_Value_t clock;
+    Clock_GetValue(&clock);
+    lv_roller_set_selected(rollerDateGrp[0].roller, clock.year - 2001, LV_ANIM_OFF);
+    lv_roller_set_selected(rollerDateGrp[1].roller, clock.month-1, LV_ANIM_OFF);
+    lv_roller_set_selected(rollerDateGrp[2].roller, clock.date-1, LV_ANIM_OFF);
+    lv_roller_set_selected(rollerTimeGrp[0].roller, clock.hour, LV_ANIM_OFF);
+    lv_roller_set_selected(rollerTimeGrp[1].roller, clock.min, LV_ANIM_OFF);
+    lv_roller_set_selected(rollerTimeGrp[2].roller, clock.sec, LV_ANIM_OFF);
 }
 
 

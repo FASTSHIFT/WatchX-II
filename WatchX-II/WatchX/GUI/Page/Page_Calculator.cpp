@@ -1,5 +1,6 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
+#include "Evaluate/evaluate.h"
 
 PAGE_EXPORT(Calculator);
 
@@ -48,21 +49,63 @@ static const BtnGrp_TypeDef BtnGrp[] =
 
 static void BtnGrp_EventHandler(lv_obj_t* obj, lv_event_t event)
 {
-    const char* text = lv_obj_get_style_value_str(obj, LV_BTN_PART_MAIN);
+    static char last_ans[128] = "\0";
+#   define IS_STR(txt, str) (strcmp((txt), (str)) == 0)
 
     if(event == LV_EVENT_CLICKED || event == LV_EVENT_LONG_PRESSED_REPEAT)
     {
-        if(strcmp(text, "C") == 0)
+        const char* btn_text = lv_obj_get_style_value_str(obj, LV_BTN_PART_MAIN);
+        const char* ta_text = lv_textarea_get_text(textareaClac);
+
+        if (IS_STR(ta_text, "Error Format"))
         {
             lv_textarea_set_text(textareaClac, "");
         }
-        else if(strcmp(text, "Del") == 0)
+
+        if (IS_STR(btn_text, "C"))
+        {
+            lv_textarea_set_text(textareaClac, "");
+        }
+        else if(IS_STR(btn_text, "Del"))
         {
             lv_textarea_del_char(textareaClac);
         }
+        else if (IS_STR(btn_text, "Ans"))
+        {
+            lv_textarea_add_text(textareaClac, last_ans);
+        }
+        else if (IS_STR(btn_text, "=") || IS_STR(btn_text, "%"))
+        {   
+            if (IS_STR(ta_text, ""))
+            {
+                return;
+            }
+
+            bool is_persent = IS_STR(btn_text, "%");
+
+            evaluate_run_expression(ta_text, is_persent);
+            char result[128];
+            evaluate_get_result(result, sizeof(result));
+
+            
+            if (result[0] >= '0' && result[0] <= '9')
+            {
+                strncpy(last_ans, result, sizeof(last_ans));
+            }
+
+            lv_textarea_set_text(textareaClac, result);
+        }
         else
         {
-            lv_textarea_add_text(textareaClac, text);
+            uint32_t len = strlen(ta_text);
+            if (len >= 1)
+            {
+                if (ta_text[len - 1] == '/' && IS_STR(btn_text, "0"))
+                {
+                    return;
+                }
+            }
+            lv_textarea_add_text(textareaClac, btn_text);
         }
     }
 }

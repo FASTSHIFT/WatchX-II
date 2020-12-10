@@ -20,6 +20,9 @@ static void Display_CommonInit()
     );
     lv_theme_set_act(th);
 
+    /*文件系统初始化*/
+    lv_fs_if_init();
+
     /*APP窗口初始化*/
     AppWindow_Create(lv_scr_act());
 

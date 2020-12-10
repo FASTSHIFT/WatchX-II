@@ -13,6 +13,7 @@
 #include "lv_drivers/display/monitor.h"
 #include "lv_drivers/indev/mouse.h"
 #include "lv_drivers/indev/keyboard.h"
+#include "lv_examples/lv_examples.h"
 #include "GUI/DisplayPrivate.h"
 #include "Basic/FileGroup.h"
 
@@ -28,7 +29,6 @@
 *  STATIC PROTOTYPES
 **********************/
 static void hal_init(void);
-static int tick_thread(void *data);
 
 /**********************
 *  STATIC VARIABLES
@@ -52,6 +52,7 @@ int main(int argc, char** argv)
     hal_init();
 
     Display_Init();
+    //lv_demo_widgets();
 
     while (1)
     {
@@ -77,8 +78,8 @@ static void hal_init(void)
     monitor_init();
 
     static lv_disp_buf_t disp_buf1;
-    static lv_color_t buf1_1[LV_HOR_RES_MAX * 120];
-    lv_disp_buf_init(&disp_buf1, buf1_1, NULL, LV_HOR_RES_MAX * 120);
+    static lv_color_t buf1_1[LV_HOR_RES_MAX * LV_VER_RES_MAX];
+    lv_disp_buf_init(&disp_buf1, buf1_1, NULL, LV_HOR_RES_MAX * LV_VER_RES_MAX);
 
     lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
@@ -104,24 +105,4 @@ static void hal_init(void)
     kb_drv.read_cb = keyboard_read;
     kb_indev = lv_indev_drv_register(&kb_drv);
 #endif
-
-    /* Tick init.
-    * You have to call 'lv_tick_inc()' in every milliseconds
-    * Create an SDL thread to do this*/
-    SDL_CreateThread(tick_thread, "tick", NULL);
-}
-
-/**
-* A task to measure the elapsed time for LittlevGL
-* @param data unused
-* @return never return
-*/
-static int tick_thread(void *data)
-{
-    while (1) {
-        lv_tick_inc(5);
-        SDL_Delay(5);   /*Sleep for 1 millisecond*/
-    }
-
-    return 0;
 }

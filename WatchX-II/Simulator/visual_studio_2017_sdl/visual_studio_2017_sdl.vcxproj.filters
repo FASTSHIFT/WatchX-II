@@ -100,6 +100,30 @@
     <Filter Include="Game\ArduboyTones">
       <UniqueIdentifier>{9cf6b828-d690-44bf-afd6-cabf27b2715c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\lv_port">
+      <UniqueIdentifier>{cf7ba811-28e4-41d2-9b96-5a794a26bad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lv_examples">
+      <UniqueIdentifier>{36e62da8-0bf6-4248-b25a-91953c4dc0fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lv_examples\assets">
+      <UniqueIdentifier>{7fa3d2c6-9985-4cb5-a1db-16cccfb0fb6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lv_examples\src">
+      <UniqueIdentifier>{a1c818cd-d9d3-4701-ba00-4999f8425900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lv_examples\src\lv_demo_benchmark">
+      <UniqueIdentifier>{85f8f7aa-ca02-425e-87d6-3d4112ad3a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lv_examples\src\lv_demo_widgets">
+      <UniqueIdentifier>{c61f2096-61db-4279-99d4-5ff48d28e04d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lv_examples\src\lv_demo_stress">
+      <UniqueIdentifier>{99886c3e-e160-4474-8cb1-f1be1cb22983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\Evaluate">
+      <UniqueIdentifier>{37e25583-edaf-4f43-98c0-f31cd8dbf2a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -155,9 +179,6 @@
       <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Bluetooth.c">
-      <Filter>GUI\IMG</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CalcBG.c">
       <Filter>GUI\IMG</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Calculator.c">
@@ -218,9 +239,6 @@
       <Filter>BSP</Filter>
     </ClCompile>
     <ClCompile Include="BSP\BSP_ParticleSensor.cpp">
-      <Filter>BSP</Filter>
-    </ClCompile>
-    <ClCompile Include="BSP\rtc.c">
       <Filter>BSP</Filter>
     </ClCompile>
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp">
@@ -745,6 +763,57 @@
     <ClCompile Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.cpp">
       <Filter>Game\ArduboyTones</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\lv_port\lv_fs_if.c">
+      <Filter>GUI\lv_port</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\lv_port\lv_fs_pc.c">
+      <Filter>GUI\lv_port</Filter>
+    </ClCompile>
+    <ClCompile Include="BSP\BSP_Clock.cpp">
+      <Filter>BSP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow2.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_alpha16.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_argb.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_chroma_keyed.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_indexed16.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_rgb.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_hand.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_12_compr_az.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_16_compr_az.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_28_compr_az.c">
+      <Filter>lv_examples\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.c">
+      <Filter>lv_examples\src\lv_demo_benchmark</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.c">
+      <Filter>lv_examples\src\lv_demo_widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.c">
+      <Filter>lv_examples\src\lv_demo_stress</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\Evaluate\evaluate.c">
+      <Filter>Libraries\Evaluate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lv_drv_conf.h" />
@@ -1039,9 +1108,6 @@
     </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\DisplayPrivate.h">
       <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="BSP\rtc.h">
-      <Filter>BSP</Filter>
     </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.h">
       <Filter>GUI\lv_ext</Filter>
@@ -1498,6 +1564,27 @@
     </ClInclude>
     <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTonesPitches.h">
       <Filter>Game\ArduboyTones</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\GUI\lv_port\lv_fs_if.h">
+      <Filter>GUI\lv_port</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.h">
+      <Filter>lv_examples\src\lv_demo_benchmark</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.h">
+      <Filter>lv_examples\src\lv_demo_widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.h">
+      <Filter>lv_examples\src\lv_demo_stress</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_examples.h">
+      <Filter>lv_examples</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\lv_ex_conf.h">
+      <Filter>lv_examples</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\Evaluate\evaluate.h">
+      <Filter>Libraries\Evaluate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

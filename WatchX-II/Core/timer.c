@@ -402,6 +402,7 @@ while(0)
     TMR_Reset(TIMx);
     Timer_ClockCmd(TIMx, ENABLE);
 
+    TMR_TimeBaseStructInit(&TMR_TimeBaseStructure);
     TMR_TimeBaseStructure.TMR_RepetitionCounter = 0;
     TMR_TimeBaseStructure.TMR_Period = period - 1;//设置在下一个更新事件装入活动的自动重装载寄存器周期的值
     TMR_TimeBaseStructure.TMR_DIV = prescaler - 1;//设置用来作为TIMx时钟频率除数的预分频值 

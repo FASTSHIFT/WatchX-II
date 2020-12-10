@@ -723,7 +723,6 @@ static void lv_refr_obj(lv_obj_t * obj, const lv_area_t * mask_ori_p)
         if(obj->design_cb) obj->design_cb(obj, &obj_ext_mask, LV_DESIGN_DRAW_POST);
     }
 }
-
 /**
  * Flush the content of the VDB
  */

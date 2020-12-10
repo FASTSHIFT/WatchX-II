@@ -87,8 +87,23 @@
 * 7.支持使用SysConfig.h配置软件I2C引脚
 * 8.改进theme初始化依赖，watchx_theme与lv_conf.h解耦
 * 9.添加EEPROM_File库，支持使用文件模拟EEPROM
-* 10.AppWimdow使用lv_obj而不使用lv_cont
+* 10.AppWindow使用lv_obj而不使用lv_cont
 * 11.添加MCU和Sim共用的显示初始化函数Display_CommonInit()
 * 12.使用DisplayPrivate.h导入字体
 * 13.将port层统一添加至lv_port文件组
 * 14.关闭背光调整页面的slider动画
+
+## [v0.8] - 2020-12-10
+* 1.添加extend_SRAM使能，可使用全部的224K内存
+* 2.从GUIX示例代码提取evaluate（数学表达式解析库）
+* 3.动态内存分配调整，MCU平台使用lv_mem，PC平台使用C标准库，不再使用FreeRTOS接管lvgl动态内存分配
+* 4.添加BSP_Clock，使获取时间的接口保持一致
+* 5.添加lv_fs_if文件系统接口， 从XC-OS移植lv_fs_sdfat
+* 6.去除字体文件内的中文注释，防止在VS编译时因为文字编码问题出错
+* 7.优化MainMenu的shadow，上下阴影采用独立的图片，提升刷新效率
+* 8.调整DISP_BUF_SIZE，每个缓冲区缓冲1/4个屏幕
+* 9.完成计算器功能
+* 10.优化MainMenu的点击动画，使用style系统的transition实现
+* 11.启用user_data，实现控件到数据的映射，不再使用遍历数组的方式
+* 12.使用lvgl内置的memcpy实现
+* 13.win平台使用GetTickCount()获取时间戳，不使用独立线程的方式生成时间戳

@@ -1,8 +1,9 @@
 #include "GUI/DisplayPrivate.h"
 #include "Basic/SysConfig.h"
 
-/*Æ¹ÅÒ»º³åÇø£¬»º³å20ÐÐÏñËØ*/
-#define DISP_BUF_SIZE (LV_HOR_RES_MAX * 20)
+/*Æ¹ÅÒ»º³åÇø*/
+#define DISP_BUF_SIZE (LV_HOR_RES_MAX * LV_VER_RES_MAX / 4)
+//#define DISP_BUF_SIZE (LV_HOR_RES_MAX * 10)
 static lv_color_t lv_disp_buf0[1];
 static lv_color_t lv_disp_buf1[DISP_BUF_SIZE];
 static lv_color_t lv_disp_buf2[DISP_BUF_SIZE];

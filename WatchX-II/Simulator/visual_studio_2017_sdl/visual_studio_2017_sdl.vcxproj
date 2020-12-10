@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Libraries\EEPROM_File\EEPROM_File.cpp" />
+    <ClCompile Include="..\..\Libraries\Evaluate\evaluate.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_group.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_indev.c" />
@@ -247,6 +248,18 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_textarea.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_tileview.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_win.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_alpha16.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_argb.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_chroma_keyed.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_indexed16.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_rgb.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_hand.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_12_compr_az.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_16_compr_az.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_28_compr_az.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.c" />
     <ClCompile Include="..\..\Libraries\PageManager\PageManager.cpp" />
     <ClCompile Include="..\..\WatchX\Game\Arduboy2\ab_logo.c" />
     <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2.cpp" />
@@ -315,8 +328,8 @@
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_68.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_89.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow2.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Bluetooth.c" />
-    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CalcBG.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Calculator.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CHNSecond.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_DialPlate.c" />
@@ -339,6 +352,8 @@
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.c" />
+    <ClCompile Include="..\..\WatchX\GUI\lv_port\lv_fs_if.c" />
+    <ClCompile Include="..\..\WatchX\GUI\lv_port\lv_fs_pc.c" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_BacklightSet.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Calculator.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_DialPlate.cpp" />
@@ -349,10 +364,10 @@
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Stopwatch.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_TimeSet.cpp" />
     <ClCompile Include="BSP\BSP_Backlight.cpp" />
+    <ClCompile Include="BSP\BSP_Clock.cpp" />
     <ClCompile Include="BSP\BSP_IMU.cpp" />
     <ClCompile Include="BSP\BSP_ParticleSensor.cpp" />
     <ClCompile Include="BSP\BSP_Power.cpp" />
-    <ClCompile Include="BSP\rtc.c" />
     <ClCompile Include="lv_drivers\display\fbdev.c" />
     <ClCompile Include="lv_drivers\display\monitor.c" />
     <ClCompile Include="lv_drivers\display\R61581.c" />
@@ -373,6 +388,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Libraries\EEPROM_File\EEPROM_File.h" />
+    <ClInclude Include="..\..\Libraries\Evaluate\evaluate.h" />
     <ClInclude Include="..\..\Libraries\lvgl\lvgl.h" />
     <ClInclude Include="..\..\Libraries\lvgl\lv_conf_template.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lvgl.h" />
@@ -465,6 +481,11 @@
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_widgets\lv_tileview.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_widgets\lv_win.h" />
     <ClInclude Include="..\..\Libraries\lv_conf.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_examples.h" />
+    <ClInclude Include="..\..\Libraries\lv_ex_conf.h" />
     <ClInclude Include="..\..\Libraries\PageManager\PageManager.h" />
     <ClInclude Include="..\..\WatchX\Basic\CommonMacro.h" />
     <ClInclude Include="..\..\WatchX\Basic\FileGroup.h" />
@@ -529,7 +550,7 @@
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.h" />
-    <ClInclude Include="BSP\rtc.h" />
+    <ClInclude Include="..\..\WatchX\GUI\lv_port\lv_fs_if.h" />
     <ClInclude Include="lv_drivers\display\fbdev.h" />
     <ClInclude Include="lv_drivers\display\monitor.h" />
     <ClInclude Include="lv_drivers\display\R61581.h" />

@@ -7,8 +7,6 @@
 
 #ifdef ARDUINO
 #   include "Arduino.h"
-#else
-#   include "BSP/rtc.h"
 #endif
 
 /*Backlight*/
@@ -94,5 +92,20 @@ do{\
     name##_Node.Next = NULL;\
     ComMaster_AddUserCallbackNode(&name##_Node);\
 }while(0)
+
+/*Clock*/
+typedef struct
+{
+    uint8_t hour;
+    uint8_t min;
+    uint8_t sec;
+    uint16_t ms;
+    uint16_t year;
+    uint8_t  month;
+    uint8_t  date;
+    uint8_t  week;
+} Clock_Value_t;
+void Clock_GetValue(Clock_Value_t* clock_value);
+void Clock_SetValue(Clock_Value_t* clock_value);
 
 #endif

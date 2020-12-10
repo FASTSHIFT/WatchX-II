@@ -1,14 +1,3 @@
-/*
-*---------------------------------------------------------------
-*                        Lvgl Font Tool                         
-*                                                               
-* 注:使用unicode编码                                              
-* 注:本字体文件由Lvgl Font Tool V0.4 生成                          
-* 作者:阿里(qq:617622104)                                         
-*---------------------------------------------------------------
-*/
-
-
 #include "lvgl/lvgl.h"
 
 
@@ -2602,9 +2591,9 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
 static int binsearch(const uint16_t *sortedSeq, int seqLength, uint16_t keyData) {
     int low = 0, mid, high = seqLength - 1;
     while (low <= high) {
-        mid = (low + high)>>1;//右移1位等于是/2，奇数，无论奇偶，有个值就行
+        mid = (low + high)>>1;
         if (keyData < sortedSeq[mid]) {
-            high = mid - 1;//是mid-1，因为mid已经比较过了
+            high = mid - 1;
         }
         else if (keyData > sortedSeq[mid]) {
             low = mid + 1;
@@ -2667,10 +2656,6 @@ static bool __user_font_get_glyph_dsc(const lv_font_t * font, lv_font_glyph_dsc_
 }
 
 
-//Microsoft YaHei,,-1
-//字模高度：37
-//内部字体
-//使用排序和二分查表
 lv_font_t Font_MicrosoftYaHei_28 = {
     .dsc = &font_dsc,
     .get_glyph_bitmap = __user_font_get_bitmap,

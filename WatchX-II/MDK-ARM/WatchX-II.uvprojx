@@ -475,6 +475,11 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\BSP\BSP_ComMaster.cpp</FilePath>
             </File>
+            <File>
+              <FileName>BSP_Clock.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\BSP\BSP_Clock.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -681,6 +686,11 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\lv_port\lv_port_log.cpp</FilePath>
             </File>
+            <File>
+              <FileName>lv_fs_sdfat.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\lv_port\lv_fs_sdfat.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -782,14 +792,14 @@
               <FilePath>..\WatchX\GUI\IMG\IMG_StopwatchStart.c</FilePath>
             </File>
             <File>
-              <FileName>IMG_CalcBG.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\WatchX\GUI\IMG\IMG_CalcBG.c</FilePath>
-            </File>
-            <File>
               <FileName>IMG_HeartrateTinyheart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\IMG\IMG_HeartrateTinyheart.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_AppShadow2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_AppShadow2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1541,6 +1551,11 @@
               <FileType>8</FileType>
               <FilePath>..\Libraries\EEPROM_File\EEPROM_File.cpp</FilePath>
             </File>
+            <File>
+              <FileName>evaluate.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\Evaluate\evaluate.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2161,8 +2176,8 @@
               <RVCTZI>0</RVCTZI>
               <RVCTOtherData>0</RVCTOtherData>
               <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>0</IncludeInBuild>
-              <AlwaysBuild>0</AlwaysBuild>
+              <IncludeInBuild>2</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
               <GenerateAssemblyFile>2</GenerateAssemblyFile>
               <AssembleAssemblyFile>2</AssembleAssemblyFile>
               <PublicsOnly>2</PublicsOnly>
@@ -2518,6 +2533,11 @@
               <FileName>rtc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>extend_SRAM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\extend_SRAM.c</FilePath>
             </File>
           </Files>
         </Group>

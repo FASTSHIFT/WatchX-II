@@ -7,8 +7,9 @@ static lv_obj_t* contTitle;
 
 static void StatusBar_Update(lv_task_t* task)
 {
-    RTC_Get();
-    lv_label_set_text_fmt(labelTitleTime, "%02d:%02d", calendar.hour, calendar.min);
+    Clock_Value_t clock;
+    Clock_GetValue(&clock);
+    lv_label_set_text_fmt(labelTitleTime, "%02d:%02d", clock.hour, clock.min);
 }
 
 void StatusBar_Create(lv_obj_t* par)

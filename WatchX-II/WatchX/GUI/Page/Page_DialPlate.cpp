@@ -32,6 +32,8 @@ static lv_obj_t* labelSteps;
 
 static lv_obj_t* imgCHN;
 
+static Clock_Value_t Clock;
+
 static void ContBatt_UpdateBattUsage(uint8_t usage)
 {
     int8_t maxIndexTarget = __Map(usage, 0, 100, 0, __Sizeof(ledBattGrp));  
@@ -120,25 +122,25 @@ static void ContDate_Create(lv_obj_t* par)
 
 static void LabelDate_Update()
 {
-    lv_label_set_text_fmt(labelDate, "%02d.%02d.%02d", calendar.w_year % 100, calendar.w_month, calendar.w_date);
+    lv_label_set_text_fmt(labelDate, "%02d.%02d.%02d", Clock.year % 100, Clock.month, Clock.date);
     
     const char* week_str[] = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
-    lv_label_set_text(labelWeek, week_str[calendar.week]);
+    lv_label_set_text(labelWeek, week_str[Clock.week]);
 }
 
 static void LabelTime_Update(lv_anim_enable_t anim_enable = LV_ANIM_ON)
 {
-    RTC_Get();
+    Clock_GetValue(&Clock);
     
     /*分-个位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[3], calendar.min % 10, anim_enable);
+    lv_label_anim_effect_check_value(&labelTimeEffect[3], Clock.min % 10, anim_enable);
     /*分-十位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[2], calendar.min / 10, anim_enable);
+    lv_label_anim_effect_check_value(&labelTimeEffect[2], Clock.min / 10, anim_enable);
     
     /*时-个位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[1], calendar.hour % 10, anim_enable);
+    lv_label_anim_effect_check_value(&labelTimeEffect[1], Clock.hour % 10, anim_enable);
     /*时-十位*/
-    lv_label_anim_effect_check_value(&labelTimeEffect[0], calendar.hour / 10, anim_enable);
+    lv_label_anim_effect_check_value(&labelTimeEffect[0], Clock.hour / 10, anim_enable);
     
     lv_led_toggle(ledSecGrp[0]);
     lv_led_toggle(ledSecGrp[1]);

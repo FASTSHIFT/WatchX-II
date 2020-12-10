@@ -45,6 +45,16 @@ uint32_t lv_anim_timeline_start(const lv_anim_timeline_t* anim_timeline, uint32_
     return playtime;
 }
 
+void lv_anim_timeline_del(const lv_anim_timeline_t* anim_timeline, uint32_t len)
+{
+    for (uint32_t i = 0; i < len; i++)
+    {
+        lv_obj_t* obj = anim_timeline[i].obj;
+        lv_anim_exec_xcb_t exec_xcb = anim_timeline[i].exec_cb;
+        lv_anim_del(obj, exec_xcb);
+    }
+}
+
 uint32_t lv_anim_timeline_get_playtime(const lv_anim_timeline_t* anim_timeline, uint32_t len)
 {
     uint32_t playtime = 0;
