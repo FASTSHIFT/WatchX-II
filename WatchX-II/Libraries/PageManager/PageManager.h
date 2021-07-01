@@ -33,6 +33,10 @@
   * @upgrade:  2019.10.5  - v1.2 使用栈结构管理页面嵌套，默认栈深度10层(可调)
   * @upgrade:  2019.12.4  - v1.3 修复在Setup和Exit阻塞情况下页面切换的BUG，添加析构
   * @upgrade:  2020.7.28  - v1.4 修改EventFunction_t形参顺序，判断指针使用 "ptr != NULL" 的形式，添加MIT开源协议
+  * @upgrade:  2020.11.3  - v1.5 将事件回调改成消息机制，统一使用一个回调函数处理；
+  *                              修改函数命名，去除Page前缀；
+  *                              为每个页面添加Name，可使用GetCurrentName()访问当前页面的名字
+  * @upgrade:  2020.11.6  - v1.6 优化Running函数，去除其中的IS_PAGE判断
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -42,36 +46,35 @@
 #include <stdint.h>
 
 class PageManager {
-    typedef void(*CallbackFunction_t)(void);
-    typedef void(*EventFunction_t)(void*,uint8_t);
-    typedef struct {
-        CallbackFunction_t SetupCallback;
-        CallbackFunction_t LoopCallback;
-        CallbackFunction_t ExitCallback;
-        EventFunction_t EventCallback;
-    } PageList_TypeDef;
+    typedef void(*CallbackFunction_t)(void*,uint8_t);
+    typedef struct PageList{
+        CallbackFunction_t Callback;
+        const char* Name;
+    } PageList_t;
 public:
     PageManager(uint8_t pageMax, uint8_t pageStackSize = 10);
     ~PageManager();
     uint8_t NowPage, LastPage, NextPage;
     uint8_t NewPage, OldPage;
+    typedef enum {
+        MSG_NONE,
+        MSG_Setup,
+        MSG_Exit,
+        MSG_Loop,
+        MSG_MAX
+    }MSG_t;
 
-    bool PageRegister(
-        uint8_t pageID,
-        CallbackFunction_t setupCallback,
-        CallbackFunction_t loopCallback,
-        CallbackFunction_t exitCallback,
-        EventFunction_t eventCallback
-    );
-    bool PageClear(uint8_t pageID);
-    bool PagePush(uint8_t pageID);
-    bool PagePop();
-    void PageChangeTo(uint8_t pageID);
-    void PageEventTransmit(void* obj, uint8_t event);
-    void PageStackClear();
+    bool Register(uint8_t pageID, CallbackFunction_t callback, const char* name);
+    bool Clear(uint8_t pageID);
+    bool Push(uint8_t pageID);
+    bool Pop();
+    void ChangeTo(uint8_t pageID);
+    void EventTransmit(void* obj, uint8_t event);
+    void StackClear();
+    const char* GetCurrentName();
     void Running();
 private:
-    PageList_TypeDef* PageList;
+    PageList_t* PageList;
     uint8_t *PageStack;
     uint8_t PageStackSize;
     uint8_t PageStackTop;

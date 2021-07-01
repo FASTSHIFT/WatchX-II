@@ -81,33 +81,6 @@ void lv_table_set_align(lv_obj_t * table, lv_label_align_t align)
 }
 
 /**
- * Calculate the current value of an animation applying an "S" characteristic (cosine)
- * @param a pointer to an animation
- * @return the current value to set
- */
-lv_anim_value_t lv_anim_path_strong_ease_in_out(const lv_anim_path_t * path, const lv_anim_t * a)
-{
-    LV_UNUSED(path);
-
-    /*Calculate the current step*/
-
-    uint32_t t;
-    if(a->time == a->act_time)
-        t = 1024;
-    else
-        t = (uint32_t)((uint32_t)a->act_time * 1024) / a->time;
-
-    int32_t step = _lv_bezier3(t, 0, 1000, 1000, 1024);
-
-    int32_t new_value;
-    new_value = (int32_t)step * (a->end - a->start);
-    new_value = new_value >> 10;
-    new_value += a->start;
-
-    return (lv_anim_value_t)new_value;
-}
-
-/**
   * @brief  为对象添加动画
   * @param  obj:对象地址
   * @param  a:动画控制器地址
@@ -115,6 +88,7 @@ lv_anim_value_t lv_anim_path_strong_ease_in_out(const lv_anim_path_t * path, con
   * @param  start:动画的开始值
   * @param  end:动画的结束值
   * @param  time:动画的执行时间
+  * @param  delay:动画开始前的延时时间
   * @param  ready_cb:动画结束事件回调
   * @param  path_cb:动画曲线
   * @retval 无
@@ -124,19 +98,22 @@ void lv_obj_add_anim(
     lv_anim_exec_xcb_t exec_cb,
     int32_t start, int32_t end,
     uint16_t time,
+    uint32_t delay,
     lv_anim_ready_cb_t ready_cb,
     lv_anim_path_cb_t path_cb
 )
 {
     lv_anim_t anim_temp;
     
-    if(a == NULL)
+    if (a == NULL)
+    {
         a = &anim_temp;
-    
-    /* INITIALIZE AN ANIMATION
-    *-----------------------*/
-    lv_anim_init(a);
 
+        /* INITIALIZE AN ANIMATION
+        *-----------------------*/
+        lv_anim_init(a);
+    }
+        
     /* MANDATORY SETTINGS
      *------------------*/
 
@@ -151,12 +128,13 @@ void lv_obj_add_anim(
 
     /*Set start and end values. E.g. 0, 150*/
     lv_anim_set_values(a, start, end);
+    
 
     /* OPTIONAL SETTINGS
      *------------------*/
 
     /*Time to wait before starting the animation [ms]*/
-    lv_anim_set_delay(a, 0);
+    lv_anim_set_delay(a, delay);
 
     lv_anim_path_t path;
     lv_anim_path_init(&path);
@@ -170,18 +148,6 @@ void lv_obj_add_anim(
 
     /*Set a callback to call when animation is started (after delay).*/
     lv_anim_set_start_cb(a, ready_cb);
-
-    /*Play the animation backward too with this duration. Default is 0 (disabled) [ms]*/
-    lv_anim_set_playback_time(a, 0);
-
-    /*Delay before playback. Default is 0 (disabled) [ms]*/
-    lv_anim_set_playback_delay(a, 0);
-
-    /*Number of repetitions. Default is 1.  LV_ANIM_REPEAT_INFINIT for infinite repetition*/
-    lv_anim_set_repeat_count(a, 1);
-
-    /*Delay before repeat. Default is 0 (disabled) [ms]*/
-    lv_anim_set_repeat_delay(a, 0);
 
     /* START THE ANIMATION
      *------------------*/

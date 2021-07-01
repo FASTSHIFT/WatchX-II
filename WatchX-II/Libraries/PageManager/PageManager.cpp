@@ -37,21 +37,21 @@
 PageManager::PageManager(uint8_t pageMax, uint8_t pageStackSize)
 {
     MaxPage = pageMax;
-    NewPage = NULL;
-    OldPage = NULL;
+    NewPage = 0;
+    OldPage = 0;
     IsPageBusy = false;
 
     /* 申请内存，清空列表 */
-    PageList = new PageList_TypeDef[MaxPage];
+    PageList = new PageList_t[MaxPage];
     for(uint8_t page = 0; page < MaxPage; page++)
     {
-        PageClear(page);
+        Clear(page);
     }
     
     /*页面栈配置*/
     PageStackSize = pageStackSize;
     PageStack = new uint8_t[PageStackSize];
-    PageStackClear();
+    StackClear();
 }
 
 /**
@@ -70,43 +70,29 @@ PageManager::~PageManager()
   * @param  pageID: 页面编号
   * @retval true:成功 false:失败
   */
-bool PageManager::PageClear(uint8_t pageID)
+bool PageManager::Clear(uint8_t pageID)
 {
     if(!IS_PAGE(pageID))
         return false;
 
-    PageList[pageID].SetupCallback = NULL;
-    PageList[pageID].LoopCallback = NULL;
-    PageList[pageID].ExitCallback = NULL;
-    PageList[pageID].EventCallback = NULL;
+    PageList[pageID].Callback = NULL;
 
     return true;
 }
 
 /**
-  * @brief  注册一个基本页面，包含一个初始化函数，循环函数，退出函数，事件函数
+  * @brief  注册页面
   * @param  pageID: 页面编号
-  * @param  setupCallback: 初始化函数回调
-  * @param  loopCallback: 循环函数回调
-  * @param  exitCallback: 退出函数回调
-  * @param  eventCallback: 事件函数回调
+  * @param  Callback: 消息回调函数
   * @retval true:成功 false:失败
   */
-bool PageManager::PageRegister(
-    uint8_t pageID,
-    CallbackFunction_t setupCallback,
-    CallbackFunction_t loopCallback,
-    CallbackFunction_t exitCallback,
-    EventFunction_t eventCallback
-)
+bool PageManager::Register(uint8_t pageID, CallbackFunction_t callback, const char* name)
 {
     if(!IS_PAGE(pageID))
         return false;
 
-    PageList[pageID].SetupCallback = setupCallback;
-    PageList[pageID].LoopCallback = loopCallback;
-    PageList[pageID].ExitCallback = exitCallback;
-    PageList[pageID].EventCallback = eventCallback;
+    PageList[pageID].Callback = callback;
+    PageList[pageID].Name = name;
     return true;
 }
 
@@ -116,11 +102,13 @@ bool PageManager::PageRegister(
   * @param  event: 事件编号
   * @retval 无
   */
-void PageManager::PageEventTransmit(void* obj, uint8_t event)
+void PageManager::EventTransmit(void* obj, uint8_t event)
 {
     /*将事件传递到当前页面*/
-    if(PageList[NowPage].EventCallback != NULL)
-        PageList[NowPage].EventCallback(obj, event);
+    if (PageList[NowPage].Callback != NULL)
+    {
+        PageList[NowPage].Callback(obj, event);
+    }
 }
 
 /**
@@ -128,7 +116,7 @@ void PageManager::PageEventTransmit(void* obj, uint8_t event)
   * @param  pageID: 页面编号
   * @retval 无
   */
-void PageManager::PageChangeTo(uint8_t pageID)
+void PageManager::ChangeTo(uint8_t pageID)
 {
     if(!IS_PAGE(pageID))
         return;
@@ -149,7 +137,7 @@ void PageManager::PageChangeTo(uint8_t pageID)
   * @param  pageID: 页面编号
   * @retval true:成功 false:失败
   */
-bool PageManager::PagePush(uint8_t pageID)
+bool PageManager::Push(uint8_t pageID)
 {
     if(!IS_PAGE(pageID))
         return false;
@@ -173,7 +161,7 @@ bool PageManager::PagePush(uint8_t pageID)
     PageStack[PageStackTop] = pageID;
     
     /*页面跳转*/
-    PageChangeTo(PageStack[PageStackTop]);
+    ChangeTo(PageStack[PageStackTop]);
     
     return true;
 }
@@ -183,7 +171,7 @@ bool PageManager::PagePush(uint8_t pageID)
   * @param  无
   * @retval true:成功 false:失败
   */
-bool PageManager::PagePop()
+bool PageManager::Pop()
 {
     /*检查页面是否忙碌*/
     if(IsPageBusy)
@@ -200,7 +188,7 @@ bool PageManager::PagePop()
     PageStackTop--;
     
     /*页面跳转*/
-    PageChangeTo(PageStack[PageStackTop]);
+    ChangeTo(PageStack[PageStackTop]);
     
     return true;
 }
@@ -210,7 +198,7 @@ bool PageManager::PagePop()
   * @param  无
   * @retval 无
   */
-void PageManager::PageStackClear()
+void PageManager::StackClear()
 {
     /*检查页面是否忙碌*/
     if(IsPageBusy)
@@ -223,6 +211,16 @@ void PageManager::PageStackClear()
     }
     /*栈顶指针复位*/
     PageStackTop = 0;
+}
+
+/**
+  * @brief  获取当前页面名称
+  * @param  无
+  * @retval 页面名称
+  */
+const char* PageManager::GetCurrentName()
+{
+    return PageList[NowPage].Name;
 }
 
 /**
@@ -239,8 +237,10 @@ void PageManager::Running()
         IsPageBusy = true;
 
         /*触发旧页面退出事件*/
-        if(PageList[OldPage].ExitCallback != NULL && IS_PAGE(OldPage))
-            PageList[OldPage].ExitCallback();
+        if (PageList[OldPage].Callback != NULL)
+        {
+            PageList[OldPage].Callback(this, MSG_Exit);
+        }
         
         /*标记旧页面*/
         LastPage = OldPage;
@@ -249,19 +249,21 @@ void PageManager::Running()
         NowPage = NewPage;
 
         /*触发新页面初始化事件*/
-        if(PageList[NewPage].SetupCallback != NULL && IS_PAGE(NewPage))
-            PageList[NewPage].SetupCallback();
+        if (PageList[NewPage].Callback != NULL)
+        {
+            PageList[NewPage].Callback(this, MSG_Setup);
+        }
 
         /*新页面初始化完成，标记为旧页面*/
         OldPage = NewPage;
-    }
-    else
-    {
+
         /*标记页面不忙碌，处于循环状态*/
         IsPageBusy = false;
-        
-        /*页面循环事件*/
-        if(PageList[NowPage].LoopCallback != NULL && IS_PAGE(NowPage))
-            PageList[NowPage].LoopCallback();
     }
+   
+    /*页面循环事件*/
+    if (PageList[NowPage].Callback != NULL)
+    {
+        PageList[NowPage].Callback(this, MSG_Loop);
+    }   
 }

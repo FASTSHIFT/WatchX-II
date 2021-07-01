@@ -42,6 +42,7 @@ void TIMx_OCxInit(TIM_TypeDef* TIMx, uint16_t arr, uint16_t psc, uint8_t TimerCh
     
     Timer_ClockCmd(TIMx, ENABLE);
 
+    TMR_TimeBaseStructInit(&TMR_TimeBaseStructure);
     TMR_TimeBaseStructure.TMR_Period = arr;
     TMR_TimeBaseStructure.TMR_DIV = psc;
     TMR_TimeBaseStructure.TMR_ClockDivision = TMR_CKD_DIV1;

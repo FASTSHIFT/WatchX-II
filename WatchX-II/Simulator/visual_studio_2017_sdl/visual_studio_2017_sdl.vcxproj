@@ -77,7 +77,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;$(ProjectDir)..\..\WatchX\Game\ArduinoLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -92,7 +92,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;$(ProjectDir)..\..\WatchX\Game\ArduinoLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -140,6 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Libraries\EEPROM_File\EEPROM_File.cpp" />
+    <ClCompile Include="..\..\Libraries\Evaluate\evaluate.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_group.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_core\lv_indev.c" />
@@ -161,6 +163,7 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_dejavu_16_persian_hebrew.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_fmt_txt.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_loader.c" />
+    <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_10.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_12.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_12_subpx.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_14.c" />
@@ -182,6 +185,7 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_44.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_46.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_48.c" />
+    <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_montserrat_8.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_simsun_16_cjk.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_font\lv_font_unscii_8.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_hal\lv_hal_disp.c" />
@@ -244,48 +248,143 @@
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_textarea.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_tileview.c" />
     <ClCompile Include="..\..\Libraries\lvgl\src\lv_widgets\lv_win.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_alpha16.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_argb.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_chroma_keyed.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_indexed16.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_cogwheel_rgb.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\img_hand.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_12_compr_az.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_16_compr_az.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\assets\lv_font_montserrat_28_compr_az.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.c" />
+    <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.c" />
+    <ClCompile Include="..\..\Libraries\Matrix\matrixLib.c" />
+    <ClCompile Include="..\..\Libraries\Matrix\MemManager.c" />
     <ClCompile Include="..\..\Libraries\PageManager\PageManager.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\ab_logo.c" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Audio.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Beep.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2Core.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\glcdfont.c" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\Sprites.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy2\SpritesB.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\Arduboy.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\audio\audio.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Arduboy\core\core.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Arduino.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\dtostrf.c" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Print.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\Stream.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\WMath.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\ArduinoLib\WString.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\GameDisp.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\GameManager.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Arduboy3D.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Draw.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Enemy.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Entity.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\FixedMath.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Font.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Game.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Map.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\MapGenerator.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Menu.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Particle.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Player.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Projectile.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\Arduboy3D\Sounds.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\chribocchi.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\game.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\logo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\MyArduboy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Games\chribocchi\title.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\Game\Page_Game.cpp" />
+    <ClCompile Include="..\..\WatchX\Game\Page_GameSelect.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayAppWin.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayBasic.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayPage.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\DisplayStatusBar.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_16.c" />
+    <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_20.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_28.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_50.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_28.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_68.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_89.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AlbumArt.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow2.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Backward.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Bluetooth.c" />
-    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CalcBG.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Calculator.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CHNSecond.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_DialPlate.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Down.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_FileExplorer.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Forward.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Game.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Heart.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartRate.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartrateTinyheart.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Music.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Power.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Settings.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Sleep.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_SleepRect.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Sport.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Stop.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Stopwatch.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchAdd.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchPause.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchReset.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchStart.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_TinyStep.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_UP.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_VOLDown.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_VOLUP.c" />
+    <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.c" />
+    <ClCompile Include="..\..\WatchX\GUI\lv_port\lv_fs_if.c" />
+    <ClCompile Include="..\..\WatchX\GUI\lv_port\lv_fs_pc.c" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_BacklightSet.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Calculator.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_DialPlate.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_EXAMPLE.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Game2048.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_HeartRate.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_MainMenu.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Music.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Settings.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Sleep.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Sport.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Stopwatch.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_TimeSet.cpp" />
     <ClCompile Include="BSP\BSP_Backlight.cpp" />
+    <ClCompile Include="BSP\BSP_Clock.cpp" />
     <ClCompile Include="BSP\BSP_IMU.cpp" />
     <ClCompile Include="BSP\BSP_ParticleSensor.cpp" />
     <ClCompile Include="BSP\BSP_Power.cpp" />
-    <ClCompile Include="BSP\rtc.c" />
     <ClCompile Include="lv_drivers\display\fbdev.c" />
     <ClCompile Include="lv_drivers\display\monitor.c" />
     <ClCompile Include="lv_drivers\display\R61581.c" />
@@ -305,10 +404,14 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Libraries\EEPROM_File\EEPROM_File.h" />
+    <ClInclude Include="..\..\Libraries\Evaluate\evaluate.h" />
     <ClInclude Include="..\..\Libraries\lvgl\lvgl.h" />
+    <ClInclude Include="..\..\Libraries\lvgl\lv_conf_template.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lvgl.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_api_map.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_conf_internal.h" />
+    <ClInclude Include="..\..\Libraries\lvgl\src\lv_conf_kconfig.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_disp.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_group.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_core\lv_indev.h" />
@@ -395,16 +498,78 @@
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_widgets\lv_tileview.h" />
     <ClInclude Include="..\..\Libraries\lvgl\src\lv_widgets\lv_win.h" />
     <ClInclude Include="..\..\Libraries\lv_conf.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.h" />
+    <ClInclude Include="..\..\Libraries\lv_examples\src\lv_examples.h" />
+    <ClInclude Include="..\..\Libraries\lv_ex_conf.h" />
+    <ClInclude Include="..\..\Libraries\Matrix\matrix.h" />
+    <ClInclude Include="..\..\Libraries\Matrix\MM.h" />
     <ClInclude Include="..\..\Libraries\PageManager\PageManager.h" />
     <ClInclude Include="..\..\WatchX\Basic\CommonMacro.h" />
     <ClInclude Include="..\..\WatchX\Basic\FileGroup.h" />
     <ClInclude Include="..\..\WatchX\Basic\SysConfig.h" />
     <ClInclude Include="..\..\WatchX\BSP\BSP.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Audio.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Beep.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Arduboy2Core.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\Sprites.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\SpritesB.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy2\SpritesCommon.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTones.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduboyTones\ArduboyTonesPitches.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\Arduboy.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\audio\audio.h" />
+    <ClInclude Include="..\..\WatchX\Game\Arduboy\core\core.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Arduino.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\binary.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\dtostrf.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Print.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Printable.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\Stream.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WCharacter.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\wirish_math.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WMath.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WProgram.h" />
+    <ClInclude Include="..\..\WatchX\Game\ArduinoLib\WString.h" />
+    <ClInclude Include="..\..\WatchX\Game\GameDisp.h" />
+    <ClInclude Include="..\..\WatchX\Game\GamePrivate.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Defines.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Draw.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Enemy.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Entity.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\FixedMath.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Font.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Game.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Generated\SpriteData.inc.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Generated\SpriteTypes.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Images.inc.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\LUT.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Map.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\MapGenerator.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Menu.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Particle.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Platform.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Player.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Projectile.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Sounds.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\Arduboy3D\Textures.h" />
+    <ClInclude Include="..\..\WatchX\Game\Games\chribocchi\common.h">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\WatchX\Game\Games\chribocchi\MyArduboy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\..\WatchX\GUI\DisplayPrivate.h" />
+    <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.h" />
     <ClInclude Include="..\..\WatchX\GUI\lv_ext\lv_theme_watchx.h" />
-    <ClInclude Include="BSP\rtc.h" />
+    <ClInclude Include="..\..\WatchX\GUI\lv_port\lv_fs_if.h" />
     <ClInclude Include="lv_drivers\display\fbdev.h" />
     <ClInclude Include="lv_drivers\display\monitor.h" />
     <ClInclude Include="lv_drivers\display\R61581.h" />
@@ -508,10 +673,23 @@
     <ClInclude Include="SDL2\include\SDL_vulkan.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Libraries\lvgl\CHANGELOG.md" />
+    <None Include="..\..\Libraries\lvgl\lvgl.mk" />
+    <None Include="..\..\Libraries\lvgl\README.md" />
+    <None Include="..\..\Libraries\lvgl\src\lv_core\lv_core.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_draw\lv_draw.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_font\lv_font.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_hal\lv_hal.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_misc\lv_misc.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_themes\lv_themes.mk" />
+    <None Include="..\..\Libraries\lvgl\src\lv_widgets\lv_widgets.mk" />
     <None Include="SDL2.dll" />
     <None Include="SDL2\include\SDL_config.h.cmake" />
     <None Include="SDL2\include\SDL_config.h.in" />
     <None Include="SDL2\include\SDL_config_macosx.h.orig" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Libraries\lvgl\LICENCE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

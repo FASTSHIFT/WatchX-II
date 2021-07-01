@@ -1,5 +1,6 @@
 #include "Basic/FileGroup.h"
 #include "GUI/DisplayPrivate.h"
+#include "Evaluate/evaluate.h"
 
 PAGE_EXPORT(Calculator);
 
@@ -8,39 +9,40 @@ static lv_obj_t* textareaClac;
 
 static const lv_coord_t Btn_Height = 35;
 static const lv_coord_t Btn_Width  = 60;
-static const lv_color_t Btn_ColorBlue   = LV_COLOR_MAKE(0x65, 0xBA, 0xF7);
-static const lv_color_t Btn_ColorYellow = LV_COLOR_MAKE(0xFB, 0xB0, 0x3B);
-static const lv_color_t Btn_ColorWhite  = LV_COLOR_WHITE;
+static const lv_color_t Btn_ColorBlue   = LV_COLOR_MAKE(0x66, 0x99, 0xff);
+static const lv_color_t Btn_ColorOrange = LV_COLOR_MAKE(0xff, 0xcc, 0x33);
+static const lv_color_t Btn_ColorYellow = LV_COLOR_MAKE(0xff, 0x99, 0x00);
+static const lv_color_t Btn_ColorWhite  = LV_COLOR_MAKE(0xff, 0xff, 0xff);
 
 typedef struct
 {
     const char* text;
-    lv_color_t color;
+    const lv_color_t color;
 } BtnGrp_TypeDef;
 
 static const BtnGrp_TypeDef BtnGrp[] =
 {
     {"C",   Btn_ColorYellow},
-    {"*",   Btn_ColorBlue  },
-    {"/",   Btn_ColorBlue  },
+    {"*",   Btn_ColorOrange  },
+    {"/",   Btn_ColorOrange  },
     {"Del", Btn_ColorYellow},
 
     {"7",   Btn_ColorWhite },
     {"8",   Btn_ColorWhite },
     {"9",   Btn_ColorWhite },
-    {"-",   Btn_ColorBlue  },
+    {"-",   Btn_ColorOrange  },
 
     {"4",   Btn_ColorWhite },
     {"5",   Btn_ColorWhite },
     {"6",   Btn_ColorWhite },
-    {"+",   Btn_ColorBlue  },
+    {"+",   Btn_ColorOrange  },
 
     {"1",   Btn_ColorWhite },
     {"2",   Btn_ColorWhite },
     {"3",   Btn_ColorWhite },
-    {"%",   Btn_ColorBlue  },
+    {"%",   Btn_ColorOrange  },
 
-    {"Ans", Btn_ColorBlue  },
+    {"Ans", Btn_ColorOrange  },
     {"0",   Btn_ColorWhite },
     {".",   Btn_ColorWhite },
     {"=",   Btn_ColorYellow},
@@ -48,21 +50,63 @@ static const BtnGrp_TypeDef BtnGrp[] =
 
 static void BtnGrp_EventHandler(lv_obj_t* obj, lv_event_t event)
 {
-    const char* text = lv_obj_get_style_value_str(obj, LV_BTN_PART_MAIN);
+    static char last_ans[128] = "\0";
+#   define IS_STR(txt, str) (strcmp((txt), (str)) == 0)
 
     if(event == LV_EVENT_CLICKED || event == LV_EVENT_LONG_PRESSED_REPEAT)
     {
-        if(strcmp(text, "C") == 0)
+        const char* btn_text = lv_obj_get_style_value_str(obj, LV_BTN_PART_MAIN);
+        const char* ta_text = lv_textarea_get_text(textareaClac);
+
+        if (IS_STR(ta_text, "Error Format"))
         {
             lv_textarea_set_text(textareaClac, "");
         }
-        else if(strcmp(text, "Del") == 0)
+
+        if (IS_STR(btn_text, "C"))
+        {
+            lv_textarea_set_text(textareaClac, "");
+        }
+        else if(IS_STR(btn_text, "Del"))
         {
             lv_textarea_del_char(textareaClac);
         }
+        else if (IS_STR(btn_text, "Ans"))
+        {
+            lv_textarea_add_text(textareaClac, last_ans);
+        }
+        else if (IS_STR(btn_text, "=") || IS_STR(btn_text, "%"))
+        {   
+            if (IS_STR(ta_text, ""))
+            {
+                return;
+            }
+
+            bool is_persent = IS_STR(btn_text, "%");
+
+            evaluate_run_expression(ta_text, is_persent);
+            char result[128];
+            evaluate_get_result(result, sizeof(result));
+
+            
+            if (result[0] >= '0' && result[0] <= '9')
+            {
+                strncpy(last_ans, result, sizeof(last_ans));
+            }
+
+            lv_textarea_set_text(textareaClac, result);
+        }
         else
         {
-            lv_textarea_add_text(textareaClac, text);
+            uint32_t len = strlen(ta_text);
+            if (len >= 1)
+            {
+                if (ta_text[len - 1] == '/' && IS_STR(btn_text, "0"))
+                {
+                    return;
+                }
+            }
+            lv_textarea_add_text(textareaClac, btn_text);
         }
     }
 }
@@ -123,22 +167,20 @@ static void TextareaCalc_Create(lv_obj_t* par)
     textareaClac = textarea;
 }
 
-static void PagePlayAnim(bool open)
+static void PagePlayAnim(bool playback = false)
 {
-    lv_coord_t y_target = open ? lv_obj_get_y(contBtnGrp) : APP_WIN_HEIGHT;
-    lv_opa_t opa_target = open ? LV_OPA_COVER : LV_OPA_TRANSP;
-    if(open)
-    {
-        lv_obj_set_y(contBtnGrp, APP_WIN_HEIGHT);
-        lv_obj_set_opa_scale(textareaClac, LV_OPA_TRANSP);
-    }
-    else
+    lv_anim_timeline_t anim_timeline[] = {
+        {0, contBtnGrp,   LV_ANIM_EXEC(y),         APP_WIN_HEIGHT, lv_obj_get_y(contBtnGrp), LV_ANIM_TIME_DEFAULT, lv_anim_path_ease_out},
+        {0, textareaClac, LV_ANIM_EXEC(opa_scale), LV_OPA_TRANSP,  LV_OPA_COVER,             LV_ANIM_TIME_DEFAULT, lv_anim_path_ease_in_out},
+    };
+
+    if(playback)
     {
         lv_textarea_set_cursor_hidden(textareaClac, true);
     }
     
-    LV_OBJ_ADD_ANIM(contBtnGrp, y, y_target, LV_ANIM_TIME_DEFAULT);
-    LV_OBJ_ADD_ANIM(textareaClac, opa_scale, opa_target, LV_ANIM_TIME_DEFAULT);
+    uint32_t playtime = lv_anim_timeline_start(anim_timeline, __Sizeof(anim_timeline), playback);
+    PageDelay(playtime);
 }
 
 /**
@@ -154,7 +196,7 @@ static void Setup()
     ContBtnGrp_Create(appWindow);
     BtnGrp_Create(contBtnGrp);
     TextareaCalc_Create(appWindow);
-    PagePlayAnim(true);
+    PagePlayAnim();
 }
 
 /**
@@ -164,8 +206,7 @@ static void Setup()
   */
 static void Exit()
 {
-    PagePlayAnim(false);
-    PageDelay(LV_ANIM_TIME_DEFAULT);
+    PagePlayAnim(true);
     lv_obj_clean(appWindow);
 }
 
@@ -181,7 +222,7 @@ static void Event(void* obj, uint8_t event)
     {
         if(event == LV_GESTURE_DIR_BOTTOM)
         {
-            Page->PagePop();
+            Page->Pop();
         }
     }
 }

@@ -15,6 +15,8 @@ extern "C" {
  *********************/
 #include "lvgl/src/lv_conf_internal.h"
 
+#define LV_USE_THEME_WATCHX      1
+
 #if LV_USE_THEME_WATCHX
 
 /*********************

@@ -10,10 +10,9 @@ void IMU_Init(void)
 
 void IMU_Update()
 {
-    stepCnt++;
 }
 
 int16_t IMU_GetSteps()
 {
-    return stepCnt;
+    return stepCnt++;
 }

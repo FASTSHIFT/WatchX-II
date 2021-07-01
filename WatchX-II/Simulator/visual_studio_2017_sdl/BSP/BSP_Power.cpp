@@ -10,7 +10,7 @@ static uint16_t Power_AutoLowPowerTimeout = 60;
 /*自动关机功能使能*/
 static bool Power_AutoLowPowerEnable = true;
 
-static uint16_t Power_ADCValue = 0;
+static uint16_t Power_ADCValue = 3000;
 
 /**
   * @brief  电源初始化
@@ -81,9 +81,7 @@ void Power_Shutdown()
   * @retval 无
   */
 void Power_Update()
-{
-    Power_ADCValue = 4095 / 2;
-    
+{    
     if(!Power_AutoLowPowerEnable)
         return;
     
@@ -98,7 +96,7 @@ void Power_Update()
 
 uint8_t Power_GetBattUsage()
 {
-    int voltage = __Map(
+    /*int voltage = __Map(
         Power_ADCValue,
         0, 4095,
         0, 3300
@@ -112,9 +110,9 @@ uint8_t Power_GetBattUsage()
         voltage,
         3000, 4100,
         0, 100
-    );
+    );*/
     
-    return usage;
+    return 100;
 }
 
 bool Power_GetBattIsCharging()
