@@ -33,7 +33,7 @@ void WatchX_Init()
 
 #if (WX_USE_BUILT_IN_I2C != 0)
     extern void I2C_Scan(bool startScan);
-    I2C_Scan(true);
+        I2C_Scan(true);
     I2Cx_Init(SENSOR_I2C, 100 * 1000);
 #else
     ComMaster_Init();

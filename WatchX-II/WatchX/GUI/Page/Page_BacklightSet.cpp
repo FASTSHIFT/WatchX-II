@@ -5,7 +5,7 @@ PAGE_EXPORT(BacklightSet);
 
 static lv_obj_t* sliderBacklight;
 static lv_obj_t* labelBacklight;
-
+static lv_obj_t* confirmBtn;
 static void SliderBacklight_EventHandler(lv_obj_t* obj, lv_event_t event)
 {
     if (event == LV_EVENT_VALUE_CHANGED)
@@ -14,6 +14,34 @@ static void SliderBacklight_EventHandler(lv_obj_t* obj, lv_event_t event)
         lv_label_set_text_fmt(labelBacklight, "%d%%", val);
         Backlight_SetGradual(val * 10, 200);
     }
+}
+
+static void BtnGrp_EventHandler(lv_obj_t* obj, lv_event_t event)
+{
+    if (event == LV_EVENT_CLICKED)
+    {
+        if (obj == confirmBtn)
+        {
+            Page->Pop();
+        }
+    }
+}
+
+static void ConfirmButton_Create(lv_obj_t* par)
+{
+    lv_obj_t* btn = lv_btn_create(par, NULL);
+    lv_obj_set_size(btn, 100, 45);
+    lv_obj_set_style_local_bg_color(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, lv_color_make(0x00, 0x89, 0xff));
+    lv_obj_set_style_local_border_width(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, 0);
+    lv_obj_set_style_local_radius(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, 8);
+    lv_obj_align(btn, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, -15);
+    lv_obj_t* label = lv_label_create(btn, NULL);
+    lv_obj_set_style_local_text_font(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &Font_MicrosoftYaHei_28);
+    lv_label_set_text(label, "OK");
+    lv_obj_set_style_local_text_decor(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_TEXT_DECOR_NONE);
+
+    lv_obj_set_event_cb(btn, BtnGrp_EventHandler);
+    confirmBtn = btn;
 }
 
 static void SliderBacklight_Create(lv_obj_t* par)
@@ -27,7 +55,7 @@ static void SliderBacklight_Create(lv_obj_t* par)
     lv_obj_set_style_local_radius(slider, LV_SLIDER_PART_BG, LV_STATE_DEFAULT, 4);
     lv_obj_set_style_local_bg_color(slider, LV_SLIDER_PART_KNOB, LV_STATE_DEFAULT, lv_color_make(0x00, 0x89, 0xff));
     lv_obj_set_style_local_border_color(slider, LV_SLIDER_PART_KNOB, LV_STATE_DEFAULT, lv_color_make(0x00, 0x89, 0xff));
-    lv_obj_align(slider, NULL, LV_ALIGN_CENTER, 0, 0);
+    lv_obj_align(slider, NULL, LV_ALIGN_CENTER, 0, -20);
     lv_obj_set_event_cb(slider, SliderBacklight_EventHandler);
     lv_slider_set_range(slider, 0, 100);
     lv_slider_set_value(slider, Backlight_GetValue() / 10, LV_ANIM_OFF);
@@ -53,6 +81,7 @@ static void PagePlayAnim(bool playback = false)
     {
         ANIM_Y_REV_DEF(0, sliderBacklight),
         ANIM_Y_REV_DEF(0, labelBacklight),
+        ANIM_Y_REV_DEF(0, confirmBtn),
     };
 
     uint32_t playtime = lv_anim_timeline_start(anim_timeline, __Sizeof(anim_timeline), playback);
@@ -65,6 +94,7 @@ static void Setup()
 {
     lv_obj_move_foreground(appWindow);
     SliderBacklight_Create(appWindow);
+    ConfirmButton_Create(appWindow);
     PagePlayAnim(false);
 }
 
@@ -76,11 +106,15 @@ static void Exit()
 
 static void Event(void* obj, uint8_t event)
 {
-    if (obj == lv_scr_act())
+    //if (obj == lv_scr_act())
+    //{
+    //    if (event == LV_GESTURE_DIR_TOP || event == LV_GESTURE_DIR_BOTTOM)
+    //    {
+    //        Page->Pop();
+    //    }
+    //}
+    if (event == LV_EVENT_LEAVE)
     {
-        if (event == LV_GESTURE_DIR_TOP || event == LV_GESTURE_DIR_BOTTOM)
-        {
-            Page->Pop();
-        }
+        Page->Pop();
     }
 }

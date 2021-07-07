@@ -78,8 +78,7 @@ static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
     {
         AppClickAnim(img, false);
     }
-
-    if(event == LV_EVENT_CLICKED)
+    else if(event == LV_EVENT_SHORT_CLICKED)
     {
         uint8_t pageID = appIcon->pageID;
 
@@ -106,6 +105,19 @@ static void AppICON_EventHandler(lv_obj_t* obj, lv_event_t event)
         {
             Page->Push(PAGE_Game);
         }
+        else if (pageID == PAGE_Sleep)
+        {
+            Page->Push(PAGE_Sleep);
+        }
+        else if (pageID == PAGE_Music)
+        {
+            Page->Push(PAGE_Music);
+        }
+        else if (pageID == PAGE_Sport)
+        {
+            Page->Push(PAGE_Sport);
+        }
+
     }
 }
 
@@ -318,5 +330,10 @@ static void Event(void* obj, uint8_t event)
         {
             Page->Pop();
         }
+    }
+
+    if (event == LV_EVENT_LEAVE)
+    {
+        Page->Pop();
     }
 }

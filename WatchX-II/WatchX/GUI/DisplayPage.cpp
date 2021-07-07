@@ -1,7 +1,7 @@
 #include "GUI/DisplayPrivate.h"
 
 /*实例化页面调度器*/
-static PageManager page(PAGE_MAX);
+PageManager page(PAGE_MAX);
 
 /*页面导入*/
 #define PAGE_IMPORT(name)\
@@ -35,9 +35,12 @@ void DisplayPage_Init()
     PAGE_IMPORT(TimeSet);         //时间设置
     PAGE_IMPORT(BacklightSet);    //背光设置
     PAGE_IMPORT(Game);            //游戏
-
+    PAGE_IMPORT(Sleep);           //睡眠
+    PAGE_IMPORT(Music);     //音乐播放器
+    PAGE_IMPORT(Sport);     //运动
+    PAGE_IMPORT(Game2048);
     page.Push(PAGE_DialPlate);    //进入第一个页面
-    
+    //page.Push(PAGE_Game2048);
     lv_obj_set_event_cb(lv_scr_act(), page_gestute_event_cb);
 }
 

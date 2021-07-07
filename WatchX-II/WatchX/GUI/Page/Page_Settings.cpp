@@ -124,4 +124,8 @@ static void Event(void* obj, uint8_t event)
             Page->Pop();
         }
     }
+    if (event == LV_EVENT_LEAVE)
+    {
+        Page->Pop();
+    }
 }

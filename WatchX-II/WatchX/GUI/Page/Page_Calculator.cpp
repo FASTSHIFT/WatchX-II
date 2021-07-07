@@ -9,9 +9,10 @@ static lv_obj_t* textareaClac;
 
 static const lv_coord_t Btn_Height = 35;
 static const lv_coord_t Btn_Width  = 60;
-static const lv_color_t Btn_ColorBlue   = LV_COLOR_MAKE(0x65, 0xBA, 0xF7);
-static const lv_color_t Btn_ColorYellow = LV_COLOR_MAKE(0xFB, 0xB0, 0x3B);
-static const lv_color_t Btn_ColorWhite  = LV_COLOR_WHITE;
+static const lv_color_t Btn_ColorBlue   = LV_COLOR_MAKE(0x66, 0x99, 0xff);
+static const lv_color_t Btn_ColorOrange = LV_COLOR_MAKE(0xff, 0xcc, 0x33);
+static const lv_color_t Btn_ColorYellow = LV_COLOR_MAKE(0xff, 0x99, 0x00);
+static const lv_color_t Btn_ColorWhite  = LV_COLOR_MAKE(0xff, 0xff, 0xff);
 
 typedef struct
 {
@@ -22,26 +23,26 @@ typedef struct
 static const BtnGrp_TypeDef BtnGrp[] =
 {
     {"C",   Btn_ColorYellow},
-    {"*",   Btn_ColorBlue  },
-    {"/",   Btn_ColorBlue  },
+    {"*",   Btn_ColorOrange  },
+    {"/",   Btn_ColorOrange  },
     {"Del", Btn_ColorYellow},
 
     {"7",   Btn_ColorWhite },
     {"8",   Btn_ColorWhite },
     {"9",   Btn_ColorWhite },
-    {"-",   Btn_ColorBlue  },
+    {"-",   Btn_ColorOrange  },
 
     {"4",   Btn_ColorWhite },
     {"5",   Btn_ColorWhite },
     {"6",   Btn_ColorWhite },
-    {"+",   Btn_ColorBlue  },
+    {"+",   Btn_ColorOrange  },
 
     {"1",   Btn_ColorWhite },
     {"2",   Btn_ColorWhite },
     {"3",   Btn_ColorWhite },
-    {"%",   Btn_ColorBlue  },
+    {"%",   Btn_ColorOrange  },
 
-    {"Ans", Btn_ColorBlue  },
+    {"Ans", Btn_ColorOrange  },
     {"0",   Btn_ColorWhite },
     {".",   Btn_ColorWhite },
     {"=",   Btn_ColorYellow},
@@ -223,5 +224,9 @@ static void Event(void* obj, uint8_t event)
         {
             Page->Pop();
         }
+    }
+    if (event == LV_EVENT_LEAVE)
+    {
+        Page->Pop();
     }
 }

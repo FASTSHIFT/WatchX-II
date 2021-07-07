@@ -31,6 +31,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -44,6 +45,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <EnableASAN>false</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -70,7 +72,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -79,6 +86,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;$(ProjectDir)..\..\WatchX\Game\ArduinoLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)\SDL2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -94,6 +102,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)SDL2\include;$(ProjectDir)..\..\Libraries;$(ProjectDir)..\..\WatchX;$(ProjectDir)..\..\WatchX\Game\ArduinoLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -260,6 +269,8 @@
     <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_benchmark\lv_demo_benchmark.c" />
     <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_stress\lv_demo_stress.c" />
     <ClCompile Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.c" />
+    <ClCompile Include="..\..\Libraries\Matrix\matrixLib.c" />
+    <ClCompile Include="..\..\Libraries\Matrix\MemManager.c" />
     <ClCompile Include="..\..\Libraries\PageManager\PageManager.cpp" />
     <ClCompile Include="..\..\WatchX\Game\Arduboy2\ab_logo.c" />
     <ClCompile Include="..\..\WatchX\Game\Arduboy2\Arduboy2.cpp" />
@@ -322,18 +333,23 @@
     <ClCompile Include="..\..\WatchX\GUI\DisplayPage.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\DisplayStatusBar.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_16.c" />
+    <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_20.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_28.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_50.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_28.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_68.c" />
     <ClCompile Include="..\..\WatchX\GUI\Font\Font_RexBold_89.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AlbumArt.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AppShadow2.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Backward.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Bluetooth.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Calculator.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_CHNSecond.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_DialPlate.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Down.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_FileExplorer.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Forward.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Game.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Heart.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_HeartRate.c" />
@@ -342,12 +358,18 @@
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Power.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Settings.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Sleep.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_SleepRect.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Sport.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Stop.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Stopwatch.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchAdd.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchPause.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchReset.c" />
     <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_StopwatchStart.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_TinyStep.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_UP.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_VOLDown.c" />
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_VOLUP.c" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_anim_timeline.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_label_anim_effect.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\lv_ext\lv_obj_ext_func.cpp" />
@@ -358,9 +380,13 @@
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Calculator.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_DialPlate.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_EXAMPLE.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Game2048.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_HeartRate.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_MainMenu.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Music.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Settings.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Sleep.cpp" />
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Sport.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_Stopwatch.cpp" />
     <ClCompile Include="..\..\WatchX\GUI\Page\Page_TimeSet.cpp" />
     <ClCompile Include="BSP\BSP_Backlight.cpp" />
@@ -486,6 +512,8 @@
     <ClInclude Include="..\..\Libraries\lv_examples\src\lv_demo_widgets\lv_demo_widgets.h" />
     <ClInclude Include="..\..\Libraries\lv_examples\src\lv_examples.h" />
     <ClInclude Include="..\..\Libraries\lv_ex_conf.h" />
+    <ClInclude Include="..\..\Libraries\Matrix\matrix.h" />
+    <ClInclude Include="..\..\Libraries\Matrix\MM.h" />
     <ClInclude Include="..\..\Libraries\PageManager\PageManager.h" />
     <ClInclude Include="..\..\WatchX\Basic\CommonMacro.h" />
     <ClInclude Include="..\..\WatchX\Basic\FileGroup.h" />

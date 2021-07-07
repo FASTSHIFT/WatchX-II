@@ -6,7 +6,7 @@
 #define WX_SOFTWARE_VERSION "v0.8"       //软件版本
 
 /*使用内置I2C读取传感器*/
-#define WX_USE_BUILT_IN_I2C 0
+#define WX_USE_BUILT_IN_I2C 1
 
 /*空引脚*/
 #define NULL_PIN            PD0

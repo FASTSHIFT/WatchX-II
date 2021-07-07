@@ -30,11 +30,11 @@ typedef struct {
     lv_coord_t x_mod;
     lv_coord_t y_mod;
 }BtnCfg_TypeDef;
-#define BTN_SIZE 40
+#define BTN_SIZE 48
 static const BtnCfg_TypeDef btnCfg[GAME_BUTTON_MAX] =
 {
-    {"A",  LV_ALIGN_IN_BOTTOM_RIGHT, -30, -100},
-    {"B",  LV_ALIGN_IN_BOTTOM_RIGHT, -30, -40},
+    {"A",  LV_ALIGN_IN_BOTTOM_RIGHT, -20, -90},
+    {"B",  LV_ALIGN_IN_BOTTOM_RIGHT, -20, -30},
     {"U",  LV_ALIGN_IN_TOP_MID,        0,  5},
     {"D",  LV_ALIGN_IN_BOTTOM_MID,     0,  -5},
     {"L",  LV_ALIGN_IN_LEFT_MID,       5,  0},
@@ -64,7 +64,8 @@ static void ButtonGrp_Create(lv_obj_t* par)
     lv_obj_t* contBtn = lv_obj_create(par, NULL);
     lv_obj_set_size(contBtn, BTN_SIZE * 3 + 10, BTN_SIZE * 3 + 10);
     lv_obj_set_style_local_radius(contBtn, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 5);
-    lv_obj_align(contBtn, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 20, -10);
+    lv_obj_set_style_local_border_width(contBtn, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, 0);
+    lv_obj_align(contBtn, NULL, LV_ALIGN_IN_BOTTOM_LEFT, 10, -5);
 
     contBtnGrp = contBtn;
 
@@ -74,12 +75,16 @@ static void ButtonGrp_Create(lv_obj_t* par)
 
         lv_obj_set_size(btn, BTN_SIZE, BTN_SIZE);
         lv_obj_align(btn, NULL, btnCfg[i].align, btnCfg[i].x_mod, btnCfg[i].y_mod);
-        lv_obj_set_style_local_radius(btn, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, 3);
+        lv_obj_set_style_local_bg_color(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x66, 0xff, 0x99));
+        lv_obj_set_style_local_bg_color(btn, LV_BTN_PART_MAIN, LV_STATE_PRESSED, LV_COLOR_MAKE(0x33, 0x99, 0x99));
+        lv_obj_set_style_local_radius(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, 8);
+        lv_obj_set_style_local_border_color(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+        lv_obj_set_style_local_border_width(btn, LV_BTN_PART_MAIN, LV_STATE_DEFAULT, 0);
         lv_obj_set_event_cb(btn, ButtonGrp_EventHandler);
 
         lv_obj_t* label = lv_label_create(btn, NULL);
         lv_label_set_text(label, btnCfg[i].sym);
-
+        lv_obj_set_style_local_text_color(label,LV_LABEL_PART_MAIN,LV_STATE_DEFAULT,LV_COLOR_BLACK);
         lv_obj_set_opa_scale(btn, LV_OPA_TRANSP);
         
         btnGrp[i] = btn;
@@ -130,7 +135,7 @@ static void ContGameDisp_Create(lv_obj_t* par)
     lv_obj_t* cont = lv_cont_create(par, NULL);
     lv_obj_set_size(cont, GAME_DISP_WIDTH + 4, GAME_DISP_HEIGHT + 4);
     lv_obj_align(cont, NULL, LV_ALIGN_IN_TOP_MID, 0, 10);
-
+    lv_obj_set_style_local_border_color(cont, LV_CONT_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_MAKE(0x33, 0x99, 0x99));
     contGameDisp = cont;
 }
 
@@ -143,7 +148,7 @@ static void LED_Create(lv_obj_t* par)
         lv_obj_set_style_local_border_width(led, LV_LED_PART_MAIN, LV_STATE_DEFAULT, 0);
         lv_obj_set_size(led, 10, 10);
         lv_obj_set_opa_scale(led, LV_OPA_TRANSP);
-        lv_obj_align(led, contGameDisp, LV_ALIGN_OUT_BOTTOM_MID, ledGrp[i].x_ofs, 5);
+        lv_obj_align(led, contGameDisp, LV_ALIGN_OUT_LEFT_MID,  -10,ledGrp[i].x_ofs);
         lv_led_off(led);
         ledGrp[i].led = led;
     }
@@ -162,7 +167,7 @@ void Game_SetLEDBright(uint8_t led_id, uint8_t val)
 {
     if(led_id < GAME_LED_MAX && ledGrp[led_id].led != NULL)
     {
-        lv_obj_t* led = ledGrp[led_id].led;
+        lv_obj_t* led = ledGrp[led_id].led; 
         lv_led_set_bright(led, val);
     }
 }
@@ -238,5 +243,9 @@ static void Event(void* obj, uint8_t event)
         {
             Page->Pop();
         }
+    }
+    if (event == LV_EVENT_LEAVE)
+    {
+        Page->Pop();
     }
 }

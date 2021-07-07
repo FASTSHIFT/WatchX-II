@@ -641,6 +641,26 @@
               <FileType>8</FileType>
               <FilePath>..\WatchX\GUI\Page\Page_BacklightSet.cpp</FilePath>
             </File>
+            <File>
+              <FileName>Page_Music.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Music.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Page_Sleep.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Sleep.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Page_Sport.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Sport.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>Page_Game2048.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\WatchX\GUI\Page\Page_Game2048.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -801,6 +821,56 @@
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\IMG\IMG_AppShadow2.c</FilePath>
             </File>
+            <File>
+              <FileName>IMG_AlbumArt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_AlbumArt.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Backward.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Backward.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Down.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Down.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Forward.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Forward.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_SleepRect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_SleepRect.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_UP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_UP.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_VOLDown.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_VOLDown.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_VOLUP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_VOLUP.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_Stop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_Stop.c</FilePath>
+            </File>
+            <File>
+              <FileName>IMG_TinyStep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\IMG\IMG_TinyStep.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -830,6 +900,11 @@
               <FileName>Font_MicrosoftYaHei_16.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_16.c</FilePath>
+            </File>
+            <File>
+              <FileName>Font_MicrosoftYaHei_20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\WatchX\GUI\Font\Font_MicrosoftYaHei_20.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1555,6 +1630,16 @@
               <FileName>evaluate.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Libraries\Evaluate\evaluate.c</FilePath>
+            </File>
+            <File>
+              <FileName>matrixLib.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\Matrix\matrixLib.c</FilePath>
+            </File>
+            <File>
+              <FileName>MemManager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Libraries\Matrix\MemManager.c</FilePath>
             </File>
           </Files>
         </Group>

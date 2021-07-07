@@ -65,6 +65,7 @@ static void BtnGrp_EventHandler(lv_obj_t* obj, lv_event_t event)
             clock.sec = lv_roller_get_selected(rollerTimeGrp[2].roller);
             
             Clock_SetValue(&clock);
+            Page->Pop();
         }
         else if (obj == switchBtn)
         {
@@ -278,5 +279,9 @@ static void Event(void* obj, uint8_t event)
         {
             Page->Pop();
         }
+    }
+    if (event == LV_EVENT_LEAVE)
+    {
+        Page->Pop();
     }
 }

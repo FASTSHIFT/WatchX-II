@@ -23,6 +23,7 @@ void Display_Update();
 
 /*Page*/
 #include "PageManager/PageManager.h"
+extern PageManager page;
 typedef enum
 {
     /*保留*/
@@ -42,6 +43,7 @@ typedef enum
     PAGE_Stopwatch,
     PAGE_TimeSet,
     PAGE_BacklightSet,
+    PAGE_Game2048,
     /*保留*/
     PAGE_MAX
 } Page_Type;
@@ -92,6 +94,7 @@ extern "C" {
     LV_FONT_DECLARE(Font_RexBold_28);
     LV_FONT_DECLARE(Font_RexBold_89);
     LV_FONT_DECLARE(Font_MicrosoftYaHei_16);
+    LV_FONT_DECLARE(Font_MicrosoftYaHei_20);
     LV_FONT_DECLARE(Font_MicrosoftYaHei_28);
     LV_FONT_DECLARE(Font_MicrosoftYaHei_50);
 }

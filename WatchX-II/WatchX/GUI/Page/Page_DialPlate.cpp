@@ -414,4 +414,8 @@ static void Event(void* obj, uint8_t event)
             Page->Push(PAGE_MainMenu);
         }
     }
+    if (event == LV_EVENT_LEAVE)
+    {
+        Page->Push(PAGE_MainMenu);
+    }
 }

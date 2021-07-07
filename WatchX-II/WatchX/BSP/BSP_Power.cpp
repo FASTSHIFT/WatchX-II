@@ -8,7 +8,7 @@ static uint32_t Power_LastHandleTime = 0;
 static uint16_t Power_AutoLowPowerTimeout = 60;
 
 /*自动关机功能使能*/
-static bool Power_AutoLowPowerEnable = false;
+static bool Power_AutoLowPowerEnable = true;
 
 static uint16_t Power_ADCValue = 0;
 
@@ -29,7 +29,7 @@ void Power_Init()
     pinMode(BAT_CHG_DET_Pin, INPUT_PULLUP);
     digitalWrite(BAT_DET_EN_Pin, LOW);
     
-    Power_SetAutoLowPowerTimeout(5 * 60);
+    Power_SetAutoLowPowerTimeout(30);
     Power_HandleTimeUpdate();
 }
 
@@ -115,7 +115,7 @@ uint8_t Power_GetBattUsage()
         0, 3300
     );
     
-    voltage *= 2;
+    voltage *= 1.5;
     
     __LimitValue(voltage, 3000, 4100);
     

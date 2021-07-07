@@ -11,7 +11,8 @@ static void Task_Display(void *pvParameters)
     for(;;)
     {
         Display_Update();
-        vTaskDelay(5);
+        Button_Update();
+        vTaskDelay(10);
     }
 }
 
@@ -19,14 +20,14 @@ static void Task_Sensor(void *pvParameters)
 {
     for(;;)
     {
-#if (WX_USE_BUILT_IN_I2C != 0)
+#if (WX_USE_BUILT_IN_I2C != 0)   
         TouchPad_Update();
         IMU_Update();
         //ParticleSensor_Update();
 #else
         ComMaster_Update();
 #endif
-        Button_Update();
+        //Button_Update();
         Power_Update();
         
         vTaskDelay(10);

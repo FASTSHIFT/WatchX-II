@@ -124,6 +124,12 @@
     <Filter Include="Libraries\Evaluate">
       <UniqueIdentifier>{37e25583-edaf-4f43-98c0-f31cd8dbf2a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Libraries\Matrix">
+      <UniqueIdentifier>{f3e5b371-984b-49b7-96e1-7aa2fa9d361c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries\MemManager">
+      <UniqueIdentifier>{d500858b-cbef-4fec-9916-56ae86ce2032}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -813,6 +819,57 @@
     </ClCompile>
     <ClCompile Include="..\..\Libraries\Evaluate\evaluate.c">
       <Filter>Libraries\Evaluate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Sleep.cpp">
+      <Filter>GUI\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\Font\Font_MicrosoftYaHei_20.c">
+      <Filter>GUI\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Down.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_SleepRect.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_UP.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_VOLUP.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_VOLDown.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Forward.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Backward.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Music.cpp">
+      <Filter>GUI\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_AlbumArt.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Sport.cpp">
+      <Filter>GUI\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_TinyStep.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\IMG\IMG_Stop.c">
+      <Filter>GUI\IMG</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\WatchX\GUI\Page\Page_Game2048.cpp">
+      <Filter>GUI\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\Matrix\matrixLib.c">
+      <Filter>Libraries\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\Matrix\MemManager.c">
+      <Filter>Libraries\MemManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1585,6 +1642,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Libraries\Evaluate\evaluate.h">
       <Filter>Libraries\Evaluate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\Matrix\matrix.h">
+      <Filter>Libraries\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Libraries\Matrix\MM.h">
+      <Filter>Libraries\MemManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

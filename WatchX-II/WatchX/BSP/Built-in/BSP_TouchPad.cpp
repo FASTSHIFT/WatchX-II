@@ -23,9 +23,9 @@ void TouchPad_Update()
     {
         TouchPoint_X = (239 - ft6336u.read_touch1_x());
         TouchPoint_Y = (239 - ft6336u.read_touch1_y());
-//        Serial.print(TouchPoint_X);
-//        Serial.print(',');
-//        Serial.println(TouchPoint_Y);
+        Serial.print(TouchPoint_X);
+        Serial.print(',');
+        Serial.println(TouchPoint_Y);
     }
 }
 
