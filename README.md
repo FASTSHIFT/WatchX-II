@@ -33,3 +33,6 @@
 ## Interaction
 - All interaction is done through a physical button and a touch screen
 -- Press the power button to light up the screen and exit the operation, and long press the power button to shut down the operation. You can exit the application by sliding gesture on the touch screen
+
+手表带壳展示
+![IMG_20210527_110259](https://github.com/Trigger-CN/WatchX-II/blob/master/images/IMG_20210527_110259.jpg)
