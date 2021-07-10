@@ -2,7 +2,7 @@
 
 > 全新设计的第二代智能手表
 
-> [硬件 & UI](https://github.com/Trigger-CN/WatchX-II_Hardware) by [Trigger-CN](https://github.com/Trigger-CN)
+> [硬件](https://github.com/Trigger-CN/WatchX-II_Hardware) & UI by [Trigger-CN](https://github.com/Trigger-CN)
 
 ## GUI
 > [LVGL V7.7.1](https://github.com/lvgl/lvgl/releases/tag/v7.7.1)
