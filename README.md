@@ -1,42 +1,36 @@
 # WatchX-II
 
-#### 基于AT32F403A的第二代智能手表，图形处理基于LVGL.
->[硬件和UI设计](https://github.com/Trigger-CN/WatchX-II_Hardware) by [Trigger-CN](https://github.com/Trigger-CN)
-## Features特性
-- 240X240分辨率的触摸屏
-- 华丽自然的过度动画
-- 美观的UI界面
-- 3D打印的手表外壳，厚度仅为1CM
-- 动画时间轴功能，让实现华丽复杂的动画成为可能
+> 全新设计的第二代智能手表
 
+> [硬件 & UI](https://github.com/Trigger-CN/WatchX-II_Hardware) by [Trigger-CN](https://github.com/Trigger-CN)
 
-## Functions功能
-- 动态表盘
-- 表达式计算器
-- 秒表
-- 计步
-- 基于Aduiboy的游戏机
-- 时间日期设置
-- 背光设置
+## GUI
+> [LVGL V7.7.1](https://github.com/lvgl/lvgl/releases/tag/v7.7.1)
 
-## Pages页面
-- Page_DialPlate 表盘页面
-- Page_Calculator 计算器
-- Page_HreatRate 心率
-- Page_Game2048 游戏2048
-- Page_Game 基于Aduiboy的游戏机
-- Paeg_MainMenu 主菜单
-- Page_Music 音乐
-- Page_Setting 设置
-- Page_Sport 运动
-- Page_Sleep 睡眠
-- Page_Stopwatch 秒表
-- Page_TimeSet 时间设置
-- Page_BackLightSet 背光设置
+## 硬件配置
+* 1.主控: AT32F403ACGU7 (主频:240MHz RAM:224KB ROM:1MB)
+* 2.屏幕: ST7789 IPS 1.54inch 8Bit并口 240x240分辨率 60Hz刷新率
+* 3.储存器: SD NAND 4GBit CSNP4GCR01
+* 4.输入设备: FT6336U电容触摸 + 按键x1
+* 5.RTC: MCU内置RTC时钟
+* 6.加速度计: LIS2DS12 (支持硬件计步输出)
+* 7.心率计: MAX30102
+* 8.电池: Li-ion 3.7V 
+* 9.电源管理: LP5907-3.3 + LP5907-1.8 + TP5100
+* 10.外壳: 3D打印 光固化
 
-## Interaction交互
-- 所有交互功能通过电源按键和触摸屏完成
-- 点按电源键可完成开机和退出页面，长按电源键为关机，触摸屏具有点按和滑动手势，可供进入和退出页面
+## 功能
+* 1.表盘
+* 2.计算器
+* 3.秒表
+* 4.计步
+* 5.游戏，基于Arduiboy和自制的2048游戏
+* 6.设置
+* 7.睡眠监测(只有UI)
+* 8.心率监测(只有UI)
+* 9.音乐(只有UI)
+* 10.运动(只有UI)
+* 11.待续...
 
-手表带壳展示
+## 实物展示
 ![IMG_20210527_110259](https://github.com/FASTSHIFT/WatchX-II/blob/master/images/IMG_20210527_110259.jpg)
